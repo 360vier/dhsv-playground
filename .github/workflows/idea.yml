@@ -39,10 +39,18 @@ jobs:
       BRANCH: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: PR anlegen bzw. finden
         id: pr
         run: |
           SLUG="${BRANCH#idea/}"
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+          if [ "$(git rev-list --count origin/main..HEAD)" = "0" ]; then
+            echo "Branch ist bereits vollständig in main – nichts zu mergen."
+            echo "number=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           TITLE=$(jq -r .title "ideas/$SLUG/idea.json")
           NUM=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
           if [ -z "$NUM" ]; then
@@ -52,9 +60,10 @@ jobs:
             NUM=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
           fi
           echo "number=$NUM" >> "$GITHUB_OUTPUT"
-          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
       - name: Nach main mergen (Merge-Commit, Branch bleibt)
+        if: steps.pr.outputs.number != ''
         run: gh pr merge "${{ steps.pr.outputs.number }}" --merge --subject "[idea:${{ steps.pr.outputs.slug }}] Merge ${{ github.sha }}"
       - name: Pages-Deploy anstoßen
+        if: steps.pr.outputs.number != ''
         # Merges per GITHUB_TOKEN lösen keinen push-Workflow aus – workflow_dispatch schon.
         run: gh workflow run deploy.yml --ref main
