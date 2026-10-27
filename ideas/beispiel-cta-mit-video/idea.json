@@ -1,0 +1,50 @@
+{
+  "$schema": "../../core/schemas/idea.schema.json",
+  "slug": "beispiel-cta-mit-video",
+  "title": "Beispiel: CTA mit Video",
+  "summary": "Pilot-Idee: CTA-Modul bekommt optional ein Video statt Bild und einen zweiten Button.",
+  "type": "anpassung",
+  "status": "entwurf",
+  "author": "zurmoehle",
+  "contributors": [],
+  "created": "2026-10-27",
+  "updated": "2026-10-27",
+  "tags": [],
+  "pages": {
+    "agentur": {
+      "title": "Agentur mit Video-CTA",
+      "basedOn": "agentur"
+    }
+  },
+  "baseline": {
+    "cta": "1171d7077bf2"
+  },
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "theme": {
+    "ticket": null,
+    "pr": null
+  },
+  "history": [
+    {
+      "date": "2026-10-27",
+      "user": "zurmoehle",
+      "status": "entwurf",
+      "note": "Idee angelegt"
+    },
+    {
+      "date": "2026-10-27",
+      "user": "zurmoehle",
+      "note": "Modul cta zur Anpassung kopiert"
+    },
+    {
+      "date": "2026-10-27",
+      "user": "zurmoehle",
+      "note": "Seite „Agentur mit Video-CTA“ angelegt (Basis: agentur)"
+    },
+    {
+      "date": "2026-10-27",
+      "user": "zurmoehle",
+      "note": "CTA: Video-Attribut + zweiter Button, Demo am Ende der Agentur-Seite"
+    }
+  ]
+}

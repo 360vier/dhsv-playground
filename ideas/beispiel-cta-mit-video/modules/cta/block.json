@@ -1,0 +1,94 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/cta",
+  "title": "CTA",
+  "description": "CTA",
+  "icon": "tag",
+  "category": "design",
+  "usesContext": [],
+  "keywords": [],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "url": ""
+      }
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subline": {
+      "type": "string",
+      "default": ""
+    },
+    "teamId": {
+      "type": "number",
+      "default": 0
+    },
+    "imagePosition": {
+      "type": "string",
+      "default": "left"
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "role": {
+      "type": "string",
+      "default": ""
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "url": ""
+      }
+    },
+    "linkText": {
+      "type": "string",
+      "default": ""
+    },
+    "emailLinkText": {
+      "type": "string",
+      "default": ""
+    },
+    "video": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "poster": ""
+      }
+    },
+    "secondaryLink": {
+      "type": "object",
+      "default": {
+        "url": ""
+      }
+    },
+    "secondaryLinkText": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": [
+      "full",
+      "wide"
+    ]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "title": "Bereit für eine Website, <br>die verkauft?",
+      "subline": "Gemeinsam schaffen wir mit Ihnen eine digitale Präsenz, die Seitenbesucher in Kunden verwandelt.",
+      "description": "Hans Mengler",
+      "role": "Geschäftsführung"
+    }
+  }
+}
