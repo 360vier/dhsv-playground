@@ -76,7 +76,8 @@ for (const slug of listDirs(PATHS.ideas)) {
 
   for (const file of walk(path.join(dir, 'modules')).filter(f => f.endsWith('.scss'))) {
     const scss = readText(path.join(dir, 'modules', file))
-    const hex = [...new Set(scss.match(/#[0-9a-fA-F]{3,8}\b/g) ?? [])]
+    const baseScss = readText(path.join(PATHS.modules, file)) // Override: nur neu hinzugekommene Farben melden
+    const hex = [...new Set(scss.match(/#[0-9a-fA-F]{3,8}\b/g) ?? [])].filter(h => !baseScss.includes(h))
     if (hex.length) warn(`${where}/modules/${file}`, `feste Farben ${hex.join(', ')} – Theme-Tokens (var(--…)) verwenden`)
   }
 }
