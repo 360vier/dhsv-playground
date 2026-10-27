@@ -127,7 +127,7 @@ switch (cmd) {
       const html = path.join(PATHS.pagesLive, `${live}.html`)
       if (exists(blocks)) source = readText(blocks)
       else if (exists(html))
-        source = `<!-- pg: Kopie des gerenderten Live-HTML von „${live}“ (keine Block-Grammar verfügbar). Abschnitte, die geändert werden, als <!-- wp:${config.theme.blockNamespace}/… --> Blocks neu aufbauen. -->\n` + readText(html)
+        source = `<!-- pg: Kopie des gerenderten Live-HTML von „${live}“ (keine Block-Grammar verfügbar). Abschnitte, die geändert werden, als wp:${config.theme.blockNamespace}/…-Blocks neu aufbauen. -->\n` + readText(html)
       else die(`Live-Seite ${live} nicht gefunden (yarn sync:content?)`)
       meta.basedOn = live
     }
