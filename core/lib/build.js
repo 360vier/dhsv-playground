@@ -214,7 +214,7 @@ export async function build({ base = '/', dev = false, only = null } = {}) {
       pages,
       changes: idea.changes,
       hasOverrides: overrides.length > 0,
-      readmeHtml: marked.parse(idea.readme.replace(/^# .*\n/, '')),
+      readmeHtml: marked.parse(idea.readme.replace(/^# .*\n+(> .*\n)?/, '')), // Titel + Summary stehen schon im Kopf
     })
   }
 

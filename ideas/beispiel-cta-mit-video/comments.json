@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "2e8492d0",
+    "page": "agentur",
+    "anchor": {
+      "block": "dhsv/cta",
+      "nth": 0
+    },
+    "path": "video:nth-of-type(1)",
+    "snippet": "",
+    "xPct": 51.5,
+    "yPct": 19.1,
+    "viewport": 1484,
+    "author": "zurmoehle",
+    "created": "2026-10-27T13:57:59.135Z",
+    "text": "Testkommentar: Überschrift etwas größer?",
+    "replies": [],
+    "resolved": false
+  }
+]
