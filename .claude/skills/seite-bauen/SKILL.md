@@ -32,6 +32,7 @@ Claude baut die Seite aus den vorhandenen Modulen (Übersicht unter **Module**) 
    - Module: `<!-- wp:dhsv/<name> {"attr":"wert"} /-->`, Container mit Inhalt: `<!-- wp:dhsv/<name> {…} -->…<!-- /wp:dhsv/<name> -->`
    - Core-Blocks mit gespeichertem HTML, z. B. `<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">…</h2><!-- /wp:heading -->`
    - Nur Attribute verwenden, die in `block.json` stehen.
+   - Jede Seite endet mit einem Spacer vor dem Footer, sonst überlappt der Footer (Parallax) den letzten Block: `<!-- wp:spacer {"height":"200px"} --><div style="height:200px" aria-hidden="true" class="wp-block-spacer"></div><!-- /wp:spacer -->`. Neue Abschnitte auf kopierten Seiten kommen **vor** diesen Spacer.
    - Module ohne `template.njk` (siehe `/module/`) zeigen nur ihr Live-Beispiel. Brauchst du dort eigene Inhalte, frag nach einer Modulanpassung oder nimm ein anderes Modul.
 5. Sieht die Seite mit bestehenden Modulen nicht wie gewünscht aus, schlag `/modul-anpassen` oder `/modul-neu` vor. Keine Inline-Styles als Workaround.
 6. README pflegen: Seitenaufbau unter „Beschreibung“, Neues unter „Umsetzung im Theme“. Dann `yarn idea note <slug> "Seite <name> gebaut"`.
