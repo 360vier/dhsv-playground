@@ -77,10 +77,7 @@
     }
   },
   "supports": {
-    "align": [
-      "full",
-      "wide"
-    ]
+    "align": ["full", "wide"]
   },
   "styles": [],
   "example": {
