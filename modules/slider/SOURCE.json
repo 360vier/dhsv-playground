@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/slider",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "e82a83cc5ca1",
+  "templateTranslatedFrom": "e82a83cc5ca1",
+  "files": {
+    "block.json": "7163d36fb107",
+    "scripts.js": "a5bee5c9a017",
+    "slider.scss": "a1c8da4f0f83"
+  }
+}

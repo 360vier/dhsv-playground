@@ -1,0 +1,14 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller ergänzt logo per Media::withMediaLibraryImageData
+    aus der Mediathek → im Playground kommt logo direkt als Attribut ({url, alt}). -#}
+{%- set logoData = logo or {} -%}
+<div {{ wrapper('', { id: id } if id else {}) }}>
+    <span class="wp-block-dhsv-tab-item--title">
+        {% if logoData.url %}
+            <img class="wp-block-dhsv-tab-item--logo" src="{{ logoData.url }}" alt="{{ logoData.alt or '' }}">
+        {% endif %}
+        <span class="wp-block-dhsv-tab-item--title-text">{{ title | safe }}</span>
+    </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        {{ content }}
+    </div>
+</div>

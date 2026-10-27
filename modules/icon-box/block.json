@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/icon-box",
+  "title": "Icon Box",
+  "description": "",
+  "icon": "insert-after",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {}
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "url": null
+      }
+    },
+    "alignment": {
+      "type": "string",
+      "default": "vertical"
+    },
+    "background": {
+      "type": "string",
+      "default": "green"
+    },
+    "iconSize": {
+      "type": "string",
+      "default": "medium"
+    },
+    "headline": {
+      "type": "string",
+      "default": ""
+    },
+    "headlineLevel": {
+      "type": "string",
+      "default": "h3"
+    }
+  },
+  "supports": {
+    "align": ["left", "right", "center"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-icon-box-block editor",
+  "style": "dhsv-icon-box-block"
+}

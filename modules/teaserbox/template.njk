@@ -1,0 +1,47 @@
+{#- Übersetzt aus source/index.blade.php + theme partials/archive-showcase-card.blade.php (manualCard-Zweig, Theme dhsv012).
+    image wird im Theme per ID über wp_get_attachment_image (mit srcset) ausgegeben – im Playground kommt
+    image direkt als {url, alt, width, height} und wird als einfaches <img> mit denselben Klassen gerendert. -#}
+{%- set img = image or {} -%}
+{%- set permalink = link.url if (link and link.url) else '#' -%}
+{%- set size = cardSize if (cardSize in ['large', 'narrow', 'medium', 'third', 'slider']) else 'medium' -%}
+{%- set tag = titleLevel if (titleLevel in ['h2', 'h3']) else 'h3' -%}
+<div {{ wrapper() }}>
+<a
+  class="archive-showcase-card archive-showcase-card--{{ size }} case-study-card case-study-card--{{ size }}   js-case-study-tilt   "
+  href="{{ permalink }}"
+>
+  <span class="archive-showcase-card__visual case-study-card__visual">
+    <span class="archive-showcase-card__follow case-study-card__follow" aria-hidden="true">
+      <span class="archive-showcase-card__follow-inner case-study-card__follow-inner">
+        <span class="archive-showcase-card__follow-core case-study-card__follow-core"></span>
+        <span class="archive-showcase-card__follow-arrow case-study-card__follow-arrow">
+          <span class="icon" aria-hidden="true">{{ svg('icons.arrow-right') }}</span>
+        </span>
+      </span>
+    </span>
+    <span class="archive-showcase-card__tilt case-study-card__tilt" aria-hidden="true">
+      {% if img.url %}
+        <img decoding="async"{% if img.width %} width="{{ img.width }}"{% endif %}{% if img.height %} height="{{ img.height }}"{% endif %} src="{{ img.url }}" class="archive-showcase-card__image case-study-card__image" alt="{{ img.alt or '' }}" loading="lazy" sizes="auto, (min-width: 1024px) 50vw, 100vw">
+      {% else %}
+        <span class="archive-showcase-card__placeholder case-study-card__placeholder"></span>
+      {% endif %}
+      <span class="archive-showcase-card__glow case-study-card__glow" aria-hidden="true"></span>
+    </span>
+  </span>
+
+  <span class="archive-showcase-card__text case-study-card__text">
+    {% if eyebrow %}
+      <span class="archive-showcase-card__eyebrow case-study-card__eyebrow">
+        {{ eyebrow | safe }}
+      </span>
+    {% endif %}
+    <{{ tag }} class="archive-showcase-card__headline case-study-card__headline">{{ title | safe }}</{{ tag }}>
+    {% if subtitle %}
+      <span class="archive-showcase-card__subline case-study-card__subline">{{ subtitle | safe }}</span>
+    {% endif %}
+    {% if meta %}
+      <span class="archive-showcase-card__meta case-study-card__meta">{{ meta | safe }}</span>
+    {% endif %}
+  </span>
+</a>
+</div>

@@ -1,0 +1,234 @@
+:root {
+  //container
+  --content-size: 70rem;
+  --wide-size: 85rem;
+  --container-size: var(--content-size);
+  --content-space: var(--size-md);
+  // Header shell height; the announcement bar (if any) adds its measured
+  // height via `--announcement-bar-height` (see components/_announcement-bar).
+  --header-height-base: 7.1875rem;
+  // Needs a unit: consumed inside calc() below.
+  --announcement-bar-height: 0rem; // stylelint-disable-line length-zero-no-unit
+  // Same for the Gravity Forms resume bar (components/_gform-resume-bar).
+  --gform-resume-bar-height: 0rem; // stylelint-disable-line length-zero-no-unit
+  --header-height: calc(
+    var(--header-height-base) + var(--announcement-bar-height) +
+      var(--gform-resume-bar-height)
+  );
+  // Bottom-edge counterpart of `--announcement-bar-height`: the space the AI
+  // chat launcher (dhsv100-ai-chat-plugin) occupies at the foot of the
+  // viewport. Stays 0 unless the plugin rendered its host container, see the
+  // `html:has(#dhsv100-chat-host)` rule below.
+  // Needs a unit: consumed inside calc() by layouts/_footer.
+  --chat-launcher-reserve: 0px; // stylelint-disable-line length-zero-no-unit
+  --content-size-space: max(
+    var(--content-space),
+    calc(((100vw - var(--content-size)) / 2) + var(--content-space))
+  );
+  --wide-size-space: max(
+    var(--content-space),
+    calc(((100vw - var(--wide-size)) / 2) + (var(--content-space) / 2))
+  );
+
+  //colors with rgb (for usage in styles)
+  //--use accent color for primary on different backgrounds
+  --black: #000;
+  --white: #fff;
+  --green-500: #81ba49;
+  --green-400: #a0d868;
+  --gray-800: #141417;
+  --gray-700: #2f2f3c;
+  --gray-600: #595b62;
+  --gray-500: #4a4b60;
+  --gray-400: #73757d;
+  --gray-300: #86888f;
+  --gray-200: #adadad;
+  --gray-100: #ebebeb;
+  --gray-50: #f7f7f7;
+  --green-gradient: linear-gradient(97deg, #a0d868 56.22%, #81ba49 103.72%);
+  --green-transparent: linear-gradient(
+    142deg,
+    color-mix(in srgb, var(--green-500) 30%, transparent 100%) 15%,
+    color-mix(in srgb, var(--green-400) 30%, transparent 100%) 75%
+  );
+  --gray-transparent: linear-gradient(
+    142deg,
+    color-mix(in srgb, var(--gray-800) 20%, transparent 100%) 15%,
+    color-mix(in srgb, var(--gray-600) 20%, transparent 100%) 75%
+  );
+  --dark-gradient: linear-gradient(
+    52deg,
+    #131626 22.11%,
+    #1f2421 62.93%,
+    #3c5340 100%
+  );
+  --light-gradient: linear-gradient(
+    142deg,
+    var(--gray-50) 15%,
+    var(--gray-100) 75%
+  );
+  --light-down-transparent: linear-gradient(
+    180deg,
+    var(--gray-50),
+    transparent
+  );
+
+  // light-stage blur orbs (Figma Website-Relaunch 2026, node bgr-blur)
+  --blur-bubble-light-mint: color-mix(
+    in srgb,
+    var(--green-400) 12%,
+    var(--white) 88%
+  );
+  --blur-bubble-light-mint-soft: color-mix(
+    in srgb,
+    var(--green-400) 9%,
+    var(--white) 91%
+  );
+  // airy sky (Figma bottom-left): cool tint, leicht Richtung Brand-Grün
+  --blur-bubble-light-sky-tint: color-mix(
+    in srgb,
+    var(--green-400) 22%,
+    var(--white)
+  );
+  --blur-bubble-light-sky: color-mix(
+    in srgb,
+    var(--blur-bubble-light-sky-tint) 28%,
+    var(--gray-200) 72%
+  );
+  --blur-bubble-light-lime: color-mix(
+    in srgb,
+    var(--green-400) 28%,
+    var(--white) 72%
+  );
+  --blur-bubble-light-wash: color-mix(
+    in srgb,
+    var(--gray-100) 28%,
+    var(--white) 72%
+  );
+
+  //color variables to use in compoents
+  --text-color: var(--black);
+  --bg-color: var(--white);
+  --bg-flat-color: var(--white);
+  --accent-bg: var(--green-400);
+  --accent-gradient: var(--green-gradient);
+  --accent-color: var(--black);
+
+  //icons
+  --icon-none: none;
+  --icon-accent: var(--accent-color);
+  --icon-base: var(--text-color);
+
+  //spacings
+  --size-0: 0;
+  --size-1: 1px;
+  --size-2xs: 0.25rem;
+  --size-xs: 0.5rem;
+  --size-sm: 0.75rem;
+  --size-md: 1rem;
+  --size-2md: 1.5rem;
+  --size-lg: 2rem;
+  --size-xl: 4rem;
+  --size-2xl: 5rem;
+  --size-3xl: 7.5rem;
+
+  //rounded
+  --rounded: 1rem;
+  --rounded-md: 1.1rem;
+  --rounded-sm: 0.75rem;
+  --rounded-lg: 1.75rem;
+  --rounded-full: 99rem;
+
+  //typo
+  // -- family
+  --primary-font-family: 'NeuzeitGrotesk', sans-serif;
+  --secondary-font-family: 'DINMONO', serif;
+
+  // -- weights
+  --font-weight-default: 400;
+  --font-weight-bold: 700;
+  --font-weight-secondary: 300;
+
+  // -- sizes
+  --font-size-h1: 3.5rem; /* ~84px */
+  --font-size-h2: 2.75rem; /* ~56px */
+  --font-size-h3: 2.25rem; /* ~47px */
+  --font-size-h4: 2.21rem; /* ~35px */
+  --font-size-h5: 1.66rem; /* ~27px */
+  --font-size-h6: 1.25rem; /* ~20px */
+  --font-size-display: 5rem;
+  --font-size-text: 1.25rem; /* 16px Basis */
+  --font-size-text-intro: 1.5rem;
+  --font-size-text-index: 1rem; /* ~25px */
+  --font-size-text-small: 0.875rem; /* 14px */
+  --font-size-nav: 0.875rem; /* 16px */
+
+  // -- line-height
+  --line-height: 1;
+  --line-height-display: 4.6rem;
+  --line-height-text: 1.5;
+
+  @media (max-width: 767.98px) {
+    // -- mobile sizes (if different from desktop)
+    --font-size-h1: 2.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.2rem;
+    --font-size-h5: 1rem;
+    --font-size-h6: 0.875rem;
+    --font-size-display: 3rem;
+    --font-size-text: 1rem;
+    --font-size-text-index: 1.3rem;
+    --font-size-text-small: 1rem;
+    --font-size-nav: 0.875rem;
+    --line-height: 1.2;
+    --line-height-display: 2.6rem;
+    --line-height-text: 1.4;
+
+    .has-secondary-font-family {
+      margin-top: var(--size-lg);
+
+      --font-size-h1: 3rem;
+      --font-size-h2: 3rem;
+      --font-size-h3: 2rem;
+      --font-size-h4: 1.5rem;
+      --wp--preset--font-size--h-1: var(--font-size-h1);
+      --wp--preset--font-size--h-2: var(--font-size-h2);
+      --wp--preset--font-size--h-3: var(--font-size-h3);
+      --wp--preset--font-size--h-4: var(--font-size-h4);
+    }
+
+    body {
+      --wp--preset--spacing--20: 0.24rem;
+      --wp--preset--spacing--30: 0.36rem;
+      --wp--preset--spacing--40: 1rem;
+      --wp--preset--spacing--50: 1.2rem;
+      --wp--preset--spacing--60: 1.8rem;
+      --wp--preset--spacing--70: 2.7rem;
+      --wp--preset--spacing--80: 3.6rem;
+      --wp--preset--spacing--90: 5.4rem;
+    }
+  }
+
+  --transition: all 0.75s var(--ease-spring-20);
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      --transition: none !important;
+    }
+  }
+}
+
+// From 768px up the chat launcher pins a full-width iframe to the bottom of the
+// viewport that swallows clicks across its whole width, not just behind the
+// visible pill — so the reserve has to clear the tallest state of that strip:
+// the `lg` bubble box at 8.25rem (the collapsed bar measures 5.75rem). Below
+// that breakpoint the plugin falls back to a bubble in the bottom-right corner,
+// which the footer's own bottom rhythm already clears. Scoped to pages where
+// the plugin emitted its host container, so a page without the chat keeps its
+// original footer rhythm.
+@media (min-width: 768px) {
+  html:has(#dhsv100-chat-host) {
+    --chat-launcher-reserve: calc(8.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}

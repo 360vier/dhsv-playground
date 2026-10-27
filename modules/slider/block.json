@@ -1,0 +1,95 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/slider",
+  "title": "Slider",
+  "icon": "slides dhsv-icon",
+  "category": "theme",
+  "usesContext": [],
+  "description": "",
+  "keywords": ["dhsv"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "whiteText": {
+      "type": "boolean",
+      "default": false
+    },
+    "withSpace": {
+      "type": "boolean",
+      "default": true
+    },
+    "slidesCount": {
+      "type": "number",
+      "default": 0
+    },
+    "currentType": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "text": {
+      "type": "string",
+      "default": ""
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "backImage": {
+      "type": "object",
+      "default": {
+        "url": null
+      }
+    },
+    "widthType": {
+      "type": "string",
+      "default": "full"
+    },
+    "useDraggablePagination": {
+      "type": "boolean",
+      "default": false
+    },
+    "responsiveSettings": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "perPage": 1,
+          "arrows": false,
+          "pagination": false
+        },
+        "tablet": {
+          "perPage": 2,
+          "arrows": false,
+          "pagination": false
+        },
+        "desktop": {
+          "perPage": 3,
+          "arrows": false,
+          "pagination": false
+        },
+        "desktop-xl": {
+          "perPage": 4,
+          "arrows": false,
+          "pagination": false
+        }
+      }
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"]
+  },
+  "styles": [],
+  "editorStyle": "wp-block-slider-editor",
+  "style": "wp-block-slider"
+}

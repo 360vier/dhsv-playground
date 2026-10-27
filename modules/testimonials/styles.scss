@@ -1,0 +1,197 @@
+.dhsv-testimonials-block-wrapper {
+  /** === CAROUSEL CONFIGURATION === */
+  --slide-spacing: 0.5rem;
+  --slide-size: 100%;
+  // Base color for carousel dot controls. Overridden on dark backgrounds below.
+  --dot-color: #000;
+
+  margin-bottom: var(--size-lg);
+
+  @media (width >= 1024px) {
+    --slide-size: 50%;
+  }
+
+  .testimonial {
+    background: var(--white);
+    border: 10px solid transparent;
+    border-radius: var(--rounded);
+    color: var(--text-color);
+    display: block;
+    height: 100%;
+    padding: var(--size-lg);
+    text-decoration: none;
+    transition: border 0.1s ease;
+  }
+
+  .testimonial:hover {
+    border: 10px solid color-mix(in srgb, var(--text-color) 10%, #0000);
+  }
+
+  .testimonial.logo-only {
+    display: grid;
+    place-items: center;
+
+    img {
+      filter: invert(1);
+      opacity: 0.7;
+      width: 12em;
+    }
+  }
+
+  .testimonial.has-testimonial .testimonial__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .testimonial.has-testimonial .testimonial__text {
+    font-size: var(--font-size-text);
+    line-height: var(--line-height-text);
+    margin-bottom: var(--size-sm);
+  }
+
+  .testimonial.has-link {
+    .testimonial__person,
+    .testimonial__cta {
+      transition: opacity 0.3s ease;
+    }
+
+    .testimonial__cta {
+      display: none;
+    }
+  }
+
+  .testimonial.has-link:hover {
+    .testimonial__person {
+      display: none;
+    }
+
+    .testimonial__cta {
+      display: flex;
+    }
+  }
+
+  .testimonial .testimonial__cta {
+    align-items: center;
+    gap: 0.5em;
+
+    svg {
+      color: var(--green-400);
+      flex-shrink: 0;
+      width: 1.5em;
+    }
+  }
+
+  .testimonial .testimonial__author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    font-size: var(--font-size-text-index);
+  }
+
+  // Logo
+  .testimonial .testimonial__author img {
+    filter: invert(1);
+    flex-shrink: 0;
+    max-width: 10em;
+    opacity: 0.7;
+    transition: opacity 0.1s ease;
+  }
+
+  .testimonial:hover .testimonial__author img {
+    opacity: 0.5;
+  }
+}
+
+// === ADJUSTMENTS FOR DARK BACKGROUNDS ===
+:is(.has-dark-gradient-background, .has-dark-background-color) {
+  .dhsv-testimonials-block-wrapper {
+    --dot-color: #fff;
+  }
+
+  .testimonial {
+    --text-color: var(--black);
+  }
+}
+
+// === CAROUSEL ===
+.dhsv-testimonials-block {
+  &__viewport {
+    overflow: hidden;
+  }
+
+  &__container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-inline-start: calc(var(--slide-spacing) * -1);
+  }
+
+  &__slide {
+    transform: translate3d(0, 0, 0);
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-inline: var(--slide-spacing);
+    position: relative;
+  }
+
+  &__controls-dots {
+    --control-height: 8px;
+
+    &[hidden] {
+      display: none;
+    }
+
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    margin-block-start: var(--size-lg);
+
+    &:hover {
+      --control-height: 12px;
+    }
+  }
+
+  &__dot {
+    -webkit-tap-highlight-color: rgba(49, 49, 49, 0.5);
+    appearance: none;
+    background-color: transparent;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 1.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: var(--control-height);
+      background: color-mix(in srgb, var(--dot-color) 15%, transparent);
+      transition: background 0.2s ease, height 0.1s ease;
+    }
+
+    &:not(.dhsv-testimonials-block__dot--selected):hover::after {
+      background: color-mix(in srgb, var(--dot-color) 20%, transparent);
+    }
+
+    &:first-child::after {
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+
+    &:last-child::after {
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+
+    &--selected::after {
+      background: var(--dot-color);
+    }
+  }
+}

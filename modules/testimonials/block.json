@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/testimonials",
+  "title": "Testimonials",
+  "description": "",
+  "icon": "format-image",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "testimonials"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    },
+    "selectionBy": {
+      "type": "string",
+      "default": "category"
+    },
+    "curatedIds": {
+      "type": "array",
+      "default": []
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "limitWhenCategory": {
+      "type": "number",
+      "default": 10
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-testimonials-block editor",
+  "style": "dhsv-testimonials-block"
+}

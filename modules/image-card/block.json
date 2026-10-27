@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/image-card",
+  "title": "Image Card",
+  "description": "",
+  "icon": "format-image",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv", "image", "card"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "style": {
+        "type": "object",
+        "default": {}
+      },
+    "image": {
+      "type": "object",
+      "default": {
+        "url": null
+      }
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "url": ""
+      }
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "isLargeBox": {
+      "type": "boolean",
+      "default": false
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "light"
+    },
+    "format": {
+      "type": "string",
+      "default": "default"
+    },
+    "titleLevel": {
+      "type": "string",
+      "enum": ["h2", "h3", "h4", "p"],
+      "default": "h2"
+    }
+  },
+  "supports": {
+    "align": ["left", "right", "center", "wide", "full"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-image-card-block editor",
+  "style": "dhsv-image-card-block"
+}
+

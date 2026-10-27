@@ -1,0 +1,65 @@
+/**
+ * Particle Text (three.js)
+ *
+ * Container for the partial `partials.particle-text`.
+ * Bietet drei Varianten für die Höhe: full, section, inline.
+ */
+
+.particle-text {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+
+  &--full {
+    height: 100vh;
+  }
+
+  &--section {
+    height: 60vh;
+    min-height: 360px;
+  }
+
+  &--inline {
+    aspect-ratio: 16 / 9;
+  }
+
+  &--compact {
+    height: 25rem;
+  }
+
+  &__canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  &__fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    white-space: pre-line;
+    pointer-events: none;
+    font-weight: var(--font-weight-regular, 400);
+    font-size: 13vw;
+    color: var(--particle-fallback-color, currentColor);
+
+    @supports (-webkit-text-stroke: 1px black) {
+      .particle-text--font-outline & {
+        -webkit-text-stroke: 1px var(--particle-fallback-color, currentColor);
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  &--canvas-active &__fallback {
+    display: none;
+  }
+}

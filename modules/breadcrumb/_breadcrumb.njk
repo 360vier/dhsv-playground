@@ -1,0 +1,36 @@
+{#- Theme partials/breadcrumb.blade.php. Erwartet `crumbs`: [{label, url}] (letzter = aktuelle Seite).
+    Wird auch von stage/template.njk eingebunden. -#}
+{%- set lastItem = crumbs[crumbs.length - 1] if crumbs.length else {} -%}
+{% if crumbs.length %}
+  <nav class="breadcrumb" aria-label="{{ __('Breadcrumb Navigation') }}">
+    <div class="breadcrumb__pill" tabindex="0">
+      <div class="breadcrumb__collapsed" aria-hidden="true">
+        <span class="breadcrumb__dots">
+          <span class="breadcrumb__dot"></span>
+          <span class="breadcrumb__dot"></span>
+          <span class="breadcrumb__dot"></span>
+        </span>
+        <span class="breadcrumb__sep">/</span>
+        <span class="breadcrumb__current">{{ lastItem.label | safe }}</span>
+      </div>
+
+      <ol class="breadcrumb__expanded">
+        {% for item in crumbs %}
+          {% if not loop.first %}
+            <li class="breadcrumb__sep-item" aria-hidden="true">/</li>
+          {% endif %}
+
+          <li class="breadcrumb__item {{ 'breadcrumb__item--current' if loop.last else '' }}">
+            {% if not loop.last and item.url %}
+              <a class="breadcrumb__link" href="{{ item.url }}">
+                <span>{{ item.label | safe }}</span>
+              </a>
+            {% else %}
+              <span>{{ item.label | safe }}</span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+  </nav>
+{% endif %}

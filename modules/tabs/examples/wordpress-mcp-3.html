@@ -1,0 +1,81 @@
+<!-- Quelle: https://www.360vier.de/integrationen/wordpress-mcp/ -->
+<div class="wp-block-dhsv-tabs" id="6ae0a9afdf014" data-default-selected="tab-item-mcp-abilities">
+    <div class="wp-block-dhsv-tabs--container">
+        <div class="wp-block-dhsv-tabs--navigation">
+            
+<div class="wp-block-dhsv-tab-item" id="tab-item-mcp-abilities">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>Abilities API im WordPress-Kern</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Seit WordPress 6.9 registrieren Plugins Fähigkeiten mit <code>wp_register_ability()</code>, jeweils mit Ein- und Ausgabeschema und einer <code>permission_callback</code>. Per REST sind sie unter <code>wp-abilities/v1</code> erreichbar.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Funktionen eurer Website lassen sich einheitlich beschreiben und für KI-Clients freigeben. Weil die API Teil des Kerns ist, wird sie mit jedem WordPress-Update gepflegt.</p>
+
+
+    </div>
+</div>
+
+
+<div class="wp-block-dhsv-tab-item" id="tab-item-mcp-adapter">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>MCP Adapter und Standard-Server</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Der MCP Adapter (Version 0.7.0, Oktober 2026) setzt auf der Abilities API auf, unterstützt die MCP-Spezifikation vom 28.07.2026 und verlangt WordPress 6.9 und PHP 7.4. Im Standard-Server erreicht der Client freigegebene Abilities über drei Meta-Werkzeuge: finden, beschreiben, ausführen.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Sichtbar wird nur, was mit <code>meta.mcp.public</code> freigegeben ist. Für Tests reicht das. Eigene Server bieten Abilities direkt als Werkzeuge an, was Agenten die Arbeit erleichtert.</p>
+
+
+    </div>
+</div>
+
+
+<div class="wp-block-dhsv-tab-item" id="tab-item-mcp-oauth">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>Anmeldung mit OAuth 2.1</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Die MCP-Spezifikation macht Autorisierung optional. Wer sie über HTTP anbietet, soll OAuth 2.1 nutzen: Der Server veröffentlicht Protected Resource Metadata (RFC 9728), Clients nutzen PKCE und schicken das Token in jedem Request im <code>Authorization</code>-Header.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Ohne gültiges Token beantwortet ein geschützter Server keine Anfrage. Der MCP Adapter selbst arbeitet mit WordPress-Anwendungspasswörtern über den Proxy <code>@automattic/mcp-wordpress-remote</code>, für Produktivsysteme setzt 360VIER auf OAuth.</p>
+
+
+    </div>
+</div>
+
+
+<div class="wp-block-dhsv-tab-item" id="tab-item-mcp-clients">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>Claude und ChatGPT anbinden</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Claude bindet entfernte MCP-Server als benutzerdefinierte Connectors ein, in allen Tarifen. In Team- und Enterprise-Konten fügen Owner den Connector hinzu, danach meldet sich jedes Mitglied selbst an. ChatGPT unterstützt eigene MCP-Server über den Entwicklermodus.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Claude verbindet sich aus der Cloud von Anthropic, nicht vom eigenen Rechner. Eine Staging-Seite hinter VPN ist dann nicht erreichbar. Schreibende Werkzeuge sollten nur Entwürfe erzeugen, weil die Recherche-Funktion Werkzeuge ohne erneute Bestätigung aufrufen kann.</p>
+
+
+    </div>
+</div>
+
+
+        </div>
+        <div class="wp-block-dhsv-tabs--content"></div>
+    </div>
+</div>

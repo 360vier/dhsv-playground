@@ -1,0 +1,17 @@
+{% extends "layout.njk" %}
+{% block main %}
+<section class="pg-hero">
+  <h1>Live-Seiten</h1>
+  <p>Snapshot von <a href="{{ config.site.liveUrl }}">{{ config.site.liveUrl }}</a> (Stand {{ liveSyncedAt | truncate(10, true, '') }}). Nur zum Nachschlagen und als Kopiervorlage – Änderungen gehören in eine Idee (<em>„/seite-bauen auf Basis von …“</em>).</p>
+</section>
+<input type="search" class="pg-search" placeholder="Seite suchen …" data-simple-filter=".pg-list li">
+<ul class="pg-list">
+{% for p in pages %}
+  <li data-q="{{ (p.title ~ ' ' ~ p.path) | lower }}">
+    <a class="pg-list__main" href="{{ base }}live/{{ p.slug }}/">{{ p.title | safe }}</a>
+    <code class="pg-muted">{{ p.path }}</code>
+    <a class="pg-muted" href="{{ p.link }}">live ↗</a>
+  </li>
+{% endfor %}
+</ul>
+{% endblock %}

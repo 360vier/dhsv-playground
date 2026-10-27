@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/teaserbox",
+  "title": "Teaserbox",
+  "description": "Teaser-Karte mit Bild, Text und Link (wie Archive-Cards).",
+  "icon": "index-card",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv", "teaser", "card", "archive"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "style": {
+      "type": "object",
+      "default": {}
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "url": null
+      }
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "subtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "meta": {
+      "type": "string",
+      "default": ""
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "url": ""
+      }
+    },
+    "cardSize": {
+      "type": "string",
+      "default": "medium"
+    },
+    "titleLevel": {
+      "type": "string",
+      "default": "h3",
+      "enum": ["h2", "h3"]
+    }
+  },
+  "supports": {
+    "align": ["left", "right", "center", "wide", "full"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "title": "Teaser-Titel",
+      "subtitle": "Kurzer Teaser-Text für diese Karte.",
+      "eyebrow": "Label",
+      "link": {
+        "url": "https://example.com"
+      }
+    }
+  },
+  "editorStyle": "dhsv-teaserbox-block editor",
+  "style": "dhsv-teaserbox-block"
+}

@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+{% block main %}
+<section class="pg-hero">
+  <h1>Module</h1>
+  <p>Ein Modul entspricht einem Gutenberg-Block im Theme (<code>{{ config.theme.blocksDir }}/&lt;name&gt;/</code>) – gleiche Namen, gleiche <code>block.json</code>, gleiche SCSS-Dateien. Module ohne <code>template.njk</code> werden über ein Live-Beispiel dargestellt und können erst nach Übersetzung (<code>/module-sync</code>) mit eigenen Attributen genutzt werden.</p>
+</section>
+<table class="pg-table">
+  <thead><tr><th>Modul</th><th>Template</th><th>Styles</th><th>JS</th><th>Live-Beispiele</th><th>In Ideen angepasst</th></tr></thead>
+  <tbody>
+  {% for m in modules %}
+    <tr>
+      <td><a href="{{ base }}module/{{ m.name }}/"><strong>{{ m.title }}</strong></a><br><code class="pg-muted">{{ m.blockName }}</code></td>
+      <td>{% if m.template == 'ok' %}✅{% elif m.template == 'veraltet' %}<span class="pg-badge pg-badge--warn">veraltet</span>{% else %}<span class="pg-muted">– (Beispiel)</span>{% endif %}</td>
+      <td><code>{{ m.styles | join(', ') or '–' }}</code></td>
+      <td>{{ '✓' if m.scripts else '' }}</td>
+      <td>{{ m.examples }}</td>
+      <td>{% for i in m.ideas %}<a href="{{ base }}ideen/{{ i }}/">{{ i }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

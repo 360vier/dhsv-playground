@@ -1,0 +1,215 @@
+/**
+ * Blur-bubbles decorative layer (see partials/blur-bubbles.blade.php).
+ * Parent should be `position: relative` (and often `overflow: hidden`).
+ */
+
+.blur-bubbles {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(136deg, #1f2026 10.21%, #111216 104.55%);
+
+  /**
+   * Explicit dark (default visuals match legacy `.blur-bubbles` without modifier).
+   */
+  &--dark {
+    background: linear-gradient(136deg, #1f2026 10.21%, #111216 104.55%);
+  }
+
+  span {
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: var(--rounded-full);
+    transform: translate(-50%, -50%);
+    width: var(--_size, 10rem);
+    top: var(--_top, 50%);
+    left: var(--_left, 50%);
+    filter: blur(var(--_blur, 200px));
+    opacity: var(--_opacity, 0.7);
+    background: var(--_bg, #a0d868);
+
+    &:nth-child(1) {
+      --_size: 25rem;
+      --_top: 50%;
+      --_left: 0%;
+    }
+
+    &:nth-child(2) {
+      --_size: 56.25rem;
+      --_top: 70%;
+      --_left: 10%;
+      --_bg: #02042c;
+      --_opacity: 0.8;
+    }
+
+    &:nth-child(3) {
+      --_size: 52.5rem;
+      --_top: 90%;
+      --_left: 100%;
+      --_bg: #404040;
+      --_opacity: 1;
+    }
+
+    &:nth-child(4) {
+      --_size: 27.5rem;
+      --_top: 60%;
+      --_left: 110%;
+      --_bg: #1483a2;
+      --_opacity: 0.9;
+    }
+
+    &:nth-child(5) {
+      --_size: 43.75rem;
+      --_opacity: 0.5;
+      --_top: 80%;
+      --_left: 25%;
+      --_bg: linear-gradient(138deg, #a0d968 4.99%, #042826 94.22%);
+    }
+  }
+
+  /**
+   * Light hero / stage (Figma Website-Relaunch 2026 — bgr-blur / light corners).
+   * Uses :root tokens: --white, --gray-50, --gray-100, --green-400, --green-500.
+   * Placed after base `span` rules so positions and colors override dark defaults.
+   */
+  &--light {
+    background: radial-gradient(
+      115% 95% at 50% 48%,
+      var(--white) 0%,
+      color-mix(in srgb, var(--gray-50) 55%, var(--white)) 52%,
+      color-mix(in srgb, var(--gray-100) 35%, var(--white)) 100%
+    );
+
+    span {
+      --_blur: 200px;
+
+      &:nth-child(1) {
+        // top-left: pale mint
+        --_size: 26rem;
+        --_top: 10%;
+        --_left: 6%;
+        --_bg: var(--blur-bubble-light-mint);
+        --_opacity: 1;
+      }
+
+      &:nth-child(2) {
+        // top-right: pale mint
+        --_size: 24rem;
+        --_top: 12%;
+        --_left: 94%;
+        --_bg: var(--blur-bubble-light-mint-soft);
+        --_opacity: 1;
+      }
+
+      &:nth-child(3) {
+        // bottom-left: airy sky
+        --_size: 50rem;
+        --_top: 92%;
+        --_left: 8%;
+        --_bg: var(--blur-bubble-light-sky);
+        --_opacity: 1;
+      }
+
+      &:nth-child(4) {
+        // bottom-right: soft lime (CTA-adjacent)
+        --_size: 40rem;
+        --_top: 86%;
+        --_left: 90%;
+        --_bg: var(--blur-bubble-light-lime);
+        --_opacity: 1;
+      }
+
+      &:nth-child(5) {
+        // wide low-contrast wash (keeps center clean white)
+        --_size: 58rem;
+        --_top: 55%;
+        --_left: 48%;
+        --_bg: linear-gradient(
+          132deg,
+          var(--blur-bubble-light-mint-soft) 0%,
+          var(--blur-bubble-light-wash) 100%
+        );
+        --_opacity: 1;
+        --_blur: 220px;
+      }
+    }
+  }
+}
+
+/**
+ * Mobile / iOS GPU mitigation — gradient-only fallback.
+ * `filter: blur()` on large spans creates heavy composited layers that delay
+ * first paint on mobile. Replace bubbles with static CSS gradients instead.
+ */
+@mixin blur-bubbles-gradient-fallback {
+  span {
+    display: none;
+  }
+
+  &--dark,
+  &:not(.blur-bubbles--light) {
+    background: radial-gradient(
+        ellipse 85% 55% at 0% 45%,
+        color-mix(in srgb, #a0d868 40%, transparent) 0%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 75% 50% at 100% 88%,
+        color-mix(in srgb, #404040 55%, transparent) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        ellipse 60% 45% at 25% 78%,
+        color-mix(in srgb, #042826 35%, transparent) 0%,
+        transparent 70%
+      ),
+      linear-gradient(136deg, #1f2026 10.21%, #111216 104.55%);
+  }
+
+  &--light {
+    background: radial-gradient(
+        ellipse 70% 45% at 8% 12%,
+        var(--blur-bubble-light-mint) 0%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 65% 40% at 92% 14%,
+        var(--blur-bubble-light-mint-soft) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 90% 55% at 10% 95%,
+        var(--blur-bubble-light-sky) 0%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 75% 50% at 88% 88%,
+        var(--blur-bubble-light-lime) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        115% 95% at 50% 48%,
+        var(--white) 0%,
+        color-mix(in srgb, var(--gray-50) 55%, var(--white)) 52%,
+        color-mix(in srgb, var(--gray-100) 35%, var(--white)) 100%
+      );
+  }
+}
+
+@media (max-width: 768px) {
+  .blur-bubbles {
+    @include blur-bubbles-gradient-fallback;
+  }
+}
+
+.is-ios .blur-bubbles {
+  @include blur-bubbles-gradient-fallback;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-bubbles span {
+    display: none;
+  }
+}

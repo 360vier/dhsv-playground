@@ -1,0 +1,74 @@
+{#- Übersetzt aus source/index.blade.php + Controller source/index.php (Theme dhsv012),
+    inkl. theme partials/blur-bubbles.blade.php (inline) und partials/breadcrumb.blade.php (breadcrumb/_breadcrumb.njk).
+    WordPress-Lookups im Playground als Attribute:
+    - breadcrumb: [{label, url}] – Breadcrumb-Pfad der aktuellen Seite (\dhsv\Breadcrumb::items()); ohne Attribut keine Breadcrumb.
+    - image: {url, alt, width, height} – statt wp_get_attachment_image(id) ein einfaches <img> mit denselben Klassen/Attributen.
+    Der Controller verschiebt dhsv/logoslider-InnerBlocks in .dhsv-stage__footer. Hier wird das gerenderte Inner-HTML
+    ab dem ersten Logoslider-Element abgeschnitten – setzt voraus, dass Logoslider (wie live) die letzten InnerBlocks sind. -#}
+{%- set themeName = 'light' if theme == 'light' else 'dark' -%}
+{%- set heightName = 'content' if height == 'content' else '100svh' -%}
+{%- set widthName = '100' if contentWidth == '100' else '60' -%}
+{%- set bgStack = 'with-bg bg-light-gradient' if themeName == 'light' else 'with-bg bg-dark-gradient' -%}
+{%- set wrapperClasses = 'dhsv-stage is-root-container is-theme-' ~ themeName ~ ' is-height-' ~ heightName ~ ' is-content-width-' ~ widthName ~ ' ' ~ bgStack -%}
+
+{%- set hasLogoslider = false -%}
+{%- for ib in (block.innerBlocks or []) -%}
+    {%- if ib.blockName == 'dhsv/logoslider' -%}{%- set hasLogoslider = true -%}{%- endif -%}
+{%- endfor -%}
+{%- set inner = content | string -%}
+{%- set mainHtml = inner -%}
+{%- set footerHtml = '' -%}
+{%- if hasLogoslider -%}
+    {%- set markerPos = -1 -%}
+    {%- for marker in ['data-pg-block="dhsv/logoslider"', 'wp-block-dhsv-logoslider', 'dhsv-logoslider-block-wrapper'] -%}
+        {%- set p = inner.indexOf(marker) -%}
+        {%- if p > -1 and (markerPos == -1 or p < markerPos) -%}{%- set markerPos = p -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if markerPos > -1 -%}
+        {%- set cut = inner.lastIndexOf('<', markerPos) -%}
+        {%- set mainHtml = inner.slice(0, cut) -%}
+        {%- set footerHtml = inner.slice(cut) -%}
+    {%- endif -%}
+{%- endif -%}
+{%- set crumbs = breadcrumb or [] -%}
+{%- set img = image or {} -%}
+<section {{ wrapper(wrapperClasses) }}>
+  <div
+    class="blur-bubbles blur-bubbles--{{ themeName }} dhsv-stage__bubbles"
+    aria-hidden="true"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="dhsv-stage__inner alignwide">
+    <div class="dhsv-stage__main">
+      <div class="dhsv-stage__content">
+        {% include "breadcrumb/_breadcrumb.njk" %}
+        {{ mainHtml | safe }}
+      </div>
+      {% if img.url %}
+        <div class="dhsv-stage__media">
+          <img
+            class="dhsv-stage__image dhsv-lcp-image"
+            src="{{ img.url }}"
+            alt="{{ img.alt or '' }}"
+            {% if img.width %} width="{{ img.width }}" {% endif %}
+            {% if img.height %} height="{{ img.height }}" {% endif %}
+            sizes="(max-width: 991.98px) 100vw, 42vw"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          >
+        </div>
+      {% endif %}
+    </div>
+    {% if footerHtml | trim %}
+      <div class="dhsv-stage__footer">
+        {{ footerHtml | safe }}
+      </div>
+    {% endif %}
+  </div>
+</section>

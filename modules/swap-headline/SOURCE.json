@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/swap-headline",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "abf75242e258",
+  "templateTranslatedFrom": "abf75242e258",
+  "files": {
+    "block.json": "e03fdea976a8",
+    "scripts.js": "b3ac441385fb",
+    "styles.scss": "f8f65fc642ae"
+  }
+}

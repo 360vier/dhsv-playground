@@ -1,0 +1,6 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller: animation_path = get_theme_file_uri() + anim.json →
+    im Playground die Live-URL des Themes (überschreibbar per Attribut animationPath). -#}
+{%- set path = animationPath or 'https://www.360vier.de/wp-content/themes/360vier-theme/resources/assets/gutenberg/blocks/lottie-animation/anim.json' -%}
+<div {{ wrapper('dhsv-lottie-animation') }}>
+    <div class="dhsv-lottie-animation__container" data-lottie-animation data-lottie-path="{{ path }}"></div>
+</div>

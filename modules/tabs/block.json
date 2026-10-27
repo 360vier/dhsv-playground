@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/tabs",
+  "title": "Tabs",
+  "icon": "admin-page",
+  "category": "layout",
+  "description": "Tabs Block",
+  "keywords": ["tabs"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "defaultSelectedTab": {
+      "type": "string"
+    },
+    "tabsNavDirection": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  }
+}

@@ -1,0 +1,83 @@
+{#- Übersetzt aus source/index.blade.php + _ai-icons.blade.php (Theme dhsv012). Controller-Logik aus source/index.php +
+    dhsv\AiView::normalizeBlockAttrs()/metadataPairs() nachgebaut. page.url fällt live auf get_permalink() zurück →
+    im Playground nur über das Attribut pageUrl. -#}
+{%- set lead = (summaryLead or '') | trim -%}
+{%- set text = (summaryText or '') | trim -%}
+{%- if not lead and not text -%}
+    {%- if entity | trim %}{% set lead = entity | trim %}{% endif -%}
+    {%- set typeCap = [] -%}
+    {%- for v in [type | trim, capability | trim] %}{% if v %}{% set typeCap = (typeCap.push(v), typeCap) %}{% endif %}{% endfor -%}
+    {%- if typeCap | length %}{% set text = typeCap | join('\n') %}{% endif -%}
+{%- endif -%}
+{%- set text = text | striptags(true) if text else '' -%}
+
+{%- if provides is string -%}
+    {%- set provideLines = provides | replace('\r\n', '\n') | replace('\r', '\n') -%}
+    {%- set provideLines = provideLines.split('\n') -%}
+{%- else -%}
+    {%- set provideLines = provides or [] -%}
+{%- endif -%}
+{%- set provideItems = [] -%}
+{%- for p in provideLines %}{% if (p | string | trim) %}{% set provideItems = (provideItems.push(p | string | trim), provideItems) %}{% endif %}{% endfor -%}
+
+{%- set metaPairs = [] -%}
+{%- for field, key in [['entity','entity'],['type','type'],['capability','capability'],['pageType','page.type'],['pagePillar','page.pillar'],['pageUrl','page.url'],['serves','serves'],['relation','relation']] -%}
+    {%- set v = (attributes[field] or '') | string | trim -%}
+    {%- if v %}{% set metaPairs = (metaPairs.push({ key: key, value: v }), metaPairs) %}{% endif -%}
+{%- endfor -%}
+{%- for p in provideItems %}{% set metaPairs = (metaPairs.push({ key: 'provides', value: p }), metaPairs) %}{% endfor -%}
+
+<details
+    {{ wrapper() }}
+    {% if itemId and not attributes.anchor %} id="{{ itemId }}"{% endif %}
+    {% if initiallyOpen %} open{% endif %}
+    data-ai-view="true"
+    {% if pageType | trim %} data-page-type="{{ pageType | trim }}"{% endif %}
+    {% if pagePillar | trim %} data-page-pillar="{{ pagePillar | trim }}"{% endif %}
+    {% if pageUrl | trim %} data-page-url="{{ pageUrl | trim }}"{% endif %}
+    {% if serves | trim %} data-serves="{{ serves | trim }}"{% endif %}
+    {% if relation | trim %} data-relation="{{ relation | trim }}"{% endif %}
+    {% if provideItems | length %} data-provides="{{ provideItems | join('|') }}"{% endif %}
+>
+    <summary>
+        <span class="ai-akkordeon__stars" aria-hidden="true">
+            <span class="ai-akkordeon__stars-badge">
+                <svg class="ai-akkordeon__stars-icon" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                    <path d="M16 16.1429C12.2129 16.1429 9.14282 19.2129 9.14282 23L6.85711 23C6.85712 19.2129 3.78707 16.1429 5.9947e-07 16.1429L7.99294e-07 13.8571C3.78707 13.8571 6.85712 10.7871 6.85712 7L9.14282 7C9.14282 10.7871 12.2129 13.8571 16 13.8571L16 16.1429Z" fill="currentColor"/>
+                    <path d="M21.75 14C21.75 12.2065 23.2051 10.7526 25 10.7526L25 9.25383C23.2051 9.25383 21.75 7.79993 21.75 6.00645L20.25 6.00645C20.25 7.79993 18.7949 9.25383 17 9.25383L17 10.7526C18.7949 10.7526 20.25 12.2065 20.25 14L21.75 14Z" fill="currentColor"/>
+                    <path d="M14.5625 6C14.5625 4.65381 15.6538 3.5625 17 3.5625L17 2.4375C15.6538 2.4375 14.5625 1.34619 14.5625 2.44931e-06L13.4375 2.35096e-06C13.4375 1.34619 12.3462 2.4375 11 2.4375L11 3.5625C12.3462 3.5625 13.4375 4.65381 13.4375 6L14.5625 6Z" fill="currentColor"/>
+                </svg>
+            </span>
+        </span>
+        <span class="ai-akkordeon__chevron" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="6 9 12 15 18 9" />
+            </svg>
+        </span>
+        <span class="ai-akkordeon__summary-content">
+            {% if lead %}
+                <div class="ai-akkordeon__summary-lead">{{ lead | safe }}</div>
+            {% endif %}
+            {% if text %}
+                <div class="ai-akkordeon__summary-text">{{ text | safe }}</div>
+            {% endif %}
+            {% if metaPairs | length %}
+                <dl class="ai-akkordeon__meta">
+                    {% for pair in metaPairs %}
+                        <div class="ai-akkordeon__meta-row">
+                            <dt class="ai-akkordeon__meta-key">{{ pair.key }}</dt>
+                            <dd class="ai-akkordeon__meta-value">{{ pair.value }}</dd>
+                        </div>
+                    {% endfor %}
+                </dl>
+            {% endif %}
+        </span>
+        {% include "ai-akkordeon/_ai-icons.njk" %}
+    </summary>
+    <div class="ai-akkordeon__separator" aria-hidden="true">
+        <span class="ai-akkordeon__separator-label">ai-view</span>
+    </div>
+    <div class="ai-akkordeon__body">
+        {{ content }}
+    </div>
+</details>

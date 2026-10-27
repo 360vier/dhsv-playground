@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/personio-listing",
+  "title": "Personio Jobs",
+  "icon": "businessperson",
+  "category": "widgets",
+  "description": "Gibt synchronisierte Personio Stellen als Liste aus (eine Stelle pro Zeile).",
+  "keywords": ["personio", "jobs", "stellen", "karriere"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "departmentIds": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "number"
+      }
+    },
+    "locationIds": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "number"
+      }
+    },
+    "employmentTypes": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "itemsToShow": {
+      "type": "number",
+      "default": 10
+    },
+    "showAll": {
+      "type": "boolean",
+      "default": false
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "order": {
+      "type": "string",
+      "default": "desc"
+    },
+    "surface": {
+      "type": "string",
+      "default": "glass"
+    },
+    "showApplyButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "showRecruitingCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showEmploymentType": {
+      "type": "boolean",
+      "default": false
+    },
+    "showDepartment": {
+      "type": "boolean",
+      "default": false
+    },
+    "showLocation": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorStyle": "dhsv-personio-listing-editor",
+  "style": "dhsv-personio-listing"
+}

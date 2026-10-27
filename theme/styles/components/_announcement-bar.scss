@@ -1,0 +1,142 @@
+/**
+ * Announcement bar: full-bleed notice strip at the top of the fixed header
+ * shell (e.g. trade-fair hints). Editable under Theme-Optionen → Banner.
+ *
+ * It is the first child of `<header>`, so it travels with the fixed header and
+ * pushes the header pill down on its own. Negative margins cancel the header
+ * shell padding of the current breakpoint; `--announcement-bar-height` keeps
+ * `--header-height` (hero paddings, sticky offsets, mobile menu) in sync and is
+ * refined to the measured height by `util/announcementBar.js`.
+ */
+
+// Pre-JS fallback, overridden inline once the bar has been measured.
+html:has(.announcement-bar) {
+  --announcement-bar-height: 2.5rem;
+}
+
+.announcement-bar {
+  position: relative;
+  // Above the full-screen mobile menu (z-index 9999) and the header pill
+  // (99999) so the notice stays readable in every header state.
+  z-index: 100000;
+  margin: calc(var(--header-shell-padding-block) * -1)
+    calc(var(--header-shell-padding-inline) * -1) 0;
+  background-color: var(--gray-800);
+  color: var(--white);
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-text-small);
+  font-weight: 400;
+  line-height: 1.4;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-sm);
+    min-height: 2.5rem;
+    max-width: var(--wide-size);
+    margin-inline: auto;
+    padding: var(--size-xs) var(--size-2xl);
+
+    // Keeps the text clear of the absolutely positioned close button.
+    @media (max-width: 991px) {
+      padding-inline: 2.75rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-2xs) var(--size-xs);
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 2px solid var(--white);
+      outline-offset: 4px;
+      border-radius: var(--size-2xs);
+    }
+  }
+
+  &__text {
+    color: inherit;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2xs);
+    white-space: nowrap;
+  }
+
+  &__cta-text {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    transition: text-decoration-color 0.3s var(--ease-spring-30);
+  }
+
+  &__icon svg {
+    display: block;
+    width: 0.875rem;
+    height: 0.875rem;
+    transition: transform 0.3s var(--ease-spring-30);
+  }
+
+  a.announcement-bar__content:hover {
+    .announcement-bar__cta-text {
+      text-decoration-color: currentColor;
+    }
+
+    .announcement-bar__icon svg {
+      transform: translateX(0.1875rem);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 50%;
+    right: var(--size-xs);
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--rounded-full);
+    background: transparent;
+    color: color-mix(in srgb, var(--white) 70%, transparent);
+    cursor: pointer;
+    transition: color 0.3s var(--ease-spring-30),
+      background-color 0.3s var(--ease-spring-30);
+
+    &:hover {
+      color: var(--white);
+      background-color: color-mix(in srgb, var(--white) 12%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--white);
+      outline-offset: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__icon svg,
+    &__cta-text,
+    &__close {
+      transition: none;
+    }
+
+    a.announcement-bar__content:hover .announcement-bar__icon svg {
+      transform: none;
+    }
+  }
+}

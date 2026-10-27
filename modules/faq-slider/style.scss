@@ -1,0 +1,28 @@
+// Will be compiled to a separate bundle and enqueued when this block is used.
+// All styles in here will be scoped to the block class .wp-block-{namespace}-{name}.
+
+.wp-block-dhsv-faq-slider {
+  .faq-accordion__columns {
+    display: grid;
+    gap: var(--size-md);
+  }
+
+  .faq-accordion--columns-2 .faq-accordion__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .faq-accordion--columns-3 .faq-accordion__columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    .faq-accordion--columns-2 .faq-accordion__columns,
+    .faq-accordion--columns-3 .faq-accordion__columns {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .faq-accordion__footer {
+    margin-top: var(--size-lg);
+  }
+}

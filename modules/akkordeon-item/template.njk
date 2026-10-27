@@ -1,0 +1,11 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller (source/index.php) mappt nur camelCase → snake_case.
+    Live setzt Klasse + id (itemId) hart; im Playground via wrapper() für den data-pg-block-Anker. -#}
+<details {{ wrapper() }}{% if itemId and not attributes.anchor %} id="{{ itemId }}"{% endif %}{% if initiallyOpen %} open{% endif %}>
+    <summary>
+        <span class="accordion-group__summary-icon"></span>
+        <span class="accordion-group__summary-title">{{ title | safe }}</span>
+    </summary>
+    <div>
+        {{ content }}
+    </div>
+</details>

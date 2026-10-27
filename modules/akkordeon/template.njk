@@ -1,0 +1,15 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller (source/index.php) mappt nur camelCase → snake_case.
+    Live setzt die Klasse hart (kein get_block_wrapper_attributes); im Playground via wrapper() für den data-pg-block-Anker.
+    faqSchema (FAQPage-JSON-LD) läuft in WordPress über einen separaten Hook und wird hier nicht ausgegeben. -#}
+{%- set activeBg = activeBackground or 'solid' -%}
+<div {{ wrapper() }}>
+    <accordion-group
+        class="has-active-bg-{{ activeBg }}"
+        {% if allowMultiple %} allow-multiple {% endif %}
+        {% if allowUrlUpdate %} allow-url-update {% endif %}
+        {% if disableScroll %} disable-scroll-into-view {% endif %}
+        {% if groupName %} name="{{ groupName }}" {% endif %}
+    >
+        {{ content }}
+    </accordion-group>
+</div>

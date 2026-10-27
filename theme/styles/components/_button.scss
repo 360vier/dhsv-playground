@@ -1,0 +1,250 @@
+.dhsv-button {
+  --_button-bg: var(--accent-gradient);
+  --_button-color: var(--accent-color);
+  --transition: all 0.5s var(--ease-spring-20);
+  --_button-padding-x: var(--size-lg);
+  --_button-padding-y: calc(var(--size-md) * 0.9);
+  --_button-font-size: var(--font-size-text);
+  --_button-outline-width: 0;
+  --_button-icon-bg: color-mix(
+    in srgb,
+    var(--_button-color) 10%,
+    transparent 100%
+  );
+  --_button-icon-bg-hover: var(--accent-bg);
+  --_button-font: inherit;
+
+  &.primary {
+    &:hover {
+      --_button-outline-width: 10px;
+    }
+  }
+
+  &.secondary {
+    --_button-bg: var(--gray-transparent);
+    --_button-color: var(--text-color);
+    --_button-outline-width: 1px;
+    --_button-outline-color: var(--gray-200);
+    --_button-icon-bg: color-mix(
+      in srgb,
+      var(--text-color) 10%,
+      transparent 100%
+    );
+    --_button-icon-bg-hover: var(--gray-transparent);
+  }
+
+  &.tertiary {
+    --_button-bg: transparent;
+    --_button-color: var(--text-color);
+    --_button-outline-width: 2px;
+    --_button-outline-color: color-mix(
+      in srgb,
+      var(--text-color) 10%,
+      transparent 100%
+    );
+    --_button-icon-bg: color-mix(
+      in srgb,
+      var(--text-color) 10%,
+      transparent 100%
+    );
+    --_button-icon-bg-hover: var(--gray-transparent);
+
+    &:hover,
+    &:focus-visible {
+      --_button-outline-width: 2px;
+      --_button-outline-color: color-mix(
+        in srgb,
+        var(--text-color) 20%,
+        transparent 100%
+      );
+    }
+  }
+
+  &.icon-before {
+    .icon {
+      right: var(--_button-padding-x);
+      left: auto;
+      transform: translateY(-50%) translateX(10%);
+
+      svg {
+        transform: translateX(100%);
+      }
+    }
+
+    &:not(:hover):not(:focus-visible) {
+      padding-inline: calc(0.875em + var(--_button-padding-x));
+    }
+
+    &:hover,
+    &:focus-visible {
+      padding-left: calc(1.75em + var(--_button-padding-x));
+
+      .icon {
+        right: calc(100% - var(--space));
+        left: auto;
+        transform: translateY(-50%) translateX(100%) rotate(360deg);
+      }
+    }
+
+    &::after {
+      background: linear-gradient(to right, black 0%, transparent 50%);
+    }
+  }
+
+  &:not([data-icon='false']):not(.icon-before) {
+    &:not(:hover):not(:focus-visible) {
+      padding-inline: calc(0.875em + var(--_button-padding-x));
+    }
+
+    &:hover,
+    &:focus-visible {
+      padding-right: calc(1.75em + var(--_button-padding-x));
+    }
+  }
+
+  border-radius: var(--rounded-full);
+  padding: var(--_button-padding-y) var(--_button-padding-x);
+  text-decoration: none;
+  font-family: var(--_button-font);
+  font-size: var(--_button-font-size);
+  color: var(--_button-color);
+  background: var(--_button-bg);
+  transition: var(--transition);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-block;
+  outline: var(--_button-outline-width) solid
+    color-mix(in srgb, var(--text-color) 20%, transparent 100%);
+  transition-delay: 0.2s;
+
+  &.full-width {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon {
+    position: absolute;
+    z-index: 2;
+    height: 1em;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
+    background: var(--_button-icon-bg);
+    transition: var(--transition);
+    left: var(--_button-padding-x);
+    top: 50%;
+    transform: translateY(-50%) translateX(-10%);
+    display: grid;
+    place-items: center;
+    transition-delay: 0.2s;
+    overflow: clip;
+    opacity: 0;
+
+    svg {
+      display: block;
+      width: 55%;
+      height: 55%;
+      stroke: var(--_button-color);
+      opacity: 0;
+      transition: var(--transition);
+      transform: translateX(-100%);
+    }
+  }
+
+  &:not([data-icon='false'])::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to left, black 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    transition-delay: 0s;
+
+    .icon {
+      --space: 0.4em;
+
+      left: calc(100% - var(--space));
+      transform: translateY(-50%) translateX(-100%) rotate(360deg);
+      border-radius: 50%;
+      height: calc(100% - var(--space) * 2);
+      background: var(--_button-icon-bg-hover);
+      transition-delay: 0s;
+      opacity: 1;
+
+      svg {
+        transform: translateX(0);
+        opacity: 1;
+        transition-delay: 0.25s;
+      }
+    }
+
+    &:focus-visible {
+      --_button-outline-width: 10px;
+    }
+
+    &::after {
+      opacity: 0.2;
+    }
+  }
+
+  // Touch / coarse pointer: no hover — show icon in its revealed state by default.
+  @media (hover: none), (pointer: coarse) {
+    &:not([data-icon='false']):not(.icon-before) {
+      padding-right: calc(1.75em + var(--_button-padding-x));
+
+      .icon {
+        --space: 0.4em;
+
+        left: calc(100% - var(--space));
+        transform: translateY(-50%) translateX(-100%);
+        border-radius: 50%;
+        height: calc(100% - var(--space) * 2);
+        background: var(--_button-icon-bg-hover);
+        opacity: 1;
+
+        svg {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      &::after {
+        opacity: 0.2;
+      }
+    }
+
+    &.icon-before {
+      padding-left: calc(1.75em + var(--_button-padding-x));
+
+      .icon {
+        --space: 0.4em;
+
+        right: calc(100% - var(--space));
+        left: auto;
+        transform: translateY(-50%) translateX(100%);
+        border-radius: 50%;
+        height: calc(100% - var(--space) * 2);
+        background: var(--_button-icon-bg-hover);
+        opacity: 1;
+
+        svg {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      &::after {
+        opacity: 0.2;
+      }
+    }
+  }
+}

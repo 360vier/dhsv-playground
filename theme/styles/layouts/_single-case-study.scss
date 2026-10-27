@@ -1,0 +1,278 @@
+:root {
+  --cs-offset: 20rem;
+  --cs-single-hl-line-height: 1.1;
+  --cs-single-hl-font-size: var(--font-size-h1);
+  --cs-single-hl-height: calc(
+    (var(--cs-single-hl-font-size) * var(--cs-single-hl-line-height)) * 2 +
+      var(--size-3xl)
+  );
+  --cs-single-hl-pad-block: var(--size-md);
+  --cs-single-space-to-image: calc(
+    var(--header-height) + (var(--cs-single-hl-pad-block) * 2) +
+      var(--cs-single-hl-height)
+  );
+
+  @media (max-width: #{$break-medium - 1px}) {
+    --cs-offset: 8rem;
+  }
+}
+
+body {
+  .cs-image-placeholder {
+    --_width: calc(var(--content-size) - (var(--size-md) * 2));
+
+    content: '';
+    position: fixed;
+    z-index: 3600;
+    aspect-ratio: 1.7;
+    width: var(--_width);
+    left: calc(50% - (var(--_width) / 2));
+    top: var(--cs-single-space-to-image);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    overflow: clip;
+    isolation: isolate;
+
+    &::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      top: 100%;
+      z-index: -1;
+      background: var(--white);
+      transition: var(--transition);
+      transition-duration: 0.5s;
+    }
+
+    .cs-image-placeholder__bubbles {
+      position: fixed !important;
+      inset: 0;
+      top: 0;
+      bottom: 0;
+      transform: translateY(100%);
+      z-index: -2 !important;
+      transition: var(--transition);
+      transition-duration: 1s;
+      opacity: 1;
+      border-radius: 0;
+    }
+
+    img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--rounded-md);
+      transition: var(--transition);
+      transition-duration: 0.5s;
+
+      &[src=''] {
+        display: none;
+      }
+    }
+
+    &.is-visible {
+      opacity: 1;
+
+      img {
+        border-radius: var(--rounded-lg);
+      }
+
+      &::after {
+        transition-delay: 0.6s;
+        top: calc(100% - var(--cs-offset));
+      }
+
+      .cs-image-placeholder__bubbles {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.case-study-single {
+  &__header {
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+    color: var(--white);
+    padding-top: var(--header-height);
+    padding-inline: var(--content-space);
+    padding-bottom: var(--size-2xl);
+    overflow: hidden;
+
+    @media (max-width: #{$break-medium - 1px}) {
+      padding-top: calc(var(--header-height) - var(--size-md));
+      padding-bottom: var(--size-md);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      top: calc(100% - var(--cs-offset));
+      background: var(--white);
+    }
+  }
+
+  &__bubbles {
+    max-width: unset;
+  }
+
+  &__stage-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--wide-size);
+    margin-inline: auto;
+  }
+
+  @keyframes cs-headline-reveal {
+    from {
+      transform: translateY(10%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  &__headline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-block: var(--cs-single-hl-pad-block);
+    height: var(--cs-single-hl-height);
+    opacity: 0;
+    transform: translateY(10%);
+    animation: cs-headline-reveal 1s ease forwards;
+    animation-delay: 0.5s;
+
+    .breadcrumb {
+      margin-bottom: 0;
+    }
+
+    h1 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+      overflow: clip;
+      max-height: 100%;
+      width: 100%;
+      font-size: var(--font-size-h2);
+      line-height: var(--_line-height);
+      padding-bottom: 0;
+    }
+  }
+
+  &__featured-image {
+    width: 100%;
+    max-width: var(--content-size);
+    padding-inline: var(--content-space);
+    margin-inline: auto;
+    height: auto;
+    overflow: hidden;
+    object-fit: cover;
+    aspect-ratio: 1.7;
+
+    img {
+      border-radius: var(--rounded-lg);
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.blog-header.case-study-single__header {
+  background: var(--dark-gradient);
+}
+
+.case-study-single__header--no-media {
+  --cs-offset: 0;
+
+  padding-bottom: var(--size-3xl);
+
+  &::before {
+    display: none;
+  }
+
+  .case-study-single__headline,
+  .blog-header__headline.case-study-single__headline {
+    height: auto;
+    min-height: 0;
+    margin-block: var(--size-lg) var(--size-md);
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .blog-header__title.entry-title,
+  .case-study-single__headline h1 {
+    display: block;
+    overflow: visible;
+    max-height: none;
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height);
+  }
+}
+
+.blog-header__headline.case-study-single__headline {
+  height: auto;
+  min-height: var(--cs-single-hl-height);
+
+  .breadcrumb {
+    margin-bottom: 0;
+  }
+}
+
+.blog-header__meta {
+  max-width: var(--content-size);
+  color: color-mix(in srgb, var(--white) 72%, transparent);
+
+  a {
+    color: inherit;
+  }
+}
+
+// Case content: the "Text Index" size is larger than the body size on mobile.
+// Body copy (cards included) stays one size on small screens. WordPress forces
+// the size with !important from the preset variable, so the variable is reset.
+@media (max-width: #{$break-medium - 1px}) {
+  .single-case_study .entry-content {
+    --wp--preset--font-size--text-index: var(--font-size-text);
+  }
+}
+
+.blog-header .blog-featured-image.case-study-single__featured-image {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--size-xl);
+
+  @media (max-width: #{$break-medium - 1px}) {
+    margin-top: var(--size-md);
+  }
+}
+
+@media not (prefers-reduced-motion: reduce) {
+  .case-study-single__header {
+    /* stylelint-disable-next-line property-no-unknown -- CSS View Transitions API */
+    view-transition-name: case-study-stage;
+  }
+
+  .case-study-single__headline h1 {
+    /* stylelint-disable-next-line property-no-unknown -- CSS View Transitions API */
+    view-transition-name: var(--case-vt-title);
+  }
+
+  .case-study-single__featured-image {
+    /* stylelint-disable-next-line property-no-unknown -- CSS View Transitions API */
+    view-transition-name: var(--case-vt-image);
+  }
+}

@@ -1,0 +1,41 @@
+//reset default styles
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* stylelint-disable-next-line */
+html :where(.editor-styles-wrapper) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: inherit;
+    padding: inherit;
+    color: inherit;
+  }
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  background: unset;
+  border: unset;
+  padding: unset;
+  margin: unset;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/ai-akkordeon",
+  "title": "AI Akkordeon",
+  "description": "Expandable accordion with AI-view summary and structured GEO metadata (page.type, provides, serves) for machines and humans.",
+  "icon": "arrow-down-alt2",
+  "category": "360vier",
+  "keywords": ["accordion", "ai", "akkordeon", "expandable"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "summaryLead": {
+      "type": "string",
+      "default": ""
+    },
+    "summaryText": {
+      "type": "string",
+      "default": ""
+    },
+    "initiallyOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "itemId": {
+      "type": "string",
+      "default": ""
+    },
+    "entity": {
+      "type": "string",
+      "default": ""
+    },
+    "type": {
+      "type": "string",
+      "default": ""
+    },
+    "capability": {
+      "type": "string",
+      "default": ""
+    },
+    "pageType": {
+      "type": "string",
+      "default": ""
+    },
+    "pagePillar": {
+      "type": "string",
+      "default": ""
+    },
+    "pageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "provides": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "serves": {
+      "type": "string",
+      "default": ""
+    },
+    "relation": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "example": {
+    "attributes": {
+      "summaryLead": "Was bedeutet \"Digital Platforms\" bei 360VIER?",
+      "summaryText": "Digital Platforms steht bei 360VIER für Websites und CMS-Architekturen, die für Menschen und Maschinen funktionieren."
+    }
+  },
+  "editorStyle": "dhsv-ai-akkordeon-editor",
+  "style": "dhsv-ai-akkordeon"
+}

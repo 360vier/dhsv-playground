@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/logoslider",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "2110482a8397",
+  "templateTranslatedFrom": null,
+  "files": {
+    "block.json": "bfebb2205f3e",
+    "scripts.js": "47fe5e6fd997",
+    "styles.scss": "b6f9e76ec1de"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/button",
+  "title": "Button",
+  "icon": "block-default dhsv-icon",
+  "category": "text",
+  "description": "",
+  "keywords": ["buttin"],
+  "textdomain": "dhsv_theme",
+  "parent": ["dhsv/buttons"],
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "left"
+    },
+    "link": {
+      "type": "object",
+      "default": { 
+        "url": ""
+      }
+    },
+    "icon": {
+      "type": "string",
+      "default": "button.arrow-right"
+    },
+    "type": {
+      "type": "string",
+      "default": "primary"
+    },
+    "iconBefore": {
+      "type": "boolean",
+      "default": false
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "usesContext": ["isSame", "maxWidth"],
+  "supports": {
+    "align": ["left", "center", "right"],
+    "anchor": true
+  },
+  "editorStyle": "dhsv-button-block editor",
+  "style": "dhsv-button-block"
+}

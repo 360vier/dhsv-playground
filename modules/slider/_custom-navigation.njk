@@ -1,0 +1,18 @@
+{#- Übersetzt aus source/custom-navigation.blade.php -#}
+{% if useDraggablePagination %}
+    <div class="splide__dragable-pagination"></div>
+{% else %}
+    <div class="splide__arrows splide__pagination-container">
+        <button type="button" class="splide__arrow splide__arrow--prev" aria-label="{{ __('Vorherige Folie') }}">
+            <span class="splide__arrow-icon" aria-hidden="true">{{ svg('icons.control-arrow-right', { class: 'dhsv-icon' }) }}</span>
+        </button>
+        <ul class="splide__pagination"></ul>
+        <div class="splide__pagination__numbers">
+            <span class="current"></span>
+            <span class="total"></span>
+        </div>
+        <button type="button" class="splide__arrow splide__arrow--next" aria-label="{{ __('Nächste Folie') }}">
+            <span class="splide__arrow-icon" aria-hidden="true">{{ svg('icons.control-arrow-right', { class: 'dhsv-icon' }) }}</span>
+        </button>
+    </div>
+{% endif %}

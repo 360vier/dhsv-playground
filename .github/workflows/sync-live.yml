@@ -1,0 +1,53 @@
+# Wöchentlich: Theme-Code + Live-Inhalte holen und als PR (Label core) vorschlagen
+name: Live-Sync
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn sync:theme
+        env:
+          THEME_REPO_TOKEN: ${{ secrets.THEME_REPO_TOKEN }}
+      - run: yarn sync:content
+        env:
+          WP_APP_USER: ${{ secrets.WP_APP_USER }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+      - run: yarn check && yarn build
+        env:
+          PG_ALLOW_CORE: '1'
+      - name: PR erstellen
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "Keine Änderungen"; exit 0; fi
+          BRANCH="sync/live-$(date +%F)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add theme modules layout pages
+          git commit -m "[core] Live-Sync $(date +%F)"
+          git push -u origin "$BRANCH"
+          REPORT=$(cat .cache/sync-theme-report.json 2>/dev/null || echo '{}')
+          gh pr create --base main --head "$BRANCH" --label core \
+            --title "[core] Live-Sync $(date +%F)" \
+            --body "Automatischer Sync von Theme ($(jq -r .sha theme/SOURCE.json | cut -c1-8)) und Live-Inhalten.
+
+          Report sync:theme:
+          \`\`\`json
+          $REPORT
+          \`\`\`
+          Module ohne/veraltetes template.njk → /module-sync."

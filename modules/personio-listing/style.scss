@@ -1,0 +1,14 @@
+.wp-block-dhsv-personio-listing {
+  width: 100%;
+
+  .personio-kit__listing {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pk-listing-gap, 1rem);
+  }
+
+  .personio-kit__job-item {
+    width: 100%;
+    max-width: none;
+  }
+}

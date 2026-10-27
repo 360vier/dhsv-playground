@@ -1,0 +1,47 @@
+.personio-kit__listing,
+.personio-kit--grid .personio-kit__listing,
+.personio-kit--block .personio-kit__listing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pk-listing-gap);
+  width: 100%;
+}
+
+.personio-kit__empty {
+  padding: var(--pk-card-padding);
+  color: var(--pk-muted-color);
+  border: var(--pk-card-border);
+  border-radius: var(--pk-card-radius);
+}
+
+.personio-kit__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pk-button-padding-y) var(--pk-button-padding-x);
+  color: var(--pk-button-color);
+  text-decoration: none;
+  background: var(--pk-button-bg);
+  border-radius: var(--pk-button-radius);
+
+  &:hover,
+  &:focus {
+    color: var(--pk-button-color);
+    filter: brightness(0.95);
+  }
+}
+
+.personio-kit__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  color: var(--pk-muted-color);
+  list-style: none;
+}
+
+.personio-kit__meta-item:not(:last-child)::after {
+  margin-left: 0.5rem;
+  content: '/';
+}

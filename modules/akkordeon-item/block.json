@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/akkordeon-item",
+  "title": "Akkordeon Item",
+  "icon": "arrow-down",
+  "category": "layout",
+  "description": "An expandable accordion section",
+  "keywords": ["accordion", "collapse", "toggle", "item"],
+  "textdomain": "dhsv_theme",
+  "parent": ["dhsv/akkordeon"],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "initiallyOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "itemId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "anchor": true,
+    "html": false
+  },
+  "editorStyle": "dhsv-akkordeon-item-editor",
+  "style": "dhsv-akkordeon-item"
+}

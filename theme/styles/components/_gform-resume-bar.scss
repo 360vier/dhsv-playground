@@ -1,0 +1,30 @@
+/**
+ * Gravity Forms resume bar ("Anfrage fortsetzen"), placed as the first child
+ * of the fixed header shell, above the announcement bar. Base styles ship with
+ * the add-on (scripts/gform-resume/style.scss); this only fits it into the
+ * header like `.announcement-bar`.
+ */
+
+// Pre-JS fallback, overridden inline once the bar has been measured.
+html:has(.gform-resume-bar:not([hidden])) {
+  --gform-resume-bar-height: 2.5rem;
+}
+
+.gform-resume-bar {
+  --gform-resume-bar-bg: var(--green-500);
+  --gform-resume-bar-color: var(--gray-800);
+  --gform-resume-bar-padding: var(--size-xs) var(--size-md);
+
+  position: relative;
+  // Same layer as the announcement bar, above mobile menu and header pill.
+  z-index: 100000;
+  margin: calc(var(--header-shell-padding-block) * -1)
+    calc(var(--header-shell-padding-inline) * -1) 0;
+  font-family: var(--primary-font-family);
+  font-size: var(--font-size-text-small);
+
+  // Both bars present: only the first one cancels the shell padding.
+  + .announcement-bar {
+    margin-top: 0;
+  }
+}

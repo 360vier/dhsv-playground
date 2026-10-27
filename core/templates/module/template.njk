@@ -1,0 +1,10 @@
+{#- Wird im Theme zu index.blade.php. Regeln:
+    - Wrapper immer über wrapper(…) (= get_block_wrapper_attributes)
+    - jedes Attribut aus block.json, kein hart codierter Inhalt
+    - {{ x }} escaped (= Blade {{ }}), {{ x | safe }} roh (= Blade {!! !!}) -#}
+<div {{ wrapper() }}>
+    {% if title %}
+        <h2 class="__NAME__--title">{{ title | safe }}</h2>
+    {% endif %}
+    {{ content }}
+</div>

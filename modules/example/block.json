@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/example",
+  "title": "Example Block",
+  "description": "Beschreibung",
+  "icon": "format-image",
+  "category": "text",
+  "usesContext": [],
+  "keywords": [],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "testSelect": {
+      "type": "string",
+      "default": ""
+    },
+    "test": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "test": true,
+      "testSelect": "option-1"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller-Logik (source/index.php) nachgebaut:
+    compositionLayers (isOnCanvas === false wird übersprungen) oder Fallback images[] → layers, defaultIndex = erster isDefault.
+    Die Mediathek-Auflösung von images[].id → URL entfällt: Bilder brauchen im Playground direkt {url, alt}.
+    Live setzt die Klassen hart; im Playground via wrapper() (data-pg-block-Anker). -#}
+{%- set layers = [] -%}
+{%- if compositionLayers and compositionLayers | length -%}
+    {%- for layer in compositionLayers -%}
+        {%- if layer.isOnCanvas !== false -%}
+            {%- set layers = (layers.push({
+                url: layer.url or '',
+                alt: layer.alt or '',
+                isDefault: not not layer.isDefault,
+                top: (layer.top | float) if (layer.top is defined and layer.top !== null) else 50,
+                left: (layer.left | float) if (layer.left is defined and layer.left !== null) else 50,
+                width: (layer.width | float) if (layer.width is defined and layer.width !== null) else 20,
+                height: (layer.height | float) if (layer.height is defined and layer.height !== null) else 20
+            }), layers) -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- else -%}
+    {%- for img in images or [] -%}
+        {%- set layers = (layers.push({ url: img.url or '', alt: img.alt or '', isDefault: loop.first, top: 50, left: 50, width: 20, height: 20 }), layers) -%}
+    {%- endfor -%}
+{%- endif -%}
+{%- set defaultIndex = 0 -%}
+{%- set found = false -%}
+{%- for layer in layers -%}
+    {%- if layer.isDefault and not found %}{% set defaultIndex = loop.index0 %}{% set found = true %}{% endif -%}
+{%- endfor -%}
+{%- set alignClass = '' if (align and align != 'none') else 'align' ~ (align or '') -%}
+
+<div {{ wrapper(('dhsv-image-stack-animation-block ' ~ alignClass) | trim, { 'data-image-stack-animation': '' }) }}>
+  <div class="dhsv-image-stack-animation__stage" role="presentation">
+    {% for layer in layers %}
+      <div
+        class="dhsv-image-stack-animation__layer"
+        data-layer
+        style="
+          --top: {{ layer.top }}%;
+          --left: {{ layer.left }}%;
+          --width: {{ layer.width }}%;
+          --height: {{ layer.height }}%;
+          --layer-index: {{ loop.index0 }};
+          --transition-delay: {{ (loop.index0 * 0.1) | round(2) }}s;
+        "
+        data-default="{{ '1' if loop.index0 == defaultIndex else '0' }}"
+      >
+        {% if layer.url %}
+          <img src="{{ layer.url }}" alt="{{ layer.alt }}" loading="lazy" />
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

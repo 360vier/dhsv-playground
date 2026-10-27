@@ -1,0 +1,35 @@
+.dhsv-buttons,
+.wp-block-dhsv-buttons {
+  margin-bottom: var(--size-sm);
+  // Buttons draw their outline outside the box. Full-width groups use
+  // overflow: clip, which cut the outline when the buttons are the last element.
+  padding-block-end: 2px;
+}
+
+.dhsv-buttons.horizontal {
+  gap: 1rem;
+}
+
+.dhsv-buttons .block-editor-block-list__block,
+.dhsv-buttons > [data-habitat] {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .dhsv-buttons {
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+
+  .dhsv-buttons.horizontal {
+    gap: 1rem;
+  }
+
+  .dhsv-buttons > [data-habitat] {
+    width: 100%;
+  }
+
+  .dhsv-buttons .dhsv-button {
+    width: 100%;
+  }
+}

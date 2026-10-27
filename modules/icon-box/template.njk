@@ -1,0 +1,20 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Der Controller reichert image per
+    dhsv\Media::withMediaLibraryImageData an – im Playground kommt image direkt als {url, alt}.
+    Kein get_block_wrapper_attributes im Original – daher kein wrapper(). -#}
+{%- set allowedLevels = ['h2', 'h3', 'h4', 'h5', 'h6', 'p'] -%}
+{%- set tag = headlineLevel if (headlineLevel in allowedLevels) else 'h3' -%}
+<div class="dhsv-icon-box-block {{ alignment }} align{{ align }} icon-size-{{ iconSize }} background-{{ background }}">
+    {% if image and image.url %}
+        <div class="icon-box__image">
+            <img src="{{ image.url }}" alt="{{ image.alt }}">
+        </div>
+    {% endif %}
+    <div class="icon-box__text">
+    {% if headline %}
+        <{{ tag }} class="title">{{ headline | safe }}</{{ tag }}>
+    {% endif %}
+    {% if text %}
+        <span>{{ text | safe }}</span>
+    {% endif %}
+    </div>
+</div>

@@ -1,0 +1,24 @@
+// core/spacer — optionale Mobile-Höhe (dhsvMobileHeight)
+// Ohne eigenen Mobile-Wert werden große Abstände mobil gedeckelt
+// (z. B. 100px/7rem aus dem Desktop-Layout), kleinere bleiben unverändert.
+.wp-block-spacer {
+  @media (max-width: 767.98px) {
+    &:not(.has-dhsv-mobile-height):not(.dhsv-spacer--hidden-mobile) {
+      max-height: var(--dhsv-spacer-mobile-max, 4rem);
+    }
+  }
+
+  &.has-dhsv-mobile-height {
+    @media (max-width: 767.98px) {
+      height: var(--dhsv-spacer-mobile-height) !important;
+    }
+  }
+
+  &.dhsv-spacer--hidden-mobile {
+    @media (max-width: 767.98px) {
+      display: none !important;
+      height: 0 !important;
+      margin-block: 0 !important;
+    }
+  }
+}

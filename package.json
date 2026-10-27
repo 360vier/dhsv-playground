@@ -1,0 +1,33 @@
+{
+  "name": "dhsv-playground",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Versionierter HTML-Playground für 360vier.de – Ideen, Seiten und Module mit Claude ausprobieren",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node core/cli/dev.js",
+    "build": "node core/cli/build.js",
+    "check": "node core/cli/check.js",
+    "sync:theme": "node core/cli/sync-theme.js",
+    "sync:content": "node core/cli/sync-content.js",
+    "sync": "yarn sync:theme && yarn sync:content",
+    "idea": "node core/cli/idea.js",
+    "render-module": "node core/cli/render-module.js"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^4",
+    "@wordpress/base-styles": "^5",
+    "@wordpress/block-serialization-default-parser": "^5.10.0",
+    "ajv": "^8.17.1",
+    "chokidar": "^3.6.0",
+    "diff": "^5.2.0",
+    "marked": "^12.0.2",
+    "nunjucks": "^3.2.4",
+    "postcss": "^8.4.47",
+    "postcss-prefixwrap": "^1.51.0",
+    "sass": "^1.79.4"
+  }
+}

@@ -1,0 +1,30 @@
+{#- Übersetzt aus source/index.blade.php + Controller source/index.php (Theme dhsv012).
+    source = 'techstack' lädt im Theme Techstack-Posts per get_posts – im Playground kommen die Titel
+    immer direkt über tags: ["…", "…"] (categories/maxItems werden ignoriert). -#}
+{%- set tagList = tags or [] -%}
+{%- set tagCount = tagList.length -%}
+{%- set clones = (tagCount * 4) if (tagCount * 4) > 48 else 48 -%}
+{%- set startIdx = (tagCount - 1) if tagCount > 1 else 0 -%}
+{%- set splideOptions = {
+    type: 'loop',
+    drag: 'free',
+    focus: 'center',
+    autoWidth: true,
+    clones: clones,
+    start: startIdx if direction == 'right-to-left' else 0,
+    autoScroll: {
+        speed: 0.5 if direction == 'left-to-right' else -0.5,
+        pauseOnHover: false
+    }
+} -%}
+<div {{ wrapper('', { direction: direction }) }}>
+    <div class="dhsv-slider splide" data-splide="{{ splideOptions | json }}">
+        <div class="splide__track">
+            <div class="splide__list">
+                {% for tag in tagList %}
+                    <div class="splide__slide">{{ tag }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

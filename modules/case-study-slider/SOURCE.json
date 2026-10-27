@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/case-study-slider",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "07d47d4d355c",
+  "templateTranslatedFrom": null,
+  "files": {
+    "block.json": "33e45713fc03",
+    "scripts.js": "ef0f51db7c4f",
+    "styles.scss": "cb2ceb9797cb"
+  }
+}

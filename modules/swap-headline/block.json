@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/swap-headline",
+  "title": "Swap Headline",
+  "description": "",
+  "icon": "format-quote",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv", "swap", "headline"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "headline": {
+      "type": "string",
+      "default": ""
+    },
+    "texts": {
+      "type": "string",
+      "default": ""
+    },
+    "level": {
+      "type": "string",
+      "default": "h2"
+    }
+  },
+  "supports": {
+    "align": ["wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-swap-headline-block editor",
+  "style": "dhsv-swap-headline-block"
+}

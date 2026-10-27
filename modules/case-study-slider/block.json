@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/case-study-slider",
+  "title": "Case Study / Blog Slider",
+  "description": "Scroll-gesteuerter Slider mit ausgewählten Case Studies oder Blog-Beiträgen.",
+  "icon": "slides",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "case study", "slider"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "postType": {
+      "type": "string",
+      "default": "case_study"
+    },
+    "caseStudyIds": {
+      "type": "array",
+      "default": []
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "maxItems": {
+      "type": "number",
+      "default": 10
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "caseStudyIds": []
+    }
+  },
+  "editorStyle": "dhsv-case-study-slider-block editor",
+  "style": "dhsv-case-study-slider-block"
+}

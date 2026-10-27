@@ -1,0 +1,15 @@
+{#- Übersetzt aus source/index.blade.php + Controller source/index.php (Theme dhsv012).
+    Kein get_block_wrapper_attributes im Original – daher kein wrapper(). Die Klassen is-layout-flex +
+    wp-block-dhsv-buttons-is-layout-flex ergänzt WordPress live über die Layout-Support (__experimentalLayout). -#}
+{%- set l = layout or {} -%}
+{%- set buttonWidth = (maxWidth ~ 'px') if isSame else 'unset' -%}
+{%- set alignItems = 'flex-start' if l.justifyContent == 'left' else ('flex-end' if l.justifyContent == 'right' else l.justifyContent) -%}
+{%- set styles = ['display: ' ~ l.type, 'flex-wrap: ' ~ l.flexWrap, '--button-width: ' ~ buttonWidth] -%}
+{%- if l.orientation == 'horizontal' -%}
+    {%- set styles = styles.concat(['flex-direction: row', 'justify-content: ' ~ l.justifyContent]) -%}
+{%- else -%}
+    {%- set styles = styles.concat(['flex-direction: column', 'align-items: ' ~ alignItems]) -%}
+{%- endif -%}
+<div class="dhsv-buttons {{ l.orientation }} is-layout-flex wp-block-dhsv-buttons-is-layout-flex" data-align="{{ align }}" style="{{ styles | join('; ') }}">
+	{{ content }}
+</div>

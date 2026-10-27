@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/image-stack-animation",
+  "title": "Image Stack Animation",
+  "description": "Bildergalerie, die beim Scrollen von gestapelten Bildern in eine Komposition übergeht.",
+  "icon": "images-alt2",
+  "category": "media",
+  "usesContext": [],
+  "keywords": ["dhsv", "image", "gallery", "stack", "composition", "animation"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "images": {
+      "type": "array",
+      "default": []
+    },
+    "compositionLayers": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"]
+  },
+  "styles": [],
+  "example": {},
+  "editorStyle": "dhsv-image-stack-animation-block editor",
+  "style": "dhsv-image-stack-animation-block"
+}

@@ -1,0 +1,16 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Kein get_block_wrapper_attributes im Original –
+    daher kein wrapper() (Live-Markup hat keine wp-block-dhsv-button-Klasse). -#}
+{%- set l = link or {} -%}
+<a
+    href="{{ l.url }}"
+    class="dhsv-button {{ type }} {{ 'icon-before' if iconBefore else '' }} {{ 'full-width' if fullWidth else '' }} {{ l.class or '' }} {{ className or '' }}"
+    {% if l.linkTarget %}target="{{ l.linkTarget }}"{% endif %}
+
+    {% if l.rel %}rel="{{ l.rel }}"{% endif %}
+
+>
+  <span class="text">{{ title }}</span>
+  <span class="icon">
+    {{ svg(icon) }}
+  </span>
+</a>

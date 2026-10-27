@@ -1,0 +1,33 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Der Controller reichert image per
+    dhsv\Media::withMediaLibraryImageData an – im Playground kommt image direkt als {url, alt}. -#}
+{%- set img = image or {} -%}
+{%- set l = link or {} -%}
+{%- set cardClasses = ('dhsv-image-card-block overlay-' ~ overlayColor ~ ' format-' ~ (format or 'default') ~ ' ' ~ ('is-large-box' if isLargeBox else '')) | trim -%}
+{%- set titleTag = titleLevel if (titleLevel in ['h2', 'h3', 'h4', 'p']) else 'h2' -%}
+<div {{ wrapper(cardClasses) }}>
+    {% if img.url %}
+        <div class="image-card__image">
+            <img decoding="async" src="{{ img.url }}" alt="{{ img.alt or '' }}">
+            <div class="image-card__overlay"></div>
+        </div>
+    {% endif %}
+    <div class="image-card__content {{ 'is-side' if isLargeBox else 'is-bottom' }}">
+        {% if title %}
+            <{{ titleTag }} class="image-card__title">{{ title | safe }}</{{ titleTag }}>
+        {% endif %}
+        {% if description %}
+            <p class="image-card__description">{{ description | safe }}</p>
+        {% endif %}
+        {% if isLargeBox and l.url and buttonText %}
+            <a href="{{ l.url }}"
+                {% if l.linkTarget %} target="{{ l.linkTarget }}"{% endif %}
+                {% if l.rel %} rel="{{ l.rel }}"{% endif %}
+                class="dhsv-button primary image-card__button">
+                <span>{{ buttonText | safe }}</span>
+                <span class="icon">
+                    {{ svg('icons.arrow-right') }}
+                </span>
+            </a>
+        {% endif %}
+    </div>
+</div>

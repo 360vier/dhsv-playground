@@ -1,0 +1,10 @@
+{
+  "block": "dhsv/cta",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "43303d3c2f14",
+  "templateTranslatedFrom": "43303d3c2f14",
+  "files": {
+    "block.json": "aa00d32e0de6",
+    "style.scss": "21b63c3c902d"
+  }
+}

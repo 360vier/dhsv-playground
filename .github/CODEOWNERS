@@ -1,0 +1,10 @@
+# Ideen gehören ihren Autoren – alles andere ist Playground-Infrastruktur und braucht Review der Entwicklung.
+/core/                 @360vier/development
+/theme/                @360vier/development
+/modules/              @360vier/development
+/layout/               @360vier/development
+/pages/live/           @360vier/development
+/.github/              @360vier/development
+/.claude/              @360vier/development
+/CLAUDE.md             @360vier/development
+/playground.config.js  @360vier/development

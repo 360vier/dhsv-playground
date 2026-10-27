@@ -1,0 +1,10 @@
+{
+  "block": "dhsv/image-card",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "860582afdc3f",
+  "templateTranslatedFrom": "860582afdc3f",
+  "files": {
+    "block.json": "3e14da21fb21",
+    "styles.scss": "a335371bbe74"
+  }
+}

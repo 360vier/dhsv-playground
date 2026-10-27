@@ -1,0 +1,125 @@
+@import '@wordpress/base-styles/breakpoints';
+
+.dhsv-icon-box-block {
+  --icon-size: 6rem;
+  --direction: column;
+  --justify: flex-start;
+  --align: flex-start;
+  --background: var(--accent-gradient);
+  --text-color: var(--accent-color);
+
+  &.icon-size-small {
+    --icon-size: 4rem;
+  }
+
+  &.icon-size-medium {
+    --icon-size: 6rem;
+  }
+
+  &.icon-size-large {
+    --icon-size: 8rem;
+  }
+
+  &.vertical {
+    --direction: column;
+  }
+
+  &.horizontal {
+    --direction: row;
+  }
+
+  &.alignleft {
+    --justify: flex-start;
+    --text-align: left;
+  }
+
+  &.alignright {
+    --justify: flex-end;
+    --text-align: right;
+  }
+
+  &.aligncenter {
+    --justify: center;
+    --text-align: center;
+  }
+
+  &.background-green {
+    --background: var(--green-gradient);
+    --text-color: var(--black);
+  }
+
+  &.background-white {
+    --background: var(--white);
+    --text-color: var(--black);
+  }
+
+  &.background-black {
+    --background: var(--black);
+    --text-color: var(--white);
+  }
+
+  &.background-gray-transparent {
+    --background: var(--gray-100);
+    --text-color: var(--text-color);
+  }
+
+  &.background-green-transparent {
+    --background: var(--green-transparent);
+    --text-color: var(--text-color);
+  }
+
+  display: flex;
+  text-align: var(--text-align);
+  align-items: var(--align);
+  justify-content: var(--justify);
+  flex-direction: var(--direction);
+  gap: var(--size-lg);
+  background: var(--background);
+  color: var(--text-color);
+  border-radius: var(--rounded);
+  padding: var(--size-lg) !important;
+  min-height: 17rem;
+
+  .icon-box {
+    &__image {
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &__text {
+      .title {
+        font-family: var(--primary-font-family);
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--size-xs);
+        padding-bottom: var(--size-xs);
+        line-height: var(--line-height);
+      }
+
+      a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-text);
+
+        &:hover {
+          opacity: 0.85;
+        }
+      }
+    }
+  }
+
+  // wp $break-medium - 1px
+  @media (max-width: #{$break-medium - 1px}) {
+    .icon-box {
+      &__image {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+}

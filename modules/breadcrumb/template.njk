@@ -1,0 +1,20 @@
+{#- Übersetzt aus source/index.blade.php + theme partials/breadcrumb.blade.php (Theme dhsv012).
+    Der Breadcrumb-Pfad (\dhsv\Breadcrumb::items(), aus der aktuellen Seite ermittelt) kommt im Playground
+    direkt als Attribut: items: [{label, url}] (letzter Eintrag = aktuelle Seite). Ohne items, aber mit currentLabel (block.json-Example) wird
+    ein Platzhalter-Pfad „Startseite / currentLabel“ gezeigt.
+    currentLabel überschreibt wie im Controller das Label des letzten Eintrags. -#}
+{%- set crumbs = [] -%}
+{%- for item in (items or []) -%}
+    {%- if loop.last and currentLabel and (currentLabel | trim) -%}
+        {%- set crumbs = (crumbs.push({ label: currentLabel | trim, url: item.url }), crumbs) -%}
+    {%- else -%}
+        {%- set crumbs = (crumbs.push(item), crumbs) -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if not crumbs.length and currentLabel -%}
+    {%- set crumbs = [{ label: 'Startseite', url: '/' }, { label: currentLabel }] -%}
+{%- endif -%}
+
+<div {{ wrapper() }}>
+{% include "breadcrumb/_breadcrumb.njk" %}
+</div>

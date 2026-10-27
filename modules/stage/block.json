@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/stage",
+  "title": "Stage",
+  "description": "Hero-Stage mit Blur-Bubbles-Hintergrund, freiem Inhalt und Bild.",
+  "icon": "align-wide",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv", "stage", "hero", "blur"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "image": {
+      "type": "object",
+      "default": {
+        "url": null
+      }
+    },
+    "height": {
+      "type": "string",
+      "default": "100svh"
+    },
+    "theme": {
+      "type": "string",
+      "default": "dark"
+    },
+    "contentWidth": {
+      "type": "string",
+      "default": "60"
+    }
+  },
+  "supports": {
+    "align": ["full"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "theme": "dark",
+      "height": "100svh"
+    }
+  },
+  "editorStyle": "dhsv-stage-block editor",
+  "style": "dhsv-stage-block"
+}

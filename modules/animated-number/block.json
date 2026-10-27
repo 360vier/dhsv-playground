@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/animated-number",
+  "title": "Animated Number",
+  "description": "Display an animated counting number with decimal support, suffixes (%, €, etc.), and descriptive text below",
+  "icon": "calculator dhsv-icon",
+  "category": "text",
+  "usesContext": [],
+  "keywords": [
+    "number",
+    "counter",
+    "statistic",
+    "animated",
+    "percentage",
+    "decimal"
+  ],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "center"
+    },
+    "number": {
+      "type": "string",
+      "default": "25.000"
+    },
+    "text": {
+      "type": "string",
+      "default": "Suchprofile gibt es<br>bei Ginesta"
+    },
+    "animationDuration": {
+      "type": "number",
+      "default": 2000
+    },
+    "thousandsSeparatorMode": {
+      "type": "string",
+      "default": "auto"
+    },
+    "numberColor": {
+      "type": "string",
+      "default": "var(--text-color)"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "var(--taupe)"
+    },
+    "suffix": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["left", "center", "right", "wide", "full"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "number": "25.000",
+      "suffix": "",
+      "text": "Suchprofile gibt es<br>bei Ginesta"
+    }
+  },
+  "editorStyle": "dhsv-animated-number-block editor",
+  "style": "dhsv-animated-number-block"
+}

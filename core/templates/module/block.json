@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "__NS__/__NAME__",
+  "title": "__TITLE__",
+  "description": "",
+  "icon": "dhsv-icon",
+  "category": "design",
+  "usesContext": [],
+  "keywords": [],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "title": "Beispieltitel"
+    }
+  }
+}

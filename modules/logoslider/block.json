@@ -1,0 +1,76 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/logoslider",
+  "title": "Logoslider",
+  "description": "",
+  "icon": "format-image",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "logoslider", "logo", "carousel"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "maxLogos": {
+      "type": "number",
+      "default": 10
+    },
+    "desktopPerPage": {
+      "type": "number",
+      "default": 5
+    },
+    "mobilePerPage": {
+      "type": "number",
+      "default": 1.5
+    },
+    "autoscroll": {
+      "type": "boolean",
+      "default": true
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "hasBackground": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasBorder": {
+      "type": "boolean",
+      "default": true
+    },
+    "invertLogos": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasOverflow": {
+      "type": "boolean",
+      "default": true
+    },
+    "logoOpacity": {
+      "type": "number",
+      "default": 1
+    },
+    "logoAlignment": {
+      "type": "string",
+      "default": "center"
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-logoslider-block editor",
+  "style": "dhsv-logoslider-block"
+}
+

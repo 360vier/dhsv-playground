@@ -1,0 +1,341 @@
+.personio-kit--single {
+  .personio-kit__header.blog-header.case-study-single__header {
+    --text-color: var(--white);
+    --bg-color: transparent;
+
+    color: var(--white);
+  }
+
+  .blog-header__title.entry-title {
+    margin: var(--size-lg) 0 var(--size-md);
+    padding-bottom: 0;
+  }
+
+  .personio-kit__meta--header {
+    margin-top: 0;
+  }
+}
+
+.personio-kit__single-layout {
+  width: min(100%, var(--pk-wide-width));
+  padding: var(--pk-section-gap) var(--pk-gap);
+  margin-inline: auto;
+  display: grid;
+  gap: var(--pk-section-gap);
+
+  @media (min-width: 992px) {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 28rem);
+    align-items: start;
+  }
+}
+
+.personio-kit__single-main {
+  display: grid;
+  gap: var(--pk-section-gap);
+}
+
+.personio-kit__section {
+  max-width: var(--pk-content-width);
+}
+
+.personio-kit__sections {
+  display: grid;
+  gap: calc(var(--pk-section-gap) * 0.75);
+}
+
+.personio-kit__section-title {
+  margin: 0 0 var(--pk-content-gap);
+  padding-bottom: 0;
+}
+
+.personio-kit__content,
+.personio-kit__section-content {
+  max-width: var(--pk-content-width);
+  line-height: var(--pk-content-line-height);
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote,
+  table {
+    margin-top: 0;
+    margin-bottom: var(--pk-content-gap);
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: calc(var(--pk-content-gap) * 1.75);
+    margin-bottom: calc(var(--pk-content-gap) * 0.75);
+    padding-bottom: 0;
+  }
+
+  h3 {
+    font-size: var(--font-size-h4);
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: var(--font-size-h5);
+  }
+
+  ul,
+  ol {
+    display: grid;
+    gap: var(--pk-content-list-gap);
+    padding-left: var(--pk-content-list-indent);
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    padding-left: 0.25em;
+  }
+
+  li::marker {
+    color: var(--pk-accent);
+  }
+
+  a {
+    color: var(--pk-content-link-color);
+    text-underline-offset: 0.18em;
+  }
+
+  strong {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.personio-kit__apply {
+  position: sticky;
+  top: var(--pk-gap);
+  padding: var(--pk-card-padding);
+  background: var(--pk-card-bg);
+  border: var(--pk-card-border);
+  border-radius: var(--pk-card-radius);
+}
+
+.personio-kit__apply-title {
+  margin-top: 0;
+}
+
+.personio-kit__apply-form {
+  margin-top: var(--pk-content-gap);
+
+  // Light card context: override global _gforms.scss (dark) + GF Orbital grid widths.
+  .gform_wrapper {
+    --text-color: var(--pk-job-title-color);
+    --gform-input-bg: var(--pk-card-bg);
+    --gform-input-border: color-mix(
+      in srgb,
+      var(--pk-job-title-color) 28%,
+      transparent
+    );
+    --gform-input-color: var(--pk-job-title-color);
+    --gform-input-placeholder: var(--pk-muted-color);
+    --gform-label-color: var(--pk-job-title-color);
+    --gform-section-color: var(--pk-job-title-color);
+    --gform-description-color: var(--pk-muted-color);
+    --gform-button-color: var(--black);
+    --gform-section-gap: var(--pk-content-gap);
+    --gform-field-gap: var(--size-md);
+  }
+
+  .gform_wrapper.gform-theme--framework,
+  .gform_wrapper.gravity-theme,
+  .gform_wrapper {
+    --gf-form-gap-x: 0;
+    --gf-form-gap-y: var(--size-md);
+    --gf-label-width: 100%;
+    --gf-ctrl-label-color-primary: var(--pk-job-title-color);
+    --gf-ctrl-desc-color: var(--pk-muted-color);
+    --gf-ctrl-bg-color: var(--pk-card-bg);
+    --gf-ctrl-border-color: color-mix(
+      in srgb,
+      var(--pk-job-title-color) 28%,
+      transparent
+    );
+    --gf-ctrl-color: var(--pk-job-title-color);
+
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    color: var(--pk-job-title-color);
+
+    .gform_title {
+      font-size: var(--font-size-h5);
+      margin-bottom: var(--size-md);
+    }
+
+    .gform_body {
+      width: 100%;
+    }
+
+    // Orbital: single-column layout (editor may use half-width columns).
+    .gform_fields,
+    .gform-grid-row {
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      width: 100% !important;
+      max-width: none !important;
+      gap: var(--gform-field-gap) !important;
+    }
+
+    .gfield,
+    .gform-grid-col,
+    [class*='gfield--width-'] {
+      width: 100% !important;
+      max-width: none !important;
+      inline-size: 100% !important;
+      grid-column: 1 / -1 !important;
+      flex: 1 1 auto !important;
+    }
+
+    .ginput_container,
+    .ginput_complex,
+    .gfield--width-full,
+    .gfield--width-half,
+    .gfield--width-third {
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    p {
+      color: var(--pk-muted-color);
+      opacity: 1;
+    }
+
+    .gfield_label,
+    .gform-field-label,
+    label.gfield_label {
+      opacity: 1;
+      color: var(--pk-job-title-color);
+    }
+
+    .gfield_description {
+      color: var(--pk-muted-color);
+    }
+
+    input:not([type='checkbox']):not([type='radio']):not([type='hidden']),
+    textarea,
+    select,
+    .gform_drop_area {
+      width: 100% !important;
+      max-width: none !important;
+      box-sizing: border-box;
+      background-color: var(--pk-card-bg);
+      color: var(--pk-job-title-color);
+      border-color: var(--gform-input-border);
+    }
+
+    .ginput_container_date > img {
+      filter: none;
+    }
+
+    .gform_drop_area,
+    .gform_fileupload_rules,
+    .gform_fileupload_multifile {
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    .gform_drop_area {
+      color: var(--pk-job-title-color);
+      border-color: var(--gform-input-border);
+      background-color: color-mix(
+        in srgb,
+        var(--pk-job-title-color) 4%,
+        var(--pk-card-bg)
+      );
+    }
+
+    .gform_button_select_files {
+      color: var(--pk-accent);
+    }
+
+    // Reset theme _gforms.scss pill/flex on consent & checkboxes — use GF Orbital defaults.
+    .gfield_radio,
+    .gfield_checkbox,
+    .gform-field-type-radio .ginput_container,
+    .gform-field-type-checkbox .ginput_container,
+    .ginput_container_checkbox,
+    .ginput_container_consent {
+      display: revert !important;
+      flex-wrap: revert !important;
+      gap: revert !important;
+    }
+
+    .gfield_radio label,
+    .gfield_checkbox label,
+    .ginput_container_radio label,
+    .ginput_container_checkbox label,
+    .ginput_container_consent label,
+    label.gfield_consent_label {
+      display: revert !important;
+      align-items: revert !important;
+      gap: revert !important;
+      padding: revert !important;
+      border-radius: revert !important;
+      background: revert !important;
+      background-color: revert !important;
+      color: var(--pk-job-title-color) !important;
+      opacity: 1 !important;
+      font-size: revert !important;
+      transition: revert !important;
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        background: revert !important;
+        background-color: revert !important;
+      }
+
+      &::before,
+      &::after {
+        display: none !important;
+        content: none !important;
+      }
+    }
+
+    .gfield_radio input,
+    .gfield_checkbox input,
+    .ginput_container_radio input,
+    .ginput_container_checkbox input,
+    .ginput_container_consent input[type='checkbox'] {
+      position: revert !important;
+      opacity: revert !important;
+      pointer-events: revert !important;
+      width: revert !important;
+      height: revert !important;
+      margin: revert !important;
+      clip: revert !important;
+      clip-path: revert !important;
+    }
+
+    .gform_footer {
+      padding-top: var(--size-md);
+    }
+
+    .gform_button {
+      width: 100% !important;
+      max-width: none !important;
+    }
+  }
+}

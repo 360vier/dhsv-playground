@@ -1,0 +1,34 @@
+/**
+ * Teaserbox – Frontend (Optik kommt aus .case-study-card / Archive-Styles).
+ */
+
+.wp-block-dhsv-teaserbox {
+  width: 100%;
+
+  .case-study-card__tilt,
+  .archive-showcase-card__tilt {
+    background: transparent;
+  }
+
+  .case-study-card__subline,
+  .archive-showcase-card__subline {
+    font-family: var(--primary-font-family);
+  }
+
+  h2.case-study-card__headline,
+  h2.archive-showcase-card__headline,
+  h3.case-study-card__headline,
+  h3.archive-showcase-card__headline {
+    margin: 0;
+  }
+
+  h2.case-study-card__headline,
+  h2.archive-showcase-card__headline {
+    font-size: var(--font-size-h2);
+  }
+
+  h3.case-study-card__headline,
+  h3.archive-showcase-card__headline {
+    font-size: var(--font-size-h3);
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/cases-stage",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "bdd21de688d6",
+  "templateTranslatedFrom": null,
+  "files": {
+    "block.json": "0320545b8ce5",
+    "scripts.js": "375da9e6ba96",
+    "styles.scss": "d96ee5817632"
+  }
+}

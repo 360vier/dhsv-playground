@@ -1,0 +1,63 @@
+<!-- Quelle: https://www.360vier.de/integrationen/wordpress-personio/ -->
+<div class="wp-block-dhsv-tabs" id="6ae0a9aed040f" data-default-selected="tab-item-pe-feed">
+    <div class="wp-block-dhsv-tabs--container">
+        <div class="wp-block-dhsv-tabs--navigation">
+            
+<div class="wp-block-dhsv-tab-item" id="tab-item-pe-feed">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>XML-Feed für veröffentlichte Stellen</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Der Feed liegt unter <code>https://{konto}.jobs.personio.de/xml</code>, standardmäßig auf Deutsch, mit <code>?language=en</code> auf Englisch. Ihr aktiviert ihn in Personio unter Einstellungen › Recruiting › Karriereseite. Er ist öffentlich und verlangt TLS 1.2.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Für die Anzeige der Stellen braucht ihr keine Zugangsdaten. Der Abschnitt „Über uns“ fehlt im Feed und wird auf der Website gepflegt. Webhooks gibt es nicht, WordPress fragt den Feed in festen Abständen ab.</p>
+
+
+    </div>
+</div>
+
+
+<div class="wp-block-dhsv-tab-item" id="tab-item-pe-v1">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>Recruiting API für Bewerbungen</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Bewerbungen nimmt <code>POST https://api.personio.de/v1/recruiting/applications</code> an. Pflichtfelder sind <code>first_name</code>, <code>last_name</code>, <code>email</code> und <code>job_position_id</code>. Dokumente werden vorher hochgeladen und über ihre <code>uuid</code> verknüpft.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Bewerbungen landen nicht mehr im Postfach, sondern direkt beim richtigen Prozess in Personio. Wichtig: Die <code>job_position_id</code> muss beim Abgleich in WordPress gespeichert werden, sonst lässt sich eine Bewerbung keiner Stelle zuordnen.</p>
+
+
+    </div>
+</div>
+
+
+<div class="wp-block-dhsv-tab-item" id="tab-item-pe-auth">
+    <span class="wp-block-dhsv-tab-item--title">
+                 <span class="wp-block-dhsv-tab-item--title-text"><strong>Zugangsdaten, Token und Limits</strong></span>
+   </span>
+    <div class="wp-block-dhsv-tab-item--content">
+        
+
+<p class="wp-block-paragraph">Die API verlangt ein Token im <code>Authorization</code>-Header und die Personio-ID des Unternehmens in <code>X-Company-ID</code>. Client-ID und Secret entstehen in Personio auf der Seite „API Credentials“. Ein Token gilt 24 Stunden, der Auth-Endpunkt erlaubt 60 Anfragen pro Minute.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Was das für euch bedeutet:</strong> Die Zugangsdaten liegen nur auf dem Server, nie im Browser. Die lesenden Recruiting-Endpunkte der API v2 für Bewerbungen, Kandidaten und Stellen sind seit 2026 allgemein verfügbar und eignen sich für Auswertungen.</p>
+
+
+    </div>
+</div>
+
+
+        </div>
+        <div class="wp-block-dhsv-tabs--content"></div>
+    </div>
+</div>

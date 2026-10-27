@@ -1,0 +1,49 @@
+@import 'common/variables';
+@import 'common/easing';
+
+/**
+ * Import npm dependencies
+ *
+ * Prefix your imports with `~` to grab from node_modules/
+ * @see https://github.com/webpack-contrib/sass-loader#imports
+ */
+// @import "~some-node-module";
+
+/** Import theme styles */
+@import 'common/reset';
+@import 'common/fonts';
+@import 'common/typo';
+@import 'common/colors';
+@import 'common/global';
+
+// Gravity Forms – Figma design (Unverbindliche Anfrage)
+// See app/customizations/remove-gform-styles.php to disable default GF styles for full control
+@import 'components/gforms';
+@import 'components/block-styles';
+@import 'components/spacer-mobile';
+@import 'components/device-visibility-editor';
+@import 'components/wp-block-list';
+@import 'components/wp-block-embed';
+@import 'components/button';
+@import 'components/image_in_slider';
+@import 'components/header';
+@import 'components/announcement-bar';
+@import 'components/gform-resume-bar';
+@import 'components/blog-category-pills';
+@import 'components/blog-overview';
+@import 'components/blog-single';
+@import 'components/blog-author';
+@import 'components/particle-text';
+@import 'components/blur-bubbles';
+@import 'components/breadcrumb';
+@import 'personio-kit/index';
+
+@import 'layouts/header';
+@import 'layouts/sidebar';
+@import 'layouts/footer';
+@import 'layouts/pages';
+@import 'layouts/posts';
+@import 'layouts/tinymce';
+@import 'layouts/single-case-study';
+@import 'layouts/single-audit';
+@import 'layouts/archive-case-study';

@@ -1,0 +1,72 @@
+// Shell: fixed positioning + transparent-at-top → blurred glass when scrolled (.is-stuck)
+
+header {
+  --header-shell-padding: var(--size-sm);
+  // Split so the full-bleed announcement bar can cancel exactly the padding
+  // that applies at the current breakpoint.
+  --header-shell-padding-block: var(--header-shell-padding);
+  --header-shell-padding-inline: var(--header-shell-padding);
+
+  position: fixed;
+  z-index: 3604;
+  left: 0;
+  right: 0;
+  top: var(--wp-admin--admin-bar--height, 0);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: var(--header-shell-padding-block) var(--header-shell-padding-inline);
+  background: transparent;
+  border-radius: 0;
+  transform: none;
+  color: var(--white);
+  transition: none;
+
+  .main-header {
+    max-width: var(--wide-size);
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .header-dropdown {
+    transition: all 0.3s var(--ease-spring-30) !important;
+  }
+
+  // At page top: no glass on the pill (unless a light Stage block is the first content block)
+  // An open mega menu or language dropdown counts as "in use" and keeps the glass.
+  $in-use: '.submenu-wrapper.submenu-open, .language-switcher.is-open';
+
+  &:not(.has-light-stage-start):not(.is-stuck):not(:has(#{$in-use}))
+    .header-dropdown {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    outline-color: transparent !important;
+  }
+
+  &.is-stuck {
+    .header-dropdown {
+      border-radius: 0 0 2.5rem 2.5rem !important;
+      margin-top: -2rem !important;
+
+      @media (max-width: 991px) {
+        border-radius: 0 !important;
+      }
+    }
+
+    // With an announcement bar the pill docks against the bar instead of the
+    // viewport edge. Cancelling the 1rem `.content` margin that collapses out
+    // of the pill lands it flush under the bar, the way the -2rem tuck lands
+    // it flush against the top edge without one.
+    &:has(.announcement-bar, .gform-resume-bar:not([hidden])) .header-dropdown {
+      margin-top: -1rem !important;
+    }
+  }
+
+  @media (max-width: 991px) {
+    --header-shell-padding-block: var(--size-md);
+    // Needs a unit: negated inside calc() by the announcement bar.
+    --header-shell-padding-inline: 0px; // stylelint-disable-line length-zero-no-unit
+  }
+}

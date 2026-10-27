@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/tabs",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "523b3fc692e8",
+  "templateTranslatedFrom": "523b3fc692e8",
+  "files": {
+    "block.json": "3e85e4666fe8",
+    "scripts.js": "93f33e789c32",
+    "style.scss": "2ccd17fb7fdf"
+  }
+}

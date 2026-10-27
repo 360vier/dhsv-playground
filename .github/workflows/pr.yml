@@ -1,0 +1,25 @@
+# PRs auf main (core/…, sync/…, oder manuell erstellte Idee-PRs)
+name: PR-Check
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn check --base origin/main
+        env:
+          PG_BRANCH: ${{ github.head_ref }}
+          PG_ALLOW_CORE: ${{ contains(github.event.pull_request.labels.*.name, 'core') && '1' || '0' }}
+      - run: yarn build

@@ -1,0 +1,114 @@
+@import '~@splidejs/splide/dist/css/splide-core.min.css';
+
+.dhsv-logoslider-block-wrapper {
+  --_card-bg: transparent;
+  --_card-backdrop-filter: none;
+  --_card-border-color: color-mix(in srgb, var(--text-color) 10%, transparent);
+  --_card-border-color-hover: color-mix(
+    in srgb,
+    var(--text-color) 15%,
+    transparent
+  );
+  --_card-border-width: 1px;
+  --_logo-filter: none;
+  --_logo-justify-content: center;
+  --_logo-object-position: center;
+  --_logo-opacity: 1;
+  --_track-overflow: hidden;
+
+  margin-bottom: var(--size-lg);
+
+  &-has-bg {
+    --_card-bg: color-mix(in srgb, var(--text-color) 10%, transparent);
+    --_card-backdrop-filter: blur(10px);
+  }
+
+  &-no-border {
+    --_card-border-color: transparent;
+    --_card-border-color-hover: transparent;
+    --_card-border-width: 0;
+  }
+
+  &-invert {
+    --_logo-filter: invert(1);
+  }
+
+  &-has-overflow {
+    --_track-overflow: visible;
+  }
+
+  &-logo-align-left {
+    --_logo-justify-content: flex-start;
+    --_logo-object-position: left center;
+  }
+
+  &-logo-align-right {
+    --_logo-justify-content: flex-end;
+    --_logo-object-position: right center;
+  }
+
+  .dhsv-logoslider.splide {
+    --slider-gap: 1rem;
+
+    .splide__track {
+      overflow: var(--_track-overflow);
+    }
+
+    .splide__slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logoslider__card {
+      border: var(--_card-border-width) solid var(--_card-border-color);
+      border-radius: var(--rounded);
+      padding: var(--size-md);
+      display: flex;
+      align-items: center;
+      justify-content: var(--_logo-justify-content);
+      width: 100%;
+      height: 100%;
+      transition: var(--transition);
+      aspect-ratio: 21 / 9;
+      background: var(--_card-bg);
+      backdrop-filter: var(--_card-backdrop-filter);
+
+      &:hover {
+        border-color: var(--_card-border-color-hover);
+      }
+    }
+
+    .logoslider__logo {
+      width: 100%;
+      height: 100%;
+      max-width: 8rem;
+      max-height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        max-height: 3rem;
+        object-fit: contain;
+        object-position: var(--_logo-object-position);
+        filter: var(--_logo-filter);
+        opacity: var(--_logo-opacity);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logoslider__card {
+        justify-content: center;
+        padding: 2rem 0;
+      }
+
+      .logoslider__logo img {
+        max-height: 2.5rem;
+      }
+    }
+  }
+}

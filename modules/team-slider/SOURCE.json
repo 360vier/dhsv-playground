@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/team-slider",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "6408e34441df",
+  "templateTranslatedFrom": null,
+  "files": {
+    "block.json": "078e921bed33",
+    "scripts.js": "6ea159397e12",
+    "style.scss": "6893ef3975b8"
+  }
+}

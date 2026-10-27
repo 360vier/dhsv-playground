@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ config.site.language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% if title %}{{ title }} · {% endif %}{{ config.site.playgroundTitle }}</title>
+  <link rel="stylesheet" href="{{ base }}assets/app.css">
+</head>
+<body class="pg-app">
+<header class="pg-top">
+  <a class="pg-brand" href="{{ base }}"><span class="pg-brand__mark">●</span> {{ config.site.playgroundTitle }}</a>
+  <nav class="pg-nav">
+    <a href="{{ base }}" {% if nav == 'ideen' %}aria-current="page"{% endif %}>Ideen</a>
+    <a href="{{ base }}module/" {% if nav == 'module' %}aria-current="page"{% endif %}>Module</a>
+    <a href="{{ base }}live/" {% if nav == 'live' %}aria-current="page"{% endif %}>Live-Seiten</a>
+    <a href="{{ base }}hilfe/" {% if nav == 'hilfe' %}aria-current="page"{% endif %}>Hilfe</a>
+  </nav>
+  <span class="pg-top__meta">Stand Theme <code>{{ themeSource.sha | truncate(8, true, '') }}</code> · Live-Sync {{ liveSyncedAt | truncate(10, true, '') }}</span>
+</header>
+<main class="pg-main">
+{% block main %}{% endblock %}
+</main>
+<footer class="pg-footer">
+  Öffentlicher Playground (noindex) – keine vertraulichen Inhalte eintragen.
+  · <a href="https://github.com/{{ config.repo.owner }}/{{ config.repo.name }}">GitHub-Repo</a>
+  · <a href="{{ config.site.designReference }}">Design-System</a>
+</footer>
+<script src="{{ base }}assets/app.js" defer></script>
+</body>
+</html>

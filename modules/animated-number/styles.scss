@@ -1,0 +1,118 @@
+.dhsv-animated-number-block:not(.editor) {
+  text-align: center;
+  margin-block: var(--space-sm);
+
+  .dhsv-animated-number-block {
+    &__content {
+      max-width: var(--content-size);
+      margin: 0 auto;
+    }
+
+    &__number {
+      font-family: var(--primary-font-family);
+      font-weight: var(--font-weight-thin);
+      font-size: var(--font-size-h1);
+      line-height: var(--line-height);
+      color: var(--text-color);
+      margin-bottom: var(--size-xs);
+      transition: var(--transition);
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-xs);
+      align-items: center;
+    }
+
+    &__text {
+      font-family: var(--primary-font-family);
+      font-weight: var(--font-weight-default);
+      font-size: var(--font-size-text);
+      line-height: var(--line-height-text);
+      color: var(--taupe);
+      transition: var(--transition);
+
+      // Handle line breaks
+      br {
+        display: block;
+        content: '';
+        margin-top: var(--size-xs);
+      }
+    }
+
+    // Alignment variations
+    &.alignleft {
+      text-align: left;
+
+      .dhsv-animated-number-block__text {
+        align-items: flex-start;
+      }
+    }
+
+    &.alignright {
+      text-align: right;
+
+      .dhsv-animated-number-block__text {
+        align-items: flex-end;
+      }
+    }
+
+    &.alignwide,
+    &.alignfull {
+      .dhsv-animated-number-block__content {
+        max-width: var(--wide-size);
+      }
+    }
+
+    // Animation for number counting effect
+    &__number {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    &__text {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+  .dhsv-animated-number-block:not(.editor) {
+    margin-block: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dhsv-animated-number-block {
+    margin-block: var(--space-sm);
+
+    &__text {
+      gap: var(--size-2xs);
+    }
+  }
+}
+
+// Several figures in one row (group, no wrap) are cut off on small screens.
+// Below the tablet breakpoint they form a grid and wrap instead.
+@media (max-width: 768px) {
+  .wp-block-group.is-layout-flex:has(> .dhsv-animated-number-block) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--size-md);
+    justify-items: center;
+  }
+}

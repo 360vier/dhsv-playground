@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/akkordeon",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "13947d8a2769",
+  "templateTranslatedFrom": "13947d8a2769",
+  "files": {
+    "block.json": "ae7de0822c7a",
+    "scripts.js": "90756ef64726",
+    "styles.scss": "dc910a90459b"
+  }
+}

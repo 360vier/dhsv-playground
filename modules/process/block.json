@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/process",
+  "title": "Process Block",
+  "description": "Process Block",
+  "icon": "process",
+  "category": "dhsv",
+  "usesContext": [],
+  "keywords": [],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "withGraph": {
+      "type": "boolean",
+      "default": true
+    },
+    "bgColor": {
+      "type": "string",
+      "default": "white"
+    },
+    "items": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "withGraph": true,
+      "bgColor": "white",
+      "items": []
+    }
+  }
+}

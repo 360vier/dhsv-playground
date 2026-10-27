@@ -1,0 +1,179 @@
+/**
+ * Animated breadcrumb with collapsed current item and expanded path on hover/focus.
+ */
+
+.breadcrumb {
+  margin-bottom: var(--size-lg);
+
+  &__pill {
+    position: relative;
+    display: inline-grid;
+    vertical-align: top;
+    border-radius: 1.25rem;
+    padding: 0.625rem 1rem;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease,
+      padding 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover,
+    &:focus-within {
+      background-color: color-mix(in srgb, currentColor 12%, transparent);
+      box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 8%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+  }
+
+  &__collapsed,
+  &__expanded {
+    grid-area: 1 / 1;
+    align-self: center;
+    justify-self: start;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--secondary-font-family);
+    font-size: var(--font-size-text-small);
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    white-space: nowrap;
+  }
+
+  &__collapsed {
+    z-index: 2;
+    color: color-mix(in srgb, currentColor 88%, transparent);
+    transition: opacity 0.32s ease 0.06s,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    transition: gap 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+
+  &__dot {
+    display: block;
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: var(--rounded-full);
+    background: currentColor;
+    opacity: 0.85;
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+      opacity 0.3s ease;
+  }
+
+  &__pill:hover &__dots,
+  &__pill:focus-within &__dots {
+    gap: 0.45rem;
+  }
+
+  &__pill:hover &__dot:nth-child(1),
+  &__pill:focus-within &__dot:nth-child(1) {
+    transform: translateX(-0.12rem) scale(1.15);
+  }
+
+  &__pill:hover &__dot:nth-child(3),
+  &__pill:focus-within &__dot:nth-child(3) {
+    transform: translateX(0.12rem) scale(1.15);
+  }
+
+  &__pill:hover &__dot,
+  &__pill:focus-within &__dot {
+    opacity: 1;
+  }
+
+  &__sep,
+  &__sep-item {
+    color: color-mix(in srgb, currentColor 42%, transparent);
+    user-select: none;
+  }
+
+  &__current,
+  &__item--current span {
+    color: var(--accent-bg);
+  }
+
+  &__expanded {
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    transform: translateY(0.2em);
+    pointer-events: none;
+    transition: opacity 0.35s ease 0.05s,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__pill:hover &__collapsed,
+  &__pill:focus-within &__collapsed {
+    opacity: 0;
+    transform: translateY(-0.35em);
+    pointer-events: none;
+    transition-delay: 0s, 0s;
+  }
+
+  &__pill:hover &__expanded,
+  &__pill:focus-within &__expanded {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0.08s, 0.08s;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__link {
+    color: color-mix(in srgb, currentColor 92%, transparent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: currentColor;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb__pill,
+  .breadcrumb__collapsed,
+  .breadcrumb__expanded,
+  .breadcrumb__dots,
+  .breadcrumb__dot {
+    transition: none !important;
+  }
+
+  .breadcrumb__pill:hover,
+  .breadcrumb__pill:focus-within {
+    padding: 0.625rem 1rem;
+    background-color: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .breadcrumb__pill:hover .breadcrumb__collapsed,
+  .breadcrumb__pill:focus-within .breadcrumb__collapsed {
+    opacity: 0;
+  }
+
+  .breadcrumb__pill:hover .breadcrumb__expanded,
+  .breadcrumb__pill:focus-within .breadcrumb__expanded {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+}
+
+@media (width < 768px) {
+  .breadcrumb {
+    display: none;
+  }
+}

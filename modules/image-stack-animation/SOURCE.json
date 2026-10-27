@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/image-stack-animation",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "cf69ce7d005d",
+  "templateTranslatedFrom": "cf69ce7d005d",
+  "files": {
+    "block.json": "c797e60c7510",
+    "scripts.js": "2f2d9cceacbf",
+    "styles.scss": "4915be3fbb75"
+  }
+}

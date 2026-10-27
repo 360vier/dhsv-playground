@@ -1,0 +1,52 @@
+// Block editor only (.editor-styles-wrapper is not present on the public site).
+// Loaded via main.css → add_editor_style().
+.editor-styles-wrapper {
+  // Keep device-restricted blocks editable (override frontend display:none from _block-styles).
+  .wp-block-group,
+  .wp-block-columns,
+  .wp-block-column,
+  .wp-block-image {
+    &.dhsv-only-desktop,
+    &.dhsv-only-mobile {
+      display: block !important;
+    }
+  }
+
+  .block-editor-block-list__block {
+    &[data-dhsv-device-visibility='desktop-only'],
+    &[data-dhsv-device-visibility='mobile-only'],
+    &.dhsv-only-desktop,
+    &.dhsv-only-mobile {
+      position: relative;
+      opacity: 0.35;
+      outline: 1px dashed rgba(0, 0, 0, 0.25);
+      outline-offset: 2px;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #1e1e1e;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 0 0 0 4px;
+        pointer-events: none;
+      }
+    }
+
+    &[data-dhsv-device-visibility='desktop-only']::before,
+    &.dhsv-only-desktop::before {
+      content: 'Nur Desktop';
+    }
+
+    &[data-dhsv-device-visibility='mobile-only']::before,
+    &.dhsv-only-mobile::before {
+      content: 'Nur Mobile';
+    }
+  }
+}

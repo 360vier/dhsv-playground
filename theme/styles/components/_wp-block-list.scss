@@ -1,0 +1,69 @@
+/**
+ * Core List block (Gutenberg: .wp-block-list on ul / ol).
+ * Relaunch 2026: ul — green en dash; ol — native LISTENSTIL (core/list type attribute); row dividers.
+ */
+
+$wb-list-row-gap: 0.875rem; // 14px
+$wb-list-marker-gap: 0.625rem; // 10px
+$wb-list-dash-col: 0.75rem; // ~12px
+$wb-list-ul-indent: $wb-list-dash-col + $wb-list-marker-gap;
+
+ul.wp-block-list,
+ol.wp-block-list {
+  margin: 0 0 var(--size-md);
+  font-size: var(--font-size-text);
+  line-height: var(--line-height-text);
+  color: var(--text-color);
+
+  ul,
+  ol {
+    margin-block-start: var(--size-sm);
+    margin-inline-start: var(--size-md);
+    margin-bottom: 0;
+  }
+}
+
+ul.wp-block-list > li,
+ol.wp-block-list > li {
+  margin: 0;
+  padding-bottom: $wb-list-row-gap;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--text-color) 15%, transparent);
+}
+
+// Unordered: custom en-dash markers (Figma 1457:11951)
+ul.wp-block-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $wb-list-row-gap;
+}
+
+ul.wp-block-list > li {
+  position: relative;
+  padding-inline-start: $wb-list-ul-indent;
+
+  &::before {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    content: '\2013'; // en dash
+    width: $wb-list-dash-col;
+    font-weight: var(--font-weight-bold);
+    color: var(--accent-bg, var(--green-500));
+    line-height: var(--line-height-text);
+    white-space: nowrap;
+  }
+}
+
+// Ordered: native markers via core/list LISTENSTIL (type, start, reversed)
+ol.wp-block-list {
+  padding-inline-start: 1.5em;
+  list-style-position: outside;
+}
+
+ol.wp-block-list > li::marker {
+  color: var(--text-color);
+  font-weight: var(--font-weight-default);
+}

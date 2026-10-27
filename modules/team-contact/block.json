@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/team-contact",
+  "title": "Team Kontakt",
+  "description": "Zeigt eine Team-Person mit Bild, Name und Kontaktdaten an. Optional kann eine Team-ID per URL-Parameter übergeben werden.",
+  "icon": "admin-users",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "team", "kontakt", "person"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "teamId": {
+      "type": "number",
+      "default": 0
+    },
+    "allowUrlOverride": {
+      "type": "boolean",
+      "default": false
+    },
+    "showRanks": {
+      "type": "boolean",
+      "default": true
+    },
+    "nameLevel": {
+      "type": "string",
+      "enum": ["h2", "h3", "h4", "p"],
+      "default": "h3"
+    }
+  },
+  "supports": {
+    "align": ["left", "center", "right", "full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-team-contact-block editor",
+  "style": "dhsv-team-contact-block"
+}

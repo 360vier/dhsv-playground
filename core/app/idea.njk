@@ -1,0 +1,106 @@
+{% extends "layout.njk" %}
+{% block main %}
+<nav class="pg-crumbs"><a href="{{ base }}">Ideen</a> / {{ idea.slug }}</nav>
+<section class="pg-hero pg-hero--idea">
+  <div class="pg-card__head">
+    {{ statusBadge(idea.status) | safe }}
+    <span class="pg-type">{{ typeLabel(idea.type) }}</span>
+    {% for tag in idea.tags %}<span class="pg-tag">#{{ tag }}</span>{% endfor %}
+  </div>
+  <h1>{{ idea.title }}</h1>
+  <p class="pg-lead">{{ idea.summary }}</p>
+  <dl class="pg-meta">
+    <div><dt>Von</dt><dd>{{ idea.author }}</dd></div>
+    {% if idea.contributors.length %}<div><dt>Mitwirkende</dt><dd>{{ idea.contributors | join(', ') }}</dd></div>{% endif %}
+    <div><dt>Erstellt</dt><dd>{{ idea.created }}</dd></div>
+    <div><dt>Aktualisiert</dt><dd>{{ idea.updated }}</dd></div>
+    <div><dt>Branch</dt><dd><a href="{{ repoUrl }}/tree/{{ config.repo.ideaBranchPrefix }}{{ idea.slug }}"><code>{{ config.repo.ideaBranchPrefix }}{{ idea.slug }}</code></a>
+      {% if idea.status != 'umgesetzt' %}· <a href="{{ repoUrl }}/compare/{{ config.repo.defaultBranch }}...{{ config.repo.ideaBranchPrefix }}{{ idea.slug }}">Compare</a>{% endif %}
+      · <a href="{{ repoUrl }}/pulls?q=head%3A{{ config.repo.ideaBranchPrefix | urlencode }}{{ idea.slug }}">PRs</a></dd></div>
+    {% if idea.theme and idea.theme.ticket %}<div><dt>Ticket</dt><dd><a href="{{ idea.theme.ticket }}">{{ idea.theme.ticket }}</a></dd></div>{% endif %}
+    {% if idea.theme and idea.theme.pr %}<div><dt>Theme-PR</dt><dd><a href="{{ idea.theme.pr }}">{{ idea.theme.pr }}</a></dd></div>{% endif %}
+  </dl>
+</section>
+
+<section class="pg-section">
+  <h2>Seiten</h2>
+  {% if not pages.length %}<p class="pg-empty">Diese Idee hat noch keine Seite. Module lassen sich trotzdem über die Modul-Vorschau ansehen.</p>{% endif %}
+  <ul class="pg-list">
+  {% for p in pages %}
+    <li>
+      <a class="pg-list__main" href="{{ base }}ideen/{{ idea.slug }}/{{ p.name }}/">{{ p.title }}</a>
+      {% if p.basedOn %}<span class="pg-muted">basiert auf <a href="{{ base }}live/{{ p.basedOn }}/">{{ p.basedOn }}</a></span>{% endif %}
+      {% if hasOverrides %}<a href="{{ base }}ideen/{{ idea.slug }}/{{ p.name }}/vorher/" class="pg-muted">Vorher</a>{% endif %}
+      {% if p.comments %}<span class="pg-badge pg-badge--comment">💬 {{ p.comments }}</span>{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</section>
+
+{% if idea.readme %}
+<section class="pg-section pg-prose">
+  {{ readmeHtml | safe }}
+</section>
+{% endif %}
+
+<section class="pg-section" id="entwickler">
+  <h2>Für Entwickler</h2>
+  {% if changes.drift %}<p class="pg-alert pg-alert--warn">⚠️ Mindestens ein Baseline-Modul hat sich seit dem Override geändert (Theme/Live-Sync). Diff unten ist gegen die <strong>aktuelle</strong> Baseline – vor der Umsetzung abgleichen.</p>{% endif %}
+
+  {% for m in changes.modules %}
+  <details class="pg-module" open>
+    <summary>
+      <strong>{{ config.theme.blockNamespace }}/{{ m.name }}</strong>
+      <span class="pg-badge {{ 'pg-badge--new' if m.kind == 'neu' else 'pg-badge--change' }}">{{ 'Neues Modul' if m.kind == 'neu' else 'Anpassung' }}</span>
+      {% if m.drift %}<span class="pg-badge pg-badge--warn">Drift</span>{% endif %}
+      <span class="pg-muted">→ Theme: <code>{{ config.theme.blocksDir }}/{{ m.name }}/</code></span>
+    </summary>
+    {% if m.newAttributes.length %}<p>Neue Attribute in <code>block.json</code>: {% for a in m.newAttributes %}<code>{{ a }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</p>{% endif %}
+    {% if m.hasScripts %}<p class="pg-muted">Enthält <code>scripts.js</code> – im Theme ggf. lazy laden (Perf-Contract).</p>{% endif %}
+    {% if not m.files.length %}<p class="pg-muted">Keine Abweichung zur Baseline.</p>{% endif %}
+    {% for f in m.files %}
+      <h4><code>{{ f.file }}</code> <span class="pg-muted">({{ f.status }}{% if f.file == 'template.njk' %} → index.blade.php{% endif %})</span></h4>
+      {% if f.patch %}<pre class="pg-diff">{{ f.patch | diffHtml | safe }}</pre>{% else %}<pre class="pg-code">{{ f.content }}</pre>{% endif %}
+    {% endfor %}
+    {% if m.unchanged.length %}<p class="pg-muted">Unverändert kopiert: {{ m.unchanged | join(', ') }}</p>{% endif %}
+  </details>
+  {% else %}
+  <p class="pg-muted">Keine Modul-Änderungen – nur Seiten aus bestehenden Modulen.</p>
+  {% endfor %}
+
+  {% for p in pages %}
+  <details class="pg-module">
+    <summary><strong>Block-Markup: {{ p.title }}</strong> <span class="pg-muted">(in den WordPress-Code-Editor einfügbar)</span>
+      <button type="button" class="pg-copy" data-copy="#markup-{{ p.name }}">Kopieren</button></summary>
+    <pre class="pg-code" id="markup-{{ p.name }}">{{ p.source }}</pre>
+  </details>
+  {% endfor %}
+
+  <h3>Checkliste Theme-Contracts</h3>
+  <ul class="pg-checklist">
+    {% for item in config.handoffChecklist %}<li>☐ {{ item }}</li>{% endfor %}
+  </ul>
+</section>
+
+<section class="pg-section" id="kommentare">
+  <h2>Kommentare <span class="pg-muted">({{ idea.openComments }} offen)</span></h2>
+  {% for c in idea.comments %}
+    <article class="pg-comment {{ 'is-resolved' if c.resolved }}">
+      <header><strong>{{ c.author }}</strong> · {{ c.created | truncate(10, true, '') }} · <a href="{{ base }}ideen/{{ idea.slug }}/{{ c.page }}/#pg-comment-{{ c.id }}">{{ c.page }}</a>{% if c.resolved %} · ✓ erledigt{% endif %}</header>
+      <p>{{ c.text }}</p>
+      {% for r in c.replies %}<p class="pg-reply"><strong>{{ r.author }}:</strong> {{ r.text }}</p>{% endfor %}
+    </article>
+  {% else %}
+    <p class="pg-muted">Noch keine Kommentare. Lokal im Dev-Server mit Taste <kbd>C</kbd> Pins setzen.</p>
+  {% endfor %}
+</section>
+
+<section class="pg-section">
+  <h2>Verlauf</h2>
+  <ol class="pg-history">
+  {% for h in idea.history | reverse %}
+    <li><span class="pg-muted">{{ h.date }}</span> <strong>{{ h.user }}</strong>{% if h.status %} → {{ statusBadge(h.status) | safe }}{% endif %} {{ h.note }}</li>
+  {% endfor %}
+  </ol>
+</section>
+{% endblock %}

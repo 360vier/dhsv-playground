@@ -1,0 +1,71 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Der Controller lädt die Person per teamId (Post-Typ mitarbeiter,
+    ACF-Felder, Beitragsbild, WPML, ?team_id=…) → im Playground kommt sie direkt als Attribut teamMember:
+    {id, title, funktion, telefonnummer, e_mail_adresse, image: {url, alt, width, height}}
+    (Aliase wie bei cta: name → title, position → funktion, email → e_mail_adresse, phone → telefonnummer).
+    Ohne teamMember rendert – wie live ohne gültige Person – nur der leere Wrapper. -#}
+{%- set tm = teamMember or null -%}
+{%- if tm -%}
+    {%- set team = {
+        id: tm.id or teamId or 0,
+        title: tm.title or tm.name or '',
+        funktion: tm.funktion or tm.position or null,
+        telefonnummer: tm.telefonnummer or tm.phone or null,
+        e_mail_adresse: tm.e_mail_adresse or tm.email or null,
+        image: tm.image or null
+    } -%}
+{%- endif -%}
+{%- set nameTag = nameLevel if nameLevel in ['h2', 'h3', 'h4', 'p'] else 'h3' -%}
+{%- set ranks = [
+    'ranks.360vier-german-web-awards',
+    'ranks.360vier-google-rate',
+    'ranks.360vier-proven-expert',
+    'ranks.360vier-ranked-digitalagentur-2024'
+] -%}
+
+<div {{ wrapper() }}>
+    {% if team %}
+        <article class="team-contact" aria-labelledby="team-contact-name-{{ team.id }}">
+            <div class="team-contact__image-wrapper">
+                {% if team.image and team.image.url %}
+                    <div class="team-contact__image">
+                        <img
+                            src="{{ team.image.url }}"
+                            alt="{{ team.image.alt or team.title }}"
+                            width="{{ team.image.width or '' }}"
+                            height="{{ team.image.height or '' }}"
+                        >
+                    </div>
+                {% else %}
+                    <div class="team-contact__image team-contact__image--placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </div>
+            <div class="team-contact__content">
+                <{{ nameTag }} id="team-contact-name-{{ team.id }}" class="team-contact__name">
+                    {{ team.title }}
+                </{{ nameTag }}>
+                {% if team.funktion %}
+                    <p class="team-contact__position">{{ team.funktion }}</p>
+                {% endif %}
+                {% if team.telefonnummer %}
+                    <a href="tel:{{ team.telefonnummer | replace(r/\s+/g, '') }}" class="team-contact__telefon">
+                        {{ team.telefonnummer }}
+                    </a>
+                {% endif %}
+                {% if team.e_mail_adresse %}
+                    <a href="mailto:{{ team.e_mail_adresse }}" class="team-contact__email">
+                        {{ team.e_mail_adresse }}
+                    </a>
+                {% endif %}
+            </div>
+            {% if showRanks !== false %}
+                <div class="team-contact__ranks" aria-hidden="true">
+                    {% for rank in ranks %}
+                        <div class="team-contact__ranks-item">
+                            {{ svg(rank, { class: 'dhsv-icon' }) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </article>
+    {% endif %}
+</div>

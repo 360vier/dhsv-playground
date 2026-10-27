@@ -1,0 +1,34 @@
+{% extends "layout.njk" %}
+{% block main %}
+<section class="pg-hero">
+  <h1>Hilfe</h1>
+  <p>Alles im Playground passiert über Claude (Claude Code Desktop lokal oder eine Cloud-Session auf diesem Repo). Jede Funktion ist ein <strong>Skill</strong> – diese Seite wird automatisch aus <code>.claude/skills/</code> erzeugt, ist also immer aktuell.</p>
+</section>
+
+<section class="pg-section pg-prose">
+  {{ introHtml | safe }}
+</section>
+
+<section class="pg-section">
+  <h2>Funktionen</h2>
+  <div class="pg-skills">
+  {% for s in skills %}
+    <article class="pg-skill" id="{{ s.name }}">
+      <header>
+        <code class="pg-skill__cmd">/{{ s.name }}</code>
+        <span class="pg-badge {{ 'pg-badge--dev' if s.audience == 'dev' else 'pg-badge--all' }}">{{ 'Entwicklung' if s.audience == 'dev' else 'für alle' }}</span>
+      </header>
+      <p><strong>{{ s.description }}</strong></p>
+      <div class="pg-prose">{{ s.humanHtml | safe }}</div>
+    </article>
+  {% endfor %}
+  </div>
+</section>
+
+<section class="pg-section">
+  <h2>Status einer Idee</h2>
+  <ol class="pg-statuses">
+    {% for s in config.statuses %}<li>{{ statusBadge(s.id) | safe }}{% if s.id in config.lockedStatuses %} <span class="pg-muted">(gesperrt – nur noch Status/Verlauf änderbar)</span>{% endif %}</li>{% endfor %}
+  </ol>
+</section>
+{% endblock %}

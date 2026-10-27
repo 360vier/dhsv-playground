@@ -1,0 +1,25 @@
+// Will be compiled to a separate bundle and enqueued when this block is used.
+// All styles in here will be scoped to the block class .wp-block-{namespace}-{name}.
+
+.wp-block-dhsv-tag-scroller {
+  margin-top: var(--size-sm) !important;
+  display: flex;
+
+  .dhsv-slider.splide {
+    --slider-gap: var(--size-sm);
+  }
+
+  .splide__slide {
+    padding: var(--size-sm) var(--size-lg);
+    background: var(
+      --tag-scroller-bg,
+      color-mix(in srgb, var(--accent-color) 10%, transparent)
+    );
+    color: color-mix(in srgb, var(--green-500) 60%, black);
+    border-radius: 99rem;
+  }
+
+  .splide__pagination {
+    display: none !important;
+  }
+}

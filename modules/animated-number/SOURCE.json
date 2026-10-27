@@ -1,0 +1,11 @@
+{
+  "block": "dhsv/animated-number",
+  "themeSha": "75b99bc5e75b657c200e57625b0f007d49ad2a81",
+  "viewHash": "07ccdd78b27d",
+  "templateTranslatedFrom": "07ccdd78b27d",
+  "files": {
+    "block.json": "5ecab1c188f7",
+    "scripts.js": "078d34ae6ba8",
+    "styles.scss": "20d25edf3279"
+  }
+}

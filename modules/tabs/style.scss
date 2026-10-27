@@ -1,0 +1,345 @@
+// Will be compiled to a separate bundle and enqueued when this block is used.
+// All styles in here will be scoped to the block class .wp-block-{namespace}-{name}.
+
+.wp-block-dhsv-tabs {
+  --tab-logo-invert: 0%;
+  --tab-active-logo-invert: 100%;
+  --tab-gap: var(--size-xs);
+
+  transition: height 0.3s ease;
+  height: auto;
+
+  &--container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--tab-gap);
+
+    // Mobile: always vertical layout (tabs on top)
+    @media (max-width: 767.98px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+
+  &[data-tabs-nav-direction='vertical'] {
+    .wp-block-dhsv-tabs--container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+
+      .wp-block-dhsv-tabs--navigation {
+        flex-direction: row;
+        width: 100%;
+        align-self: stretch; // Stretch when tabs are on top
+
+        .wp-block-dhsv-tab-item {
+          flex: 1;
+
+          // Mobile: override flex to allow scrolling
+          @media (max-width: 767.98px) {
+            flex: 0 0 auto;
+          }
+        }
+      }
+    }
+  }
+
+  // Tab-Classic (Horizontal): tab row above content, active indicator = bottom line (all breakpoints)
+  &[data-tabs-nav-direction='horizontal'] {
+    .wp-block-dhsv-tabs--container {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+
+      .wp-block-dhsv-tabs--navigation {
+        flex-direction: row;
+        width: 100%;
+        align-self: stretch;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+          width: 0;
+          height: 0;
+        }
+
+        .wp-block-dhsv-tab-item {
+          flex: 0 0 auto;
+        }
+      }
+    }
+  }
+
+  &--navigation {
+    width: var(--tabs-nav-size, 18rem);
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--tab-gap, 0.5rem);
+    align-items: stretch; // Ensure all tab items have the same height
+    align-self: start; // Don't stretch to content height when tabs are beside content
+
+    // Mobile: horizontal scrollable tabs
+    @media (max-width: 767.98px) {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      // Hide scrollbar completely
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE and Edge
+
+      // Hide scrollbar for webkit browsers (Chrome, Safari, etc.)
+      &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  &--content {
+    display: grid;
+    grid-template-areas: 'content';
+    background: color-mix(in srgb, var(--text-color) 10%, transparent 100%);
+    backdrop-filter: blur(10px);
+    padding: var(--size-md);
+    border-radius: var(--rounded);
+    transition: var(--transition);
+    height: calc(var(--child-height, 0) + var(--size-md) * 2);
+
+    .wp-block-dhsv-tab-item--content {
+      grid-area: content;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s var(--ease-spring-20);
+      z-index: -1;
+
+      &.active {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+      }
+    }
+  }
+
+  .wp-block-dhsv-tab-item {
+    &--content {
+      height: fit-content;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    // Ensure all tab items have the same height
+    display: flex;
+    flex-direction: column;
+
+    // Mobile: prevent tab items from shrinking
+    @media (max-width: 767.98px) {
+      flex: 0 0 auto;
+      min-width: fit-content;
+      display: block;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      background: color-mix(in srgb, var(--text-color) 10%, transparent 100%);
+      backdrop-filter: blur(10px);
+      color: var(--text-color);
+      padding: var(--size-md);
+      border-radius: var(--rounded);
+      width: 100%;
+      transition: var(--transition);
+      position: relative; // For the ::before indicator
+
+      // Mobile: adjust label for horizontal layout
+      @media (max-width: 767.98px) {
+        white-space: nowrap;
+        width: auto;
+        min-width: fit-content;
+        min-height: auto; // Allow natural height on mobile
+        padding-block: calc(var(--size-md) * 1.5);
+      }
+
+      img {
+        filter: invert(var(--tab-logo-invert, 0%));
+        transition: var(--transition);
+        height: auto;
+        width: auto;
+        max-height: 2.5rem; // Default max height for logos - scales with tab height
+        object-fit: contain;
+
+        // Mobile: smaller logo size but still proportional
+        @media (max-width: 767.98px) {
+          max-height: 1rem;
+        }
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: var(--size-sm);
+        top: 50%;
+        transform: translateY(-50%);
+        width: 5px;
+        border-radius: var(--rounded);
+        height: calc(100% - var(--size-md) * 2);
+        background: linear-gradient(0deg, #a0d868 0%, #a0d868 100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+
+        // Mobile: change indicator to bottom border
+        @media (max-width: 767.98px) {
+          top: auto;
+          bottom: calc(var(--size-md) - 3px);
+          width: calc(100% - var(--size-md) * 2);
+          left: 50% !important;
+          transform: translateX(-50%);
+          height: 3px;
+        }
+      }
+
+      &:hover {
+        background: color-mix(in srgb, var(--text-color) 20%, transparent 100%);
+      }
+    }
+
+    // Visually hidden, but kept in the tab order so keyboard users can reach
+    // and switch tabs (arrow keys within the radio group).
+    &--input {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+      opacity: 0;
+    }
+
+    &--input:focus-visible + label {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
+
+    &--input:checked + label {
+      background: var(--text-color);
+      color: var(--bg-flat-color);
+      padding-left: calc(var(--size-md) + 1rem);
+
+      img {
+        filter: invert(var(--tab-active-logo-invert, 100%));
+      }
+
+      &::before {
+        left: var(--size-md);
+        opacity: 1;
+      }
+
+      // Mobile: adjust active state for horizontal layout
+      @media (max-width: 767.98px) {
+        padding-left: var(--size-md);
+        padding-bottom: calc(var(--size-md) * 1.8);
+        padding-top: calc(var(--size-md) * 1.2);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // Tab row above content (horizontal + vertical): green active indicator as bottom line on all
+  // viewports. Placed after base `.wp-block-dhsv-tab-item` rules so it overrides the left bar.
+  &[data-tabs-nav-direction='horizontal'],
+  &[data-tabs-nav-direction='vertical'] {
+    // Same padding inactive + active (even height). Symmetric block padding keeps label
+    // content visually centered; the 3px line sits in the bottom padding via inset.
+    --tab-row-pad: calc(var(--size-md) + 0.3rem);
+    --tab-row-line-inset: calc(var(--size-md) + 0.3rem);
+    --tab-row-line-thickness: 6px;
+    --tab-row-line-bottom-offset: 1rem;
+
+    .wp-block-dhsv-tabs--container {
+      gap: var(--size-sm);
+    }
+
+    .wp-block-dhsv-tab-item {
+      label {
+        white-space: normal;
+        width: auto;
+        min-width: fit-content;
+        min-height: auto;
+        padding: var(--tab-row-pad);
+        box-sizing: border-box;
+        justify-content: flex-start;
+        hyphens: auto;
+
+        &::before {
+          top: auto;
+          bottom: 0;
+          left: var(--tab-row-line-inset) !important;
+          right: var(--tab-row-line-inset);
+          width: auto;
+          transform: none;
+          height: var(--tab-row-line-thickness);
+          border-radius: 10rem;
+          opacity: 0;
+        }
+      }
+
+      &--input:checked + label {
+        padding-top: calc(var(--tab-row-pad) - 0.25rem);
+        padding-bottom: calc(var(--tab-row-pad) + 0.25rem);
+
+        &::before {
+          bottom: var(--tab-row-line-bottom-offset);
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.wp-block-dhsv-tabs[data-tabs-theme='white-on-gray'] {
+  --tab-logo-invert: 100%;
+  --tab-active-logo-invert: 0%;
+
+  .wp-block-dhsv-tabs--content {
+    background: var(--white);
+  }
+
+  .wp-block-dhsv-tab-item {
+    label {
+      background: var(--white);
+      color: var(--black);
+
+      &:hover {
+        background: color-mix(in srgb, var(--white) 85%, var(--black) 15%);
+      }
+    }
+
+    &--input:checked + label {
+      background: var(--gray-700);
+      color: var(--white);
+    }
+  }
+}

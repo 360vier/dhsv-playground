@@ -1,0 +1,97 @@
+.is-root-container,
+.is-layout-constrained,
+.is-root-container
+  > .block-editor-inner-blocks
+  > .block-editor-block-list__layout,
+.is-root-container > [data-habitat] {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+
+  > * {
+    padding-inline: var(--content-space);
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--content-size);
+
+    &[data-align='wide'],
+    &.alignwide {
+      max-width: var(--wide-size);
+    }
+
+    &[data-align='full'],
+    &.alignfull {
+      padding-inline: 0;
+      max-width: unset;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.wp-block-group.has-dhsv-radius,
+.wp-block-column.has-dhsv-radius {
+  border-radius: var(--rounded);
+}
+
+// core/image block style "Rounded" (Abgerundet) — core uses 9999px; theme uses --rounded (1rem).
+:root
+  :where(.wp-block-image.is-style-rounded img, .wp-block-image
+    .is-style-rounded
+    img) {
+  border-radius: var(--rounded);
+}
+
+// Responsive Sichtbarkeit (core/group, core/columns, core/column, core/image)
+.wp-block-group,
+.wp-block-columns,
+.wp-block-column,
+.wp-block-image {
+  &.dhsv-only-desktop {
+    @media (max-width: 767.98px) {
+      display: none !important;
+    }
+  }
+
+  &.dhsv-only-mobile {
+    @media (min-width: 768px) {
+      display: none !important;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  // Stack grid groups into a single column on mobile by default.
+  .wp-block-group.is-layout-grid:not(.dhsv-grid-mobile-slider) {
+    grid-template-columns: 1fr !important;
+  }
+
+  // Reset grid display so Splide can take over on mobile.
+  .wp-block-group.is-layout-grid.dhsv-grid-mobile-slider {
+    display: block !important;
+  }
+}
+
+.wp-block-group {
+  --group-space: var(--size-lg);
+
+  &.is-style {
+    &-with-space-xl {
+      --group-space: var(--size-2xl);
+    }
+
+    &-without-space {
+      --group-space: 0;
+    }
+  }
+
+  > *:first-child {
+    padding-top: var(--group-space);
+  }
+
+  > *:last-child {
+    padding-bottom: var(--group-space);
+  }
+}

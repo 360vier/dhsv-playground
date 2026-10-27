@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/cases-stage",
+  "title": "Cases Stage",
+  "description": "Zeigt eine Auswahl von Cases an.",
+  "icon": "format-image",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "cases", "stage"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "selectionBy": {
+      "type": "string",
+      "default": "curated"
+    },
+    "curatedIds": {
+      "type": "array",
+      "default": []
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "limitWhenCategory": {
+      "type": "number",
+      "default": 8
+    }
+  },
+  "supports": {},
+  "styles": [],
+  "example": {
+    "attributes": {}
+  },
+  "editorStyle": "dhsv-cases-stage-block editor",
+  "style": "dhsv-cases-stage-block"
+}

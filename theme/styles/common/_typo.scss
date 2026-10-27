@@ -1,0 +1,116 @@
+html {
+  font-size: clamp(16px, 0.875vw, 18px);
+}
+
+body {
+  font-size: var(--font-size-text);
+  line-height: var(--line-height-text);
+  font-family: var(--primary-font-family);
+  color: var(--text-color);
+  background: var(--bg-color);
+  font-weight: var(--font-weight-default);
+}
+
+p {
+  margin-bottom: var(--size-md);
+}
+
+b,
+strong {
+  font-weight: var(--font-weight-bold);
+}
+
+a {
+  color: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+h1,
+.h1,
+.has-h1-font-size,
+h2,
+.h2,
+.has-h2-font-size,
+h3,
+.h3,
+.has-h3-font-size,
+h4,
+.h4,
+.has-h4-font-size,
+h5,
+.h5,
+.has-h5-font-size,
+h6,
+.h6,
+.has-h6-font-size {
+  font-family: var(--primary-font-family);
+  line-height: var(--line-height);
+  font-weight: var(--font-weight-default);
+  padding-bottom: var(--size-xs);
+}
+
+h1,
+.h1,
+.has-h1-font-size {
+  font-size: var(--font-size-h1);
+}
+
+h2,
+.h2,
+.has-h2-font-size {
+  font-size: var(--font-size-h2);
+}
+
+h3,
+.h3,
+.has-h3-font-size {
+  font-size: var(--font-size-h3);
+}
+
+h4,
+.h4,
+.has-h4-font-size {
+  font-size: var(--font-size-h4);
+}
+
+h5,
+.h5,
+.has-h5-font-size {
+  font-size: var(--font-size-h5);
+}
+
+h6,
+.h6,
+.has-h6-font-size {
+  font-size: var(--font-size-h6);
+}
+
+.has-display-font-size {
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+}
+
+.has-text-intro-font-size {
+  font-size: var(--font-size-text-intro);
+  line-height: var(--line-height-text);
+  font-weight: var(--font-weight-secondary);
+  opacity: 0.8;
+}
+
+.has-text-index-font-size {
+  font-size: var(--font-size-text-index);
+}
+
+.has-text-font-size {
+  font-size: var(--font-size-text);
+}
+
+.has-text-small-font-size {
+  font-size: var(--font-size-text-small);
+}
+
+//Wordpress Fontstyles
+//Font Size is already set by theme.json

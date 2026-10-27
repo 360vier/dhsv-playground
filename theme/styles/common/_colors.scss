@@ -1,0 +1,121 @@
+:root,
+.wp-block-group,
+.has-background,
+.with-bg {
+  --gform-input-color: var(--text-color);
+  --gform-label-color: var(--text-color);
+  --gform-section-color: var(--text-color);
+  --gform-description-color: color-mix(
+    in srgb,
+    var(--text-color) 65%,
+    transparent
+  );
+  --gform-input-placeholder: color-mix(
+    in srgb,
+    var(--text-color) 45%,
+    transparent
+  );
+  --gform-input-border: color-mix(in srgb, var(--text-color) 30%, transparent);
+  --gform-radio-selected-color: var(--text-color);
+  --gform-icon-invert: 0%;
+}
+
+.wp-block-group,
+.has-background,
+.with-bg {
+  --icon-none: none;
+  --icon-accent: var(--accent-color);
+  --icon-base: var(--text-color);
+
+  &.has-background {
+    color: var(--text-color);
+    background: var(--bg-color);
+  }
+
+  &.has-green-background-color,
+  &.bg-green {
+    --text-color: var(--white);
+    --bg-color: var(--green-500);
+    --accent-gradient: var(--light-gradient);
+    --accent-color: var(--black);
+    --accent-bg: var(--white);
+  }
+
+  &.has-light-background-color,
+  &.bg-light {
+    --text-color: var(--black);
+    --bg-color: var(--gray-50);
+    --_accordion-item-bg: var(--white);
+    --tag-scroller-bg: color-mix(in srgb, var(--green-500) 10%, transparent);
+    --tab-logo-invert: 100%;
+    --tab-active-logo-invert: 0%;
+  }
+
+  &.has-dark-background-color,
+  &.bg-dark {
+    --text-color: var(--white);
+    --bg-color: var(--gray-800);
+    --gform-icon-invert: 100%;
+    --gray-transparent: linear-gradient(
+      142deg,
+      color-mix(in srgb, var(--gray-100) 20%, transparent 100%) 15%,
+      color-mix(in srgb, var(--gray-300) 20%, transparent 100%) 75%
+    );
+  }
+
+  &.has-black-background-color,
+  &.bg-black {
+    --text-color: var(--white);
+    --bg-color: var(--black);
+    --gform-icon-invert: 100%;
+    --gray-transparent: linear-gradient(
+      142deg,
+      color-mix(in srgb, var(--gray-300) 20%, transparent 100%) 15%,
+      color-mix(in srgb, var(--gray-400) 20%, transparent 100%) 75%
+    );
+  }
+
+  &.has-white-background-color,
+  &.bg-white {
+    --text-color: var(--black);
+    --bg-color: var(--white);
+    --tag-scroller-bg: color-mix(in srgb, var(--green-500) 10%, transparent);
+    --tab-logo-invert: 100%;
+    --tab-active-logo-invert: 0%;
+  }
+
+  &.has-dark-gradient-background,
+  &.bg-dark-gradient {
+    --text-color: var(--white);
+    --bg-color: var(--dark-gradient);
+    --gform-icon-invert: 100%;
+    --gray-transparent: linear-gradient(
+      142deg,
+      color-mix(in srgb, var(--gray-100) 20%, transparent 100%) 15%,
+      color-mix(in srgb, var(--gray-300) 20%, transparent 100%) 75%
+    );
+    --bg-flat-color: var(--black);
+    --tab-logo-invert: 100%;
+    --tab-active-logo-invert: 0%;
+  }
+
+  &.has-light-gradient-background,
+  &.bg-light-gradient {
+    --text-color: var(--black);
+    --bg-color: var(--light-gradient);
+    --bg-flat-color: var(--gray-50);
+    --tag-scroller-bg: color-mix(in srgb, var(--green-500) 10%, transparent);
+    --tab-logo-invert: 100%;
+    --tab-active-logo-invert: 0%;
+  }
+
+  &.has-light-down-transparent-background,
+  &.bg-light-down-transparent {
+    --text-color: var(--black);
+    --bg-color: var(--light-down-transparent);
+    --bg-flat-color: var(--gray-50);
+    --tag-scroller-bg: color-mix(in srgb, var(--green-500) 10%, transparent);
+    --tab-logo-invert: 100%;
+    --tab-active-logo-invert: 0%;
+  }
+}

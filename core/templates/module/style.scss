@@ -1,0 +1,9 @@
+// Wird automatisch auf .wp-block-__NS__-__NAME__ gescopt (postcss-prefixwrap, wie im Theme).
+// Nur Theme-Tokens verwenden: var(--green-500), var(--content-size), var(--font-size-h2) …
+.wp-block-__NS__-__NAME__ {
+  margin-block: 5rem;
+}
+
+.__NAME__--title {
+  font-size: var(--font-size-h2);
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/buttons",
+  "title": "Buttons",
+  "icon": "button dhsv-icon",
+  "category": "text",
+  "usesContext": [],
+  "description": "Wrapper to align buttons",
+  "keywords": ["dhsv"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    },
+    "fullWith": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "layout": {
+      "type": "object",
+      "default": {
+        "type": "flex",
+        "flexWrap": "wrap",
+        "justifyContent": "left",
+        "orientation": "horizontal"
+      }
+    },
+    "isSame": {
+      "type": "boolean",
+      "default": false
+    },
+    "maxWidth": {
+      "type": "number"
+    }
+  },
+  "providesContext": {
+    "isSame": "isSame",
+    "maxWidth": "maxWidth"
+  },
+  "supports": {
+    "anchor": true,
+    "align": ["wide", "full"],
+    "__experimentalExposeControlsToChildren": true,
+    "__experimentalLayout": {
+      "allowSwitching": false,
+      "allowInheriting": false,
+      "default": {
+        "type": "flex",
+        "flexWrap": "wrap"
+      }
+    }
+  },
+  "styles": [],
+  "editorStyle": "wp-block-buttons-editor",
+  "style": "wp-block-buttons"
+}

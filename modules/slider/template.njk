@@ -1,0 +1,57 @@
+{#- Übersetzt aus source/index.blade.php + custom-navigation.blade.php (Theme dhsv012); navigation.blade.php ist live
+    auskommentiert. Controller-Logik (source/index.php) nachgebaut: splide-Optionen-JSON inkl. destroy-Flag pro Breakpoint
+    und Roadmap-Hotfix. Für teaserCarousel/imageTextCarousel ist $splide_options in PHP undefiniert → data-splide="null".
+    Abweichungen: die section bekommt per wrapper() zusätzlich die Klasse wp-block-dhsv-slider + data-pg-block (Anker);
+    fehlt slidesCount (0), wird die Anzahl der Inner-Blocks genommen (WordPress speichert den Wert vom Editor). -#}
+{%- set contentStr = content ~ '' -%}
+{%- set isRoadmap = 'dhsv-roadmap' in contentStr -%}
+{%- set count = slidesCount if (slidesCount and slidesCount > 0) else (block.innerBlocks | length) -%}
+{%- set rs = responsiveSettings or {} -%}
+
+{%- macro setting(name) -%}
+    {%- set s = rs[name] or {} -%}
+    {%- set perPage = 1 if (isRoadmap and name == 'mobile') else s.perPage -%}
+    {
+    {%- for k, v in s -%}
+        {%- if k != 'destroy' -%}
+            {{ k | dump | safe }}:{{ (perPage if k == 'perPage' else v) | dump | safe }},
+        {%- endif -%}
+    {%- endfor -%}
+    "destroy":{{ ((perPage or 0) >= count) | dump | safe }}}
+{%- endmacro -%}
+
+{%- macro settingInner(name) -%}
+    {%- set inner = setting(name) | string -%}
+    {{ inner.slice(1, -1) | safe }}
+{%- endmacro -%}
+
+{%- if currentType != 'teaserCarousel' and currentType != 'imageTextCarousel' -%}
+    {%- set splideOptions -%}
+        {"type":"slide","autoplay":{{ (autoplay or false) | dump | safe }},"autoWidth":{{ (currentType == 'imageCarousel') | dump | safe }},
+        {{- settingInner('desktop-xl') -}}
+        ,"breakpoints":{"768":{{ setting('mobile') }},"1024":{{ setting('tablet') }},"1500":{{ setting('desktop') }}}
+        {%- if isRoadmap %},"adjustableHeight":{"maximizeHeight":true}{% endif -%}
+        }
+    {%- endset -%}
+{%- else -%}
+    {%- set splideOptions = 'null' -%}
+{%- endif -%}
+
+{%- set img = backImage or {} -%}
+{%- set textColor = 'white' if (img.id or whiteText) else 'default' -%}
+{%- set alignClass = '' if (align and align != 'none') else 'align' ~ (align or '') -%}
+
+<section {{ wrapper(['slider-container', currentType, 'text-' ~ textColor, alignClass] | join(' ') | trim) }}>
+    <div
+        class="dhsv-slider splide align{{ widthType }} {{ currentType }} {{ 'with-space' if withSpace else '' }}"
+        aria-label="{{ aria_label or '' }}"
+        data-splide="{{ splideOptions | trim }}"
+    >
+        <div class="splide__track">
+            <div class="splide__list">
+                {{ content }}
+            </div>
+        </div>
+        {% include "slider/_custom-navigation.njk" %}
+    </div>
+</section>

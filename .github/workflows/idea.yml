@@ -1,0 +1,60 @@
+# Push auf idea/<slug>: prüfen, bauen, automatisch nach main mergen (Branch bleibt bestehen), Pages neu deployen.
+name: Idee
+
+on:
+  push:
+    branches: ['idea/**']
+
+concurrency:
+  group: idea-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - name: Regeln prüfen (Isolation, Schema, Sperren)
+        run: yarn check --base origin/main
+        env:
+          PG_BRANCH: ${{ github.ref_name }}
+      - run: yarn build
+
+  merge:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BRANCH: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: PR anlegen bzw. finden
+        id: pr
+        run: |
+          SLUG="${BRANCH#idea/}"
+          TITLE=$(jq -r .title "ideas/$SLUG/idea.json")
+          NUM=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          if [ -z "$NUM" ]; then
+            gh pr create --head "$BRANCH" --base main \
+              --title "[idea:$SLUG] $TITLE" \
+              --body "Automatischer Merge der Idee **$TITLE** (\`ideas/$SLUG/\`). Der Branch bleibt bis zur Umsetzung im Theme bestehen."
+            NUM=$(gh pr list --head "$BRANCH" --base main --state open --json number --jq '.[0].number')
+          fi
+          echo "number=$NUM" >> "$GITHUB_OUTPUT"
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+      - name: Nach main mergen (Merge-Commit, Branch bleibt)
+        run: gh pr merge "${{ steps.pr.outputs.number }}" --merge --subject "[idea:${{ steps.pr.outputs.slug }}] Merge ${{ github.sha }}"
+      - name: Pages-Deploy anstoßen
+        # Merges per GITHUB_TOKEN lösen keinen push-Workflow aus – workflow_dispatch schon.
+        run: gh workflow run deploy.yml --ref main

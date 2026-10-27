@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/breadcrumb",
+  "title": "Breadcrumb",
+  "description": "Automatische Breadcrumb für Seiten, Archive und Singles.",
+  "icon": "ellipsis",
+  "category": "360vier",
+  "usesContext": [],
+  "keywords": ["dhsv", "breadcrumb", "navigation"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "currentLabel": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "currentLabel": "Cases Übersicht"
+    }
+  }
+}

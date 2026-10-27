@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ config.site.language }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ title }} · {{ config.site.playgroundTitle }}</title>
+  {{ layout.head | safe }}
+  <link rel="stylesheet" href="{{ themeCss }}">
+  {% for href in blockCss %}
+  <link rel="stylesheet" href="{{ href }}">
+  {% endfor %}
+</head>
+<body class="{{ bodyClass }} pg-document">
+<script>document.documentElement.classList.remove('no-js')</script>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+{{ layout.header | safe }}
+<main id="main">
+  <div class="is-root-container">
+{{ content | safe }}
+  </div>
+</main>
+{{ layout.footer | safe }}
+{% if withThemeJs %}{{ layout.scripts | safe }}{% endif %}
+<script>window.__PG__ = {{ pg | dump | safe }};</script>
+<script src="{{ base }}assets/pg-overlay.js" defer></script>
+</body>
+</html>

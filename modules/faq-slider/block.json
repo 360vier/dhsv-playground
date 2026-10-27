@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/faq-slider",
+  "title": "FAQ-Akkordeon",
+  "description": "FAQs als Akkordeon aus dem FAQ-CPT anzeigen",
+  "icon": "editor-ul",
+  "category": "design",
+  "usesContext": [],
+  "keywords": ["faq", "akkordeon", "accordion"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "maxFaqs": {
+      "type": "number",
+      "default": 60
+    },
+    "columns": {
+      "type": "number",
+      "default": 1
+    },
+    "showAllFaqs": {
+      "type": "boolean",
+      "default": false
+    },
+    "showAllFaqsButton": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "categories": []
+    }
+  }
+}

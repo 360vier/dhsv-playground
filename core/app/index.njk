@@ -1,0 +1,57 @@
+{% extends "layout.njk" %}
+{% block main %}
+<section class="pg-hero">
+  <h1>Ideen &amp; Vorhaben</h1>
+  <p>Jede Idee ist ein eigener Branch <code>{{ config.repo.ideaBranchPrefix }}&lt;slug&gt;</code>, landet aber sofort in <code>{{ config.repo.defaultBranch }}</code>, damit hier alle sichtbar sind. Neue Idee: sag Claude <em>„/idee-neu …“</em> – Details unter <a href="{{ base }}hilfe/">Hilfe</a>.</p>
+</section>
+
+<div class="pg-filters" data-filter-root>
+  <label>Status
+    <select data-filter="status">
+      <option value="">alle aktiven</option>
+      <option value="*">alle</option>
+      {% for s in config.statuses %}<option value="{{ s.id }}">{{ s.label }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Von
+    <select data-filter="author">
+      <option value="">alle</option>
+      {% for a in authors %}<option value="{{ a }}">{{ a }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Typ
+    <select data-filter="type">
+      <option value="">alle</option>
+      {% for t in config.ideaTypes %}<option value="{{ t.id }}">{{ t.label }}</option>{% endfor %}
+    </select>
+  </label>
+  <input type="search" placeholder="Suchen …" data-filter="q">
+</div>
+
+{% if not ideas.length %}
+<p class="pg-empty">Noch keine Ideen. Starte mit <code>/idee-neu</code> in Claude.</p>
+{% endif %}
+
+<div class="pg-cards" data-filter-list>
+{% for idea in ideas %}
+  <a class="pg-card" href="{{ base }}ideen/{{ idea.slug }}/"
+     data-status="{{ idea.status }}" data-author="{{ idea.allPeople | join(' ') }}" data-type="{{ idea.type }}"
+     data-locked="{{ 'true' if idea.status in ['umgesetzt','verworfen'] else 'false' }}"
+     data-q="{{ (idea.title ~ ' ' ~ idea.summary ~ ' ' ~ idea.slug ~ ' ' ~ (idea.tags | join(' '))) | lower }}">
+    <div class="pg-card__head">
+      {{ statusBadge(idea.status) | safe }}
+      <span class="pg-type">{{ typeLabel(idea.type) }}</span>
+      {% if idea.changes.drift %}<span class="pg-badge pg-badge--warn" title="Baseline-Modul hat sich seit dem Override geändert">Drift</span>{% endif %}
+    </div>
+    <h2>{{ idea.title }}</h2>
+    <p>{{ idea.summary }}</p>
+    <div class="pg-card__meta">
+      <span>👤 {{ idea.author }}{% if idea.contributors.length %} +{{ idea.contributors.length }}{% endif %}</span>
+      <span>{{ idea.pageFiles.length }} Seite(n) · {{ idea.moduleNames.length }} Modul(e)</span>
+      {% if idea.openComments %}<span class="pg-badge pg-badge--comment">💬 {{ idea.openComments }}</span>{% endif %}
+      <span>{{ idea.updated }}</span>
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller-Logik aus source/index.php:
+    teamMember kommt im Playground direkt als Attribut ({name, firstName, position, email, image}). -#}
+{%- set person = teamMember or {} -%}
+{%- set displayImage = person.image if (person.image and person.image.url) else (image or {}) -%}
+{%- set personName = person.name or description -%}
+{%- set personRole = person.position or role -%}
+{%- set email = person.email or '' -%}
+{%- set emailName = person.firstName or (personName | string).split(' ')[0] -%}
+{%- set primaryLabel = linkText or (link.title if link and link.title else __('Mehr erfahren')) -%}
+{%- set emailLabel = emailLinkText or (__('E-Mail an') ~ ' ' ~ emailName) | trim -%}
+{%- set wrapperClasses = ('is-image-right' if imagePosition == 'right' else 'is-image-left')
+    ~ (' has-subline' if subline else '')
+    ~ (' has-image' if displayImage.url else ' is-without-image') -%}
+
+<div {{ wrapper(wrapperClasses) }}>
+    {% if displayImage.url %}
+        <img
+            class="image"
+            src="{{ displayImage.url }}"
+            alt="{{ displayImage.alt or '' }}"
+            {% if displayImage.width %} width="{{ displayImage.width }}" {% endif %}
+            {% if displayImage.height %} height="{{ displayImage.height }}" {% endif %}
+        >
+    {% endif %}
+    <div class="content with-bg bg-dark-gradient">
+        <div class="content--body">
+            {% if title %}
+                <h2 class="content--title">{{ title | safe }}</h2>
+            {% endif %}
+            {% if subline %}
+                <p class="content--subline">{{ subline | safe }}</p>
+            {% endif %}
+        </div>
+        <div class="content--footer">
+            <div class="content--person">
+                {% if personName %}
+                    <p class="content--description">{{ personName | safe }}</p>
+                {% endif %}
+                {% if personRole %}
+                    <p class="content--role">{{ personRole | safe }}</p>
+                {% endif %}
+            </div>
+            <div class="content--actions">
+                {% if email %}
+                    <a href="mailto:{{ email }}" class="dhsv-button tertiary cta-email-button">
+                        <span class="email-label">{{ emailLabel | safe }}</span>
+                        <span class="icon email-icon" aria-hidden="true">{{ svg('button.mail-plane') }}</span>
+                    </a>
+                {% endif %}
+                {% if link and link.url %}
+                    <a href="{{ link.url }}"
+                        {% if link.linkTarget %} target="{{ link.linkTarget }}" {% endif %}
+                        {% if link.rel %} rel="{{ link.rel }}" {% endif %}
+                        class="dhsv-button primary">
+                        <span>{{ primaryLabel | safe }}</span>
+                        <span class="icon" aria-hidden="true">
+                            {{ svg('icons.arrow-right') }}
+                        </span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

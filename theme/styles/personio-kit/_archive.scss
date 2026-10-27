@@ -1,0 +1,18 @@
+.personio-kit--archive {
+  width: min(100%, var(--pk-wide-width));
+  padding: var(--pk-section-gap) var(--pk-gap);
+  margin-inline: auto;
+}
+
+.personio-kit__archive-header {
+  max-width: var(--pk-content-width);
+  margin-bottom: var(--pk-section-gap);
+}
+
+.personio-kit__archive-title {
+  margin-top: 0;
+}
+
+.personio-kit__archive-description {
+  color: var(--pk-muted-color);
+}

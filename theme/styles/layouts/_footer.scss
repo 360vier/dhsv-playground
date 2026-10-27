@@ -1,0 +1,555 @@
+/* stylelint-disable */
+.footer-section {
+  --text-color: var(--white);
+
+  background: linear-gradient(136deg, #1f2026 10.21%, #111216 104.55%);
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+
+  &__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &--parallax-active &__content {
+    will-change: transform, opacity;
+  }
+}
+
+footer {
+  //overflow: clip;
+  padding: var(--size-lg);
+  // Keep the last footer row out from under the chat launcher strip, which is
+  // fixed to the bottom of the viewport and eats clicks across its full width.
+  padding-bottom: calc(var(--size-lg) + var(--chat-launcher-reserve));
+  margin-top: -5rem;
+  position: relative;
+  z-index: 3;
+
+  .footer-box {
+    --map-size: 30rem;
+    --map-left: 70%;
+    --map-top: -10%;
+
+    &.out {
+      --map-size: 15rem;
+      --map-left: 50%;
+      --map-top: 50%;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    gap: var(--size-2xl);
+    min-height: 20rem;
+    position: relative;
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      gap: var(--size-lg);
+      padding: var(--size-md);
+      min-height: auto;
+    }
+
+    &--map {
+      position: relative;
+      display: flex;
+      gap: 15rem;
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      flex: 0 0 20rem;
+      height: 20rem;
+
+      @media (max-width: 1200px) {
+        flex-direction: column;
+        flex: 1;
+        gap: var(--size-lg);
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: var(--size-lg);
+      }
+
+      &-graphics {
+        position: absolute;
+        pointer-events: none;
+        top: var(--map-top);
+        left: var(--map-left);
+        transform: translate(-50%, 0);
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+
+        @media (max-width: 1200px) {
+          display: none;
+        }
+
+        svg {
+          width: var(--map-size);
+          height: auto;
+          mask-image: linear-gradient(to bottom, transparent 15%, black 60%);
+          opacity: 0.4;
+
+          path {
+            //fill: transparent;
+            fill: color-mix(in srgb, var(--gray-200) 40%, transparent 100%);
+            //stroke-width: 0.5px;
+          }
+        }
+      }
+
+      &-marker {
+        --marker-offset: 6rem;
+        --marker-top: 1.9rem;
+
+        position: relative;
+        align-self: flex-start;
+        justify-self: flex-start;
+
+        @media (max-width: 1200px) {
+          --marker-offset: 2rem;
+          align-self: flex-start;
+          justify-self: flex-start;
+          width: 100%;
+
+          &:last-child {
+            align-self: flex-start;
+            justify-self: flex-start;
+          }
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: var(--marker-top);
+          transform: translateY(-50%);
+          right: calc(-1 * var(--marker-offset));
+          width: 1.5rem;
+          aspect-ratio: 1/1;
+          border-radius: var(--rounded-full);
+          background: var(--green-gradient);
+          outline: 0.25rem solid
+            color-mix(in srgb, var(--white) 25%, transparent 100%);
+
+          @media (max-width: 1200px) {
+            display: none;
+          }
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: var(--marker-top);
+          left: 0;
+          width: calc(100% + (var(--marker-offset) - 0.5rem));
+          height: 1px;
+          background: var(--gray-200);
+
+          @media (max-width: 1200px) {
+            display: none;
+          }
+        }
+
+        &:last-child {
+          align-self: flex-end;
+          justify-self: flex-end;
+
+          &::after {
+            right: auto;
+            left: calc(-1 * var(--marker-offset));
+          }
+
+          &::before {
+            left: auto;
+            right: 0;
+          }
+
+          @media (max-width: 1200px) {
+            &::after {
+              display: none;
+            }
+
+            &::before {
+              display: none;
+            }
+          }
+        }
+
+        p {
+          margin-bottom: 0;
+        }
+
+        &-title {
+          font-size: var(--font-size-h6);
+          font-weight: var(--font-weight-bold);
+          color: var(--text-color);
+          white-space: nowrap;
+          padding-bottom: 0.5rem;
+        }
+
+        &-address {
+          font-size: var(--font-size-text-small);
+          color: var(--text-color);
+          min-width: 9rem;
+        }
+      }
+    }
+
+    &--links {
+      display: flex;
+      align-items: flex-start;
+      align-self: flex-start;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: var(--size-lg);
+      padding-left: var(--size-xl);
+      flex: 1;
+
+      @media (max-width: 1200px) {
+        flex-direction: column;
+        gap: var(--size-lg);
+        border-left: none;
+        border-top: 1px solid
+          color-mix(in srgb, var(--gray-200) 50%, transparent 100%);
+        padding-left: 0;
+        padding-top: var(--size-xl);
+        width: 100%;
+      }
+
+      &-column,
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        line-height: 1.2;
+        max-width: 11rem;
+
+        @media (max-width: 1200px) {
+          width: 100%;
+          gap: var(--size-sm);
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+      }
+
+      a {
+        font-size: var(--font-size-text-small);
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+        opacity: 0.75;
+        display: block;
+        line-height: 1.3;
+
+        &:hover {
+          color: var(--green-400);
+          opacity: 1;
+        }
+      }
+
+      &-title {
+        font-weight: var(--font-weight-bold);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.purpose-text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden;
+
+  .particle-text--compact {
+    height: clamp(12rem, 26vw, 25rem);
+    transform: translate3d(-3.5vw, 0, 0);
+    width: calc(100% + 7vw);
+  }
+}
+
+.footer-legal {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-lg);
+  padding-top: var(--size-lg);
+  color: color-mix(in srgb, var(--white) 72%, transparent);
+  font-size: var(--font-size-text);
+  margin-top: var(--size-lg);
+
+  &__menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-md) var(--size-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+
+      &:hover {
+        color: var(--green-400);
+      }
+    }
+  }
+
+  &__copyright {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  &__trust {
+    --_footer-trust-logo-height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--size-lg);
+    padding-top: var(--size-lg);
+    margin-top: var(--size-lg);
+    border-top: 1px solid
+      color-mix(in srgb, var(--gray-200) 50%, transparent 100%);
+    flex-shrink: 0;
+  }
+
+  &__trust-provenexpert {
+    flex-shrink: 0;
+
+    .footer-provenexpert-rating {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      color: color-mix(in srgb, var(--white) 85%, transparent);
+      text-decoration: none;
+      border: none;
+      outline: none;
+      transition: var(--transition);
+
+      &:hover {
+        color: var(--green-400);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--green-400);
+        outline-offset: 4px;
+      }
+
+      &__line {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 0.35rem;
+        line-height: 1.35;
+        max-width: 100%;
+
+        &--primary {
+          color: color-mix(in srgb, var(--white) 92%, transparent);
+        }
+
+        &--meta {
+          opacity: 0.55;
+          font-size: var(--font-size-text-small);
+        }
+      }
+
+      &__text {
+        flex-shrink: 0;
+      }
+
+      svg {
+        display: block;
+        max-height: 1.1rem;
+        width: auto;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--size-md) var(--size-lg);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__trust-logo-link {
+    display: block;
+    transition: var(--transition);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__trust-logo img {
+    display: block;
+    height: var(--_footer-trust-logo-height);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+/* Mobile-only footer rhythm: tighter hero strip, sane map padding, horizontal inset */
+@media (max-width: 1200px) {
+  .footer-section {
+    &__content {
+      opacity: 1 !important;
+      transform: none !important;
+      will-change: auto;
+    }
+
+    .purpose-text {
+      .particle-text--compact {
+        height: min(13rem, 42vw);
+        min-height: 10.5rem;
+        transform: translate3d(-8vw, 0, 0);
+        width: calc(100% + 16vw);
+      }
+    }
+
+    footer .is-root-container > * {
+      padding-inline: var(--size-lg);
+    }
+
+    footer {
+      padding-block: var(--size-lg);
+      padding-inline: 0;
+      // `padding-block` above resets the base rule's bottom padding, so the
+      // launcher reserve has to be restated here.
+      padding-bottom: calc(var(--size-lg) + var(--chat-launcher-reserve));
+    }
+
+    // Stack order on mobile: links → trust row → legal bar. The legal bar
+    // closes the footer like a sign-off instead of floating between blocks.
+    footer .is-root-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    // Locations and link columns share one two-column grid so every block
+    // lines up on the same left edges.
+    .footer-box--map,
+    .footer-box--links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+      gap: var(--size-lg) var(--size-2md);
+    }
+
+    // Lines stay whole ("Groß-Umstadt" would otherwise break at its hyphen);
+    // the few px of overflow on narrow phones land in the column gap.
+    .footer-box--map-marker-address {
+      min-width: 0;
+      white-space: nowrap;
+    }
+
+    .footer-box--links {
+      padding-top: var(--size-lg);
+
+      &-column,
+      ul {
+        max-width: none;
+      }
+    }
+
+    .footer-legal {
+      order: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--size-md);
+      margin-top: 0;
+      padding-top: var(--size-lg);
+      border-top: 1px solid
+        color-mix(in srgb, var(--gray-200) 50%, transparent 100%);
+      font-size: var(--font-size-text-small);
+
+      // Below 768px the chat launcher is a bubble in the bottom-right corner
+      // (see --chat-launcher-reserve); keep the last legal row clear of it.
+      @media (max-width: 767.98px) {
+        padding-bottom: var(--size-2xl);
+      }
+
+      &__menu {
+        gap: var(--size-sm) var(--size-2md);
+
+        // Phones: fixed columns so the wrapped second row lines up with the first.
+        @media (max-width: 767.98px) {
+          display: grid;
+          grid-template-columns: repeat(3, max-content);
+        }
+
+        @media (max-width: 359.98px) {
+          grid-template-columns: repeat(2, max-content);
+        }
+      }
+
+      &__copyright {
+        white-space: normal;
+        opacity: 0.7;
+      }
+
+      &__trust {
+        order: 2;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--size-lg);
+        width: 100%;
+        padding-block: var(--size-lg);
+        margin-top: var(--size-lg);
+      }
+
+      &__trust-provenexpert {
+        width: 100%;
+
+        .footer-provenexpert-rating {
+          align-items: flex-start;
+          width: 100%;
+          text-align: left;
+
+          &__line {
+            width: 100%;
+          }
+        }
+      }
+
+      // Every logo is fitted into the same box: wide wordmarks hit the width
+      // cap and end up shorter, compact marks hit the height cap. Keeps optical
+      // weight even without per-logo tuning in the CMS. Phones stack them one
+      // per row instead of an uneven 2 + 1 wrap.
+      &__trust-logos {
+        justify-content: flex-start;
+        gap: var(--size-2md) var(--size-xl);
+        width: 100%;
+
+        @media (max-width: 767.98px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--size-2md);
+        }
+      }
+
+      &__trust-logo img {
+        height: auto;
+        max-height: 2rem;
+        max-width: 8.5rem;
+      }
+    }
+  }
+}
+/* stylelint-enable */

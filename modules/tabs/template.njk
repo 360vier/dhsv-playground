@@ -1,0 +1,16 @@
+{#- Übersetzt aus source/index.blade.php (Theme dhsv012). Controller: uniqueId = uniqid() → hier 13 zufällige Hex-Zeichen
+    (überschreibbar per Attribut uniqueId). Leere Extra-Attribute lässt get_block_wrapper_attributes weg → nur bei Wert. -#}
+{%- if not uniqueId -%}
+    {%- set uniqueId -%}{% for i in range(13) %}{{ '0123456789abcdef' | list | random }}{% endfor %}{%- endset -%}
+{%- endif -%}
+<div {{ wrapper('', { id: uniqueId }) }}
+    {%- if defaultSelectedTab %} data-default-selected="{{ defaultSelectedTab }}"{% endif %}
+    {%- if tabsNavDirection %} data-tabs-nav-direction="{{ tabsNavDirection }}"{% endif %}
+    {%- if theme %} data-tabs-theme="{{ theme }}"{% endif %}>
+    <div class="wp-block-dhsv-tabs--container">
+        <div class="wp-block-dhsv-tabs--navigation">
+            {{ content }}
+        </div>
+        <div class="wp-block-dhsv-tabs--content"></div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+{
+  "version": 2,
+  "settings": {
+    "typography": {
+      "dropCap": false,
+      "fontSizes": [
+        {
+          "slug": "display",
+          "size": "var(--font-size-display)",
+          "name": "Display"
+        },
+        {
+          "slug": "h1",
+          "size": "var(--font-size-h1)",
+          "name": "Überschrift 1"
+        },
+        {
+          "slug": "h2",
+          "size": "var(--font-size-h2)",
+          "name": "Überschrift 2"
+        },
+        {
+          "slug": "h3",
+          "size": "var(--font-size-h3)",
+          "name": "Überschrift 3"
+        },
+        {
+          "slug": "h4",
+          "size": "var(--font-size-h4)",
+          "name": "Überschrift 4"
+        },
+        {
+          "slug": "h5",
+          "size": "var(--font-size-h5)",
+          "name": "Überschrift 5"
+        },
+        {
+          "slug": "h6",
+          "size": "var(--font-size-h6)",
+          "name": "Überschrift 6"
+        },
+        {
+          "slug": "text",
+          "size": "var(--font-size-text)",
+          "name": "Text"
+        },
+        {
+          "slug": "text-intro",
+          "size": "var(--font-size-text-intro)",
+          "name": "Text Intro"
+        },
+        {
+          "slug": "text-index",
+          "size": "var(--font-size-text-index)",
+          "name": "Text Index"
+        },
+        {
+          "slug": "text-small",
+          "size": "var(--font-size-text-small)",
+          "name": "Text Klein"
+        }
+      ],
+      "fontWeight": false
+    },
+    "layout": {
+      "contentSize": "var(--content-size)",
+      "wideSize": "var(--wide-size)"
+    },
+    "border": {
+      "radius": true,
+      "custom": {
+        "radius": {
+          "default": "var(--rounded-md)",
+          "small": "var(--rounded-sm)",
+          "large": "var(--rounded-lg)",
+          "full": "var(--rounded-full)"
+        }
+      }
+    },
+    "spacing": {
+      "units": ["%", "rem"],
+      "margin": true,
+      "padding": true,
+      "blockGap": "var(--block-gap, 0)",
+      "defaultSpacingSizes": false,
+      "spacingSizes": [
+        {
+          "name": "Klein",
+          "slug": "small",
+          "size": "1.875rem"
+        },
+        {
+          "name": "Mittel",
+          "slug": "medium",
+          "size": "3.75rem"
+        },
+        {
+          "name": "Groß",
+          "slug": "large",
+          "size": "7.5rem"
+        }
+      ]
+    },
+    "color": {
+      "link": false,
+      "text": false,
+      "customGradient": false,
+      "defaultPalette": false,
+      "background": true,
+      "defaultGradients": false,
+      "gradients": [
+        {
+          "name": "Dark Gradient",
+          "slug": "dark",
+          "gradient": "var(--dark-gradient)"
+        },
+        {
+          "name": "Light Gradient",
+          "slug": "light",
+          "gradient": "var(--light-gradient)"
+        },
+        {
+          "name": "Light Down Transparent",
+          "slug": "light-down-transparent",
+          "gradient": "var(--light-down-transparent)"
+        }
+      ],
+      "duotone": [],
+      "palette": [
+        {
+          "name": "Grün",
+          "slug": "green",
+          "color": "var(--green-500)"
+        },
+        {
+          "name": "Hell",
+          "slug": "light",
+          "color": "var(--gray-50)"
+        },
+        {
+          "name": "Dunkel",
+          "slug": "dark",
+          "color": "var(--gray-800)"
+        },
+        {
+          "name": "Weiß",
+          "slug": "white",
+          "color": "var(--white)"
+        },
+        {
+          "name": "Schwarz",
+          "slug": "black",
+          "color": "var(--black)"
+        }
+      ]
+    }
+  }
+}

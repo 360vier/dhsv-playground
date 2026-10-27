@@ -1,0 +1,123 @@
+.personio-kit__job-item {
+  width: 100%;
+}
+
+.personio-kit__job-item-link {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--pk-job-padding-y) var(--pk-job-padding-x);
+  color: var(--pk-job-title-color);
+  text-decoration: none;
+  background-color: var(--pk-job-bg);
+  border-radius: var(--pk-job-radius);
+  transition: var(--pk-job-transition);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--pk-job-hover-color);
+    background-color: var(--pk-job-bg-hover);
+    outline: none;
+  }
+}
+
+.personio-kit--surface-glass .personio-kit__job-item-link {
+  background-color: var(--pk-job-bg-glass);
+  backdrop-filter: blur(17px);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--pk-job-hover-color);
+    background-color: var(--pk-job-bg-hover);
+    backdrop-filter: none;
+  }
+}
+
+.personio-kit--surface-solid .personio-kit__job-item-link {
+  background-color: var(--pk-job-bg);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--pk-job-hover-color);
+    background-color: var(--pk-job-bg-hover);
+  }
+}
+
+.personio-kit__job-item-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--pk-job-font-family);
+  font-size: var(--pk-job-title-size);
+  font-weight: 400;
+  line-height: var(--pk-job-title-line-height);
+  letter-spacing: var(--pk-job-title-tracking);
+  color: inherit;
+}
+
+.personio-kit__job-item-aside {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1rem;
+  align-items: center;
+}
+
+.personio-kit__job-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.personio-kit__job-item-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pk-job-tag-padding-y) var(--pk-job-tag-padding-x);
+  font-family: var(--pk-job-tag-font-family);
+  font-size: var(--pk-job-tag-font-size);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--pk-job-tag-color);
+  white-space: nowrap;
+  background-color: var(--pk-job-tag-bg);
+  border-radius: var(--pk-job-tag-radius);
+  backdrop-filter: blur(3.42px);
+  transition: var(--pk-job-transition);
+}
+
+.personio-kit__job-item-link:hover .personio-kit__job-item-tag,
+.personio-kit__job-item-link:focus-visible .personio-kit__job-item-tag {
+  color: var(--pk-job-tag-hover-color);
+  background-color: var(--pk-job-tag-hover-bg);
+}
+
+.personio-kit__job-item-arrow {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  color: var(--pk-job-arrow-color);
+  transition: var(--pk-job-transition);
+}
+
+.personio-kit__job-item-link:hover .personio-kit__job-item-arrow,
+.personio-kit__job-item-link:focus-visible .personio-kit__job-item-arrow {
+  color: var(--pk-job-arrow-hover-color);
+}
+
+@media (max-width: 640px) {
+  .personio-kit__job-item-link {
+    flex-wrap: wrap;
+  }
+
+  .personio-kit__job-item-aside {
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+}

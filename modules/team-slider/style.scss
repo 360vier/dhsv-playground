@@ -1,0 +1,181 @@
+// Compiled to wp-block-dhsv-team-slider-style.css; scoped to .wp-block-dhsv-team-slider
+
+.wp-block-dhsv-team-slider.team-slider {
+  --_team-card-size: 18.125rem; // 290px
+  --_team-card-gap: 1.25rem; // 20px
+  --_team-card-radius: 0.725rem; // ~11.6px
+  --_team-card-panel-radius: 0.621rem;
+  --_team-card-content-padding: 0.875rem;
+
+  margin-top: var(--size-sm) !important;
+
+  .team-slider__empty {
+    margin: 0;
+    font-family: var(--primary-font-family);
+    font-size: var(--font-size-text-small);
+    color: var(--text-color);
+  }
+
+  .team-slider__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-md);
+  }
+
+  .dhsv-slider.splide.team-slider__splide {
+    --slider-gap: var(--_team-card-gap);
+  }
+
+  .splide__pagination {
+    display: none !important;
+  }
+
+  .splide__slide {
+    flex-shrink: 0;
+    width: var(--_team-card-size);
+    max-width: var(--_team-card-size);
+  }
+
+  .team-slider-card {
+    position: relative;
+    width: var(--_team-card-size);
+    max-width: 100%;
+  }
+
+  .team-slider-card__link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--_team-card-radius);
+    color: inherit;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 2px solid var(--accent-color, currentColor);
+      outline-offset: 2px;
+    }
+  }
+
+  .team-slider-card__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--_team-card-radius);
+    overflow: hidden;
+    background: var(--gray-100);
+  }
+
+  .team-slider-card__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .team-slider-card__img--default {
+    position: relative;
+    z-index: 0;
+  }
+
+  .team-slider-card__tint {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    background: rgba(20, 20, 23, 0.2);
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+  }
+
+  .team-slider-card__img--hover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+  }
+
+  .team-slider-card--has-hover:hover .team-slider-card__tint,
+  .team-slider-card--has-hover:focus-within .team-slider-card__tint {
+    opacity: 1;
+  }
+
+  .team-slider-card--has-hover:hover .team-slider-card__img--hover,
+  .team-slider-card--has-hover:focus-within .team-slider-card__img--hover {
+    opacity: 1;
+  }
+
+  .team-slider-card__placeholder {
+    position: absolute;
+    inset: 0;
+    background: var(--gray-100);
+  }
+
+  .team-slider-card__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    padding: var(--_team-card-content-padding);
+    opacity: 0;
+    transform: translateY(calc(100% + var(--_team-card-content-padding)));
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    pointer-events: none;
+  }
+
+  .team-slider-card:hover .team-slider-card__content,
+  .team-slider-card:focus-within .team-slider-card__content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .team-slider-card__panel {
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    background: rgba(20, 20, 23, 0.7);
+    border-radius: var(--_team-card-panel-radius);
+    padding: var(--_team-card-content-padding);
+  }
+
+  .team-slider-card__name {
+    margin: 0 0 var(--size-2xs);
+    font-family: var(--primary-font-family);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.22;
+    color: var(--white);
+  }
+
+  .team-slider-card__role {
+    margin: 0;
+    font-family: var(--primary-font-family);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-default);
+    line-height: 1.22;
+    color: var(--white);
+  }
+
+  @media (max-width: 767.98px) {
+    --_team-card-size: 10.25rem; // 164px
+    --_team-card-radius: 0.41rem;
+    --_team-card-panel-radius: 0.35rem;
+    --_team-card-content-padding: 0.5rem;
+
+    .team-slider-card__name {
+      font-size: 0.8125rem;
+    }
+
+    .team-slider-card__role {
+      font-size: 0.6875rem;
+      letter-spacing: 0.00688rem;
+    }
+
+    .team-slider-card__panel {
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+  }
+}

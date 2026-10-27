@@ -1,0 +1,18 @@
+{#- Übersetzt aus source/index.blade.php + Controller source/index.php (Theme dhsv012).
+    texts: kommagetrennte Liste; {{SWAP}} im headline wird durch den Swap-Wrapper ersetzt.
+    Kein get_block_wrapper_attributes im Original – daher kein wrapper(). -#}
+{%- set tag = level if (level in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) else 'h2' -%}
+{%- set swapSpans = '' -%}
+{%- for raw in (texts or '').split(',') -%}
+    {%- set t = raw | trim -%}
+    {%- if t !== '' -%}
+        {%- set swapSpans = swapSpans ~ '<span class="swap" style="--anchor: --swap-pos-' ~ loop.index0 ~ '">' ~ t ~ '</span>' -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- set swapOutput = '<div class="swap-wrapper"><div class="swap-inner">' ~ swapSpans ~ '</div></div>' -%}
+{%- set headlineHtml = (headline or '') | replace('{{SWAP}}', swapOutput) -%}
+<div class="dhsv-swap-headline-block align{{ align }}">
+    <{{ tag }}>
+    {{ headlineHtml | safe }}
+    </{{ tag }}>
+</div>

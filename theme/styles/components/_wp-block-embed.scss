@@ -1,0 +1,10 @@
+// Video embeds (YouTube, Vimeo, ...) fill the content width. The iframes come with fixed
+// width/height attributes (e.g. 500x281) that would otherwise keep them small.
+.wp-block-embed.is-type-video .wp-block-embed__wrapper {
+  iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}

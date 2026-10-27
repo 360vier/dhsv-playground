@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dhsv/team-slider",
+  "title": "Team Slider",
+  "description": "Zwei gegenläufig scrollende Reihen mit Mitarbeiter-Karten (Portrait + optional Hover-Portrait).",
+  "icon": "groups",
+  "category": "theme",
+  "usesContext": [],
+  "keywords": ["dhsv", "team", "mitarbeiter", "slider"],
+  "textdomain": "dhsv_theme",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "none"
+    },
+    "filterByCategories": {
+      "type": "boolean",
+      "default": false
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "maxItems": {
+      "type": "number",
+      "default": 50
+    }
+  },
+  "supports": {
+    "align": ["full", "wide"]
+  },
+  "styles": [],
+  "example": {
+    "attributes": {
+      "filterByCategories": false,
+      "maxItems": 12
+    }
+  }
+}
